@@ -1,0 +1,382 @@
+#LyX 2.4 created this file. For more info see https://www.lyx.org/
+\lyxformat 620
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\use_default_options true
+\maintain_unincluded_children no
+\language american
+\language_package default
+\inputencoding utf8
+\fontencoding auto
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_roman_osf false
+\font_sans_osf false
+\font_typewriter_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\float_placement class
+\float_alignment class
+\paperfontsize default
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_formatted_ref 0
+\use_minted 0
+\use_lineno 0
+\index Index
+\shortcut idx
+\color #008080
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tablestyle default
+\tracking_changes false
+\output_changes false
+\change_bars false
+\postpone_fragile_content true
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\docbook_table_output 0
+\docbook_mathml_prefix 1
+\end_header
+
+\begin_body
+
+\begin_layout Part*
+Week #1
+\end_layout
+
+\begin_layout Subsection
+
+\color blue
+Define following terms and concepts shortly:
+\end_layout
+
+\begin_layout Enumerate
+Network bandwidth
+\end_layout
+
+\begin_layout Enumerate
+Network throughput
+\end_layout
+
+\begin_layout Enumerate
+Packet loss and jitter
+\end_layout
+
+\begin_layout Enumerate
+bps vs Bps
+\end_layout
+
+\begin_layout Enumerate
+Protocol payload
+\end_layout
+
+\begin_layout Enumerate
+Protocol overhead (especially for resource-contrained IoT purposes)
+\end_layout
+
+\begin_layout Enumerate
+Spanning Tree Protocol
+\end_layout
+
+\begin_layout Enumerate
+Collision domain
+\end_layout
+
+\begin_layout Enumerate
+Broadcast domain
+\end_layout
+
+\begin_layout Enumerate
+SOHO network
+\end_layout
+
+\begin_layout Enumerate
+MAC (physical) address
+\end_layout
+
+\begin_layout Enumerate
+Physical layer protocol data unit (PDU)
+\end_layout
+
+\begin_layout Enumerate
+MAC layer protocol data unit (PDU)
+\end_layout
+
+\begin_layout Enumerate
+Half-duplex vs Full-duplex
+\end_layout
+
+\begin_layout Enumerate
+Ethernet auto-negotiation
+\end_layout
+
+\begin_layout Enumerate
+Hidden node problem (wireless)
+\end_layout
+
+\begin_layout Enumerate
+Networking physical vs logical topology
+\end_layout
+
+\begin_layout Enumerate
+TIA/EIA-568 and ISO/IEC_11801
+\end_layout
+
+\begin_layout Enumerate
+Ethernet cabling categories.
+ For example,
+ CAT 6
+\end_layout
+
+\begin_layout Enumerate
+8P8C (RJ45)
+\end_layout
+
+\begin_layout Enumerate
+Wifi AD HOC
+\end_layout
+
+\begin_layout Enumerate
+IEEE 802.11ac,
+ 802.11ax,
+ 802.11be
+\end_layout
+
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+The definition of “
+\series bold
+\color brown
+Bandwidth
+\series default
+\color inherit
+” in the computing domain refers to the rate of data over time.
+ Data is usually measured in bits,
+ the time unit in seconds,
+ and it’s often abbreviated as “bps”.
+ This term is also used in lower-layer protocols,
+ like the PHY layer in Wi-Fi,
+ where bandwidth is measured in hertz (Hz),
+ not in bps,
+ but the wider the channel in Hz,
+ the more bps can be transmitted.
+ In Wi-Fi,
+ it basically represents the channel width.
+ Bandwidth refers to the maximum theoretical capacity of a channel to transmit data,
+ it’s a property of the medium or communication channel,
+ not the actual speed.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+\color brown
+Throughput
+\series default
+\color inherit
+,
+ like bandwidth,
+ also represents a rate of data over time,
+ but unlike bandwidth where bps means the total theoretical capacity of the channel throughput measures the amount of bits delivered from source A to source B.
+ In fact a data transmission can encounter different obstacles on the way,
+ which can lead to packet loss or delays,
+ that is why measuring throughput is critical in networking and signal processing.
+ Data can be measured not only in bits,
+ but also in packets or frames (blocks containing a fixed number of bits).
+ 
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+\color brown
+Packet loss
+\series default
+\color inherit
+ could be represented by formula:
+ 
+\color red
+PLR = (1 - (received frames) / (total frames transmitted))
+\color inherit
+ this shows the ratio of lost packets to total sent packets.
+ The higher the result of this formula,
+ the worse the channel quality.
+ 
+\color brown
+Jitter
+\color inherit
+ is a complex measurement and it can be calculated in different ways.
+ For example,
+ there are Random Jitter (RJ),
+ Deterministic Jitter (DJ),
+ and Total Jitter (TJ).
+ Basically,
+ jitter shows the variation in the packet delivery time in other words,
+ how much the interval between packet arrivals changes over time the higher is a jitter value the less stable and predictable is a signal.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+\begin_inset Quotes eld
+\end_inset
+
+
+\color brown
+bps
+\series default
+\color inherit
+
+\begin_inset Quotes erd
+\end_inset
+
+ is an abbreviation for bits per second,
+ while 
+\begin_inset Quotes eld
+\end_inset
+
+
+\color brown
+Bps
+\color inherit
+
+\begin_inset Quotes erd
+\end_inset
+
+ is bytes per second.
+ 
+\color red
+1 byte = 8 bits
+\color inherit
+.
+ “Bps” is used in higher-layer protocols because data sizes are usually measured in bytes rather than bits.
+ 
+\begin_inset Quotes eld
+\end_inset
+
+bps
+\begin_inset Quotes erd
+\end_inset
+
+ is more useful in lower-layer protocols such as MAC or PHY.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+\color brown
+Protocol payload
+\color inherit
+.
+
+\series default
+ Protocol in domain of computing is a set of rules which defines the way how to deliver and extract the message,
+ without which it would be a random bit stream.
+ 
+\color brown
+Payload
+\color inherit
+ is an actual message,
+ for which protocol is applied.
+ 
+\series bold
+\color brown
+Message
+\series default
+\color inherit
+ is a meaningful expression with well defined bounds (it has finite size) for example:
+ 
+\family typewriter
+\color darkgray
+
+\begin_inset Quotes eld
+\end_inset
+
+I want to stop writing right now and go take some beer
+\begin_inset Quotes erd
+\end_inset
+
+
+\family default
+\color inherit
+.
+ 
+\color brown
+Protocol payload
+\color inherit
+ is a message.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+\color brown
+Protocol overhead
+\series default
+\color inherit
+ is the extra cost,
+ which can be represented as time,
+ extra bits,
+ and processing logic needed for delivering data from source to destination.
+ For example,
+ some protocol header bits must be sent with a message (payload) to ensure that the receiver can extract the message.
+ It also could be some logic like a handshake in TCP to establish a connection between RX (receiver) and TX (transmitter).
+ In the end,
+ all of these things are time-consuming,
+ that’s why they are called overheads.
+\end_layout
+
+\end_body
+\end_document
