@@ -540,6 +540,63 @@ broadcast domain
 
 \begin_layout Enumerate
 
+\series bold
+\color brown
+SOHO network 
+\series default
+\color inherit
+(Small Office / Home Office) is not an official networking term,
+ meaning it is not defined in any standards like IEEE 802.11.SOHO is used to describe a networking scenario,
+ where several clients are connected through the same router or the same physical cable.In most cases,
+ all clients are members of a single subnet,
+ sharing the same LAN and belonging to the same broadcast domain.However,
+ a SOHO network can also contain multiple broadcast domains —
+ for example,
+ one subnet can be used for guests,
+ another for IoT devices,
+ and another for regular users.This separation is usually done using VLANs configured on the same router.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+\color brown
+MAC (physical)
+\series default
+\color inherit
+ address is a unique number that every device with a network interface has,
+ for example Wi\SpecialChar nobreakdash
+Fi or Ethernet.
+ It is usually 48 bits and written as hexadecimal pairs,
+ for example AA:BB:CC:DD:EE:FF.
+ MAC addresses are used on the Data Link Layer (Layer 2) so that devices can find each other inside the same network.
+ When one device sends a frame to another,
+ it puts its own MAC as the source and the MAC of the receiver as the destination.
+ Without MAC addresses,
+ sending data would be a lot more complicated,
+ because devices would have to “ask” everyone in the network if the packet is for them.With MAC,
+ it’s much easier —
+ switches and Wi\SpecialChar nobreakdash
+Fi routers know exactly where to deliver the frame.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+\color brown
+Physical layer protocol 
+\series default
+\color inherit
+data unit (PDU) is a bit.
+ Generally,
+ the physical layer does not have any high-level logic except for math and physics,
+ where bits are turned into signals.
+ In Wi-Fi these are radio waves,
+ in Ethernet they are electrical signals,
+ and in optical fiber they are light flashes.
+ The exact instructions on how to modulate the signal come from Layer 2.
+ The physical layer is usually optimized more by mathematicians and physicists than by programmers,
+ but it's best when all three skills are combined in one person.
 \end_layout
 
 \end_body
