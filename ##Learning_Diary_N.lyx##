@@ -378,5 +378,169 @@ Protocol overhead
  that’s why they are called overheads.
 \end_layout
 
+\begin_layout Enumerate
+
+\series bold
+\color brown
+Spanning Tree Protocol (STP)
+\color inherit
+,
+
+\series default
+ defined in IEEE 802.1D,
+ is used to prevent loops in switched networks.
+ Switches communicate with each other by sending BPDU (Bridge Protocol Data Units) every 2 seconds.
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+
+\family sans
+\shape italic
+\begin_inset Quotes eld
+\end_inset
+
+I Think That I Shall Never See
+\end_layout
+
+\begin_layout Standard
+
+\family sans
+\shape italic
+A Graph More Lovely Than A Tree.
+\end_layout
+
+\begin_layout Standard
+
+\family sans
+\shape italic
+A Tree Whose Crucial Property
+\end_layout
+
+\begin_layout Standard
+
+\family sans
+\shape italic
+Is Loop-free Connectivity.
+\end_layout
+
+\begin_layout Standard
+
+\family sans
+\shape italic
+A Tree That Must Be Sure To Span
+\end_layout
+
+\begin_layout Standard
+
+\family sans
+\shape italic
+So Packets Can Reach Every LAN.
+\end_layout
+
+\begin_layout Standard
+
+\family sans
+\shape italic
+First,
+ The Root Must Be Selected.
+\end_layout
+
+\begin_layout Standard
+
+\family sans
+\shape italic
+By ID,
+ It Is Elected.
+\end_layout
+
+\begin_layout Standard
+
+\family sans
+\shape italic
+Least Cost Paths From Root Are Traced.
+\end_layout
+
+\begin_layout Standard
+
+\family sans
+\shape italic
+In The Tree,
+ These Paths Are Placed.
+\end_layout
+
+\begin_layout Standard
+
+\family sans
+\shape italic
+A Mesh Is Made By Folks Like Me,
+\end_layout
+
+\begin_layout Standard
+
+\family sans
+\shape italic
+Then Bridges Find A Spanning Tree.
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+At the start,
+ all switches consider themselves as the root bridge and send BPDU messages containing their Bridge ID to neighboring switches.
+ Each switch compares its own Bridge ID with the neighbor’s and forwards the smallest one further.
+ After several exchanges,
+ all switches know the Root Bridge,
+ the switch with the lowest Bridge ID.
+ Next,
+ each switch calculates the shortest path to the Root Bridge using the path cost defined in 802.1D.
+ If a switch has multiple paths,
+ the shortest one is kept as the designated port,
+ and the longer path is blocked.
+ As a result,
+ STP creates a loop-free spanning tree,
+ ensuring that packets can reach every LAN segment while avoiding broadcast storms.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+A 
+\series bold
+\color brown
+collision domain
+\series default
+\color inherit
+ is a segment of a network space where a signal is traveling.
+ To communicate,
+ clients sometimes use the same route for example,
+ the same frequency if we talk about Wi-Fi.
+ When two clients try to send data at the same time on the same channel,
+ their signals interfere and collide it will lead to packet loss.
+ After a collision,
+ the data must be retransmitted,
+ which causes delays and reduces network performance.
+\end_layout
+
+\begin_layout Enumerate
+A 
+\series bold
+\color brown
+broadcast domain
+\series default
+\color inherit
+ can be described as a segment of a network.If I send a frame on Layer 2 with the destination address FF:FF:FF:FF:FF:FF,
+ it means “send this to all members of my subnet where I am located.”If the router is configured to combine several physical subnets into one logical subnet,
+ then all of them become part of the same broadcast domain,
+ even if they are physically separated.However,
+ the actual boundary of such a broadcast domain will always end at the router,
+ which separates this domain from the rest of the internet.
+\end_layout
+
+\begin_layout Enumerate
+
+\end_layout
+
 \end_body
 \end_document
