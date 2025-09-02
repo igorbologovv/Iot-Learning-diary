@@ -550,8 +550,7 @@ SOHO network
  where several clients are connected through the same router or the same physical cable.In most cases,
  all clients are members of a single subnet,
  sharing the same LAN and belonging to the same broadcast domain.However,
- a SOHO network can also contain multiple broadcast domains —
- for example,
+ a SOHO network can also contain multiple broadcast domains for example,
  one subnet can be used for guests,
  another for IoT devices,
  and another for regular users.This separation is usually done using VLANs configured on the same router.
@@ -959,6 +958,1138 @@ Fi 6E).
  It also improves MU-MIMO even further,
  supporting up to 16 spatial streams and allowing many clients to send and receive data at the same time.
  Theoretical speeds can go above 40 Gbps.
+\end_layout
+
+\begin_layout Subsection
+
+\color blue
+Estimate how long does it take to download 3 TB file from cloud based backup service if network download throughput is 200 Mbps for actual payload (i.e.
+ data)?
+\end_layout
+
+\begin_layout Itemize
+Step 1 - Convert 3 TiB to bits (1 TiB = 1024⁴ bytes):
+ 
+\begin_inset Formula $3\text{TiB}=3\times1024^{4}bytes=3.295\times10^{12}\text{bytes}\times8\text{byte}=2.636\times10^{13}\text{bits}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Step 2 - Divide by the payload throughput (200 Mbps):
+ 
+\begin_inset Formula $T=\frac{2.636\times10^{13}bits}{200\times10^{6}\text{bits/s}}=1.318\times10^{5}s$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Step 3 - Convert seconds to hours:
+ 
+\begin_inset Formula $T_{\text{h}}=\frac{1.318\times10^{5}\text{s}}{3600s/h}\approx36.6h$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Answer:
+ 36.6 hours
+\end_layout
+
+\begin_layout Subsection
+
+\color blue
+Locate the MAC address of your mobile phone,
+ laptop wifi interface or some other networked IT device
+\end_layout
+
+\begin_layout Standard
+
+\color blue
+How did you find it?
+\end_layout
+
+\begin_layout Standard
+
+\color blue
+List the MAC address in hex format (such as f0:1f:af:cf:d9:1a),
+ but replace last 24 bits with zeros for your privacy
+\end_layout
+
+\begin_layout Standard
+
+\color blue
+Use OUI MAC address list(s) or lookup tools,
+ and determine the device/chipset vendor of that MAC address.
+ For example,
+ that f0:1f:af:cf:d9:1a is Dell inc.
+\end_layout
+
+\begin_layout Standard
+Device 1:
+ Laptop (Arch Linux)
+\end_layout
+
+\begin_layout Standard
+To find the MAC addr I used the ip link command in terminal.
+ Wi-Fi interface is wlan0,
+ its MAC address is shown next to link/ether.
+\end_layout
+
+\begin_layout Standard
+MAC address:
+\end_layout
+
+\begin_layout Standard
+6c:29:95:00:00:00 (last 24 bits zeroed for privacy)
+\end_layout
+
+\begin_layout Standard
+Vendor (OUI lookup):
+\end_layout
+
+\begin_layout Standard
+MAC prefix 6c:29:95 belongs to Intel Corporate
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pasted1.png
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Device 2:
+ Android smartphone
+\end_layout
+
+\begin_layout Standard
+How did you find it?
+\end_layout
+
+\begin_layout Standard
+Went to:
+\end_layout
+
+\begin_layout Standard
+Settings → About phone → Status → Wi-Fi MAC address
+\end_layout
+
+\begin_layout Standard
+MAC address:
+ ac:c0:48:00:00:00 (last 24 bits zeroed for privacy)
+\end_layout
+
+\begin_layout Standard
+Vendor (OUI lookup):
+ AC:C0:48 OnePlus Technology (Shenzhen) Co.,
+ Ltd.
+\end_layout
+
+\begin_layout Standard
+(Looked up using the Wireshark OUI Lookup Tool
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pasted2.png
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+
+\color blue
+Describe shortly what are these network devices,
+ functions,
+ and services
+\end_layout
+
+\begin_layout Enumerate
+Repeater
+\end_layout
+
+\begin_layout Enumerate
+Hub (multiport repeater)
+\end_layout
+
+\begin_layout Enumerate
+Bridge
+\end_layout
+
+\begin_layout Enumerate
+Access switch
+\end_layout
+
+\begin_layout Enumerate
+Core switch
+\end_layout
+
+\begin_layout Enumerate
+Edge router
+\end_layout
+
+\begin_layout Enumerate
+Core router
+\end_layout
+
+\begin_layout Enumerate
+Firewall
+\end_layout
+
+\begin_layout Enumerate
+Wifi AP
+\end_layout
+
+\begin_layout Enumerate
+WLAN AP controller
+\end_layout
+
+\begin_layout Enumerate
+Network TAP
+\end_layout
+
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+\color brown
+Repeater
+\series default
+\color inherit
+ is a device used in networks or telecom lines to help signals travel longer distances.
+ When a signal gets weak or noisy,
+ the repeater picks it up,
+ regenerates it,
+ and sends it out again.
+ This way,
+ the signal can reach further without losing quality or becoming unreadable.
+ Repeaters are used for Ethernet cables,
+ fiber optic links,
+ and even wireless connections.
+ There are different types of repeaters depending on the technology,
+ for example,
+ telephone,
+ optical,
+ or radio repeaters.
+ The main point is that a repeater doesn’t just make the signal louder.
+ Repeater actually rebuilds the data and removes most of the noise,
+ so errors don’t add up as the signal moves through the network.
+ If the signal is already too weak or too noisy,
+ a repeater might not help,
+ but usually it keeps the data clear over long distances.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+\color brown
+Hub
+\series default
+\color inherit
+,
+ or multiport repeater,
+ is a simple network device used to connect several computers or other devices in a local network,
+ usually with Ethernet cables.
+ When a device sends data to the hub,
+ the hub copies that data and sends it out to all its ports,
+ so every connected device gets the same message,
+ no matter who it was meant for.
+ This is why hubs work at the physical layer (Layer 1) and don't know anything about addresses or who is supposed to get the data.Because hubs just repeat everything to everyone,
+ they don’t help with traffic management if two devices send data at the same time,
+ their signals will collide,
+ which causes errors and forces the devices to resend their data.
+ For this reason,
+ hubs have been replaced by switches in most modern networks,
+ since switches are smarter and only forward data to the right device,
+ reducing collisions and making the network faster.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+\color brown
+Bridge
+\series default
+\color inherit
+ is a network device that splits a network segment into two parts to help filter traffic and cut down on unnecessary data.
+ When data frames arrive,
+ the bridge checks their MAC addresses to see if the sender and receiver are on the same side.
+ If they are,
+ the bridge blocks the traffic from crossing over.
+ If they’re on different sides,
+ the bridge lets the data through.
+ This way,
+ bridges help reduce collisions and keep local traffic separate,
+ making the network more efficient.
+ Bridges work at the data link layer (Layer 2).
+ They’re especially useful for breaking up a large,
+ busy network into smaller,
+ quieter sections.
+ In modern networks,
+ simple bridges aren’t used much anymore because switches can do the same thing (and more),
+ but the main idea is the same:
+ bridges help organize network traffic and stop unnecessary signals from spreading everywhere.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+\color brown
+Access switch
+\series default
+\color inherit
+ is a network switch used to connect end devices,
+ like computers,
+ printers,
+ or phones,
+ to the local network.
+ It’s usually placed at the edge of the network,
+ close to users,
+ and has many ports for plugging in devices with Ethernet cables.
+ The main job of an access switch is to forward data only to the specific device it’s meant for,
+ using MAC addresses—
+which means,
+ when one device sends data,
+ the switch checks the destination MAC address and sends that data only to the right port,
+ not to everyone else.
+ This keeps traffic organized and reduces collisions.Access switches work at Layer 2 (the data link layer) and often support extra features,
+ like VLANs for segmenting traffic,
+ or Power over Ethernet (PoE) for powering devices directly through the cable.
+ In most networks,
+ access switches connect user devices to higher-level switches or routers,
+ forming the first step for devices to access the rest of the network.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+\color brown
+Core
+\series default
+\color inherit
+ 
+\series bold
+\color brown
+switch
+\series default
+\color inherit
+ is a high-performance network switch that is located at the center of a large network and connects multiple access switches together.
+ Its main job is to move large amounts of data between different parts of the network,
+ especially between different buildings or sections of an organization.
+ Core switches usually have very high bandwidth and fast processing to handle lots of simultaneous connections.
+ Unlike access switches,
+ core switches don’t connect directly to end devices like computers or printers they mostly connect to other switches and routers.
+ They work at Layer 2 or sometimes Layer 3 (data link),
+ and are designed for speed and reliability,
+ making sure data can always get from one side of the network to the other.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+\color brown
+Edge router 
+\series default
+\color inherit
+is a network device (Layer 3) that sits at the boundary between an internal network (like a company or campus LAN) and an external network,
+ usually the internet or another organization’s network.
+ Its main job is to route traffic in and out of the local network,
+ deciding which data goes where based on IP addresses.
+ Edge routers also often handle things like NAT (Network Address Translation),
+ firewall rules,
+ VPNs,
+ and sometimes basic security functions,
+ protecting the internal network from outside threats.In short,
+ the edge router acts as the main gateway between your private network and the outside world.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+\color brown
+Core router
+\series default
+\color inherit
+ is a high-capacity network device (Layer 3) located in the center of large networks,
+ such as service provider backbones or big enterprise networks.
+ Its main job is to quickly route large amounts of data between different parts of the network,
+ connecting multiple edge routers and distribution switches.
+ Core routers are optimized for speed,
+ reliability,
+ and handling high volumes of traffic,
+ but they usually don’t connect directly to end devices.
+ In summary,
+ a core router forms the backbone of a big network,
+ moving data efficiently between major segments.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+\color brown
+Ffirewall
+\series default
+\color inherit
+ is a security device or software that controls which data is allowed to enter or leave a network or a single computer based on a set of rules.
+ Its main job is to block unwanted or dangerous traffic.
+ Firewalls can be physical devices placed between networks,
+ or software running on a computer or server.
+ Firewalls check network packets for things like source and destination addresses,
+ ports,
+ and protocols.
+ Based on this information,
+ the firewall decides whether to allow or block the traffic.
+ This helps protect networks from attacks,
+ unauthorized access,
+ and malware.
+ In most modern networks,
+ firewalls are used to separate private internal networks from the public internet,
+ adding an important layer of defense.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+\color brown
+WiFi access point (AP)
+\series default
+\color inherit
+ is a device that allows wireless devices,
+ like laptops and smartphones,
+ to connect to a wired network using Wi-Fi.
+ The AP acts as a bridge between the wireless devices and the wired part of the network (for example,
+ an Ethernet LAN).
+ When you connect your phone or laptop to Wi-Fi,
+ you’re actually connecting to the access point,
+ which then forwards your data to the rest of the network.
+ Wi-Fi APs handle radio communication,
+ manage which devices can connect,
+ and take care of basic security settings like passwords and encryption.
+ In home networks,
+ the AP is often built into the Wi-Fi router,
+ but in bigger networks (like offices or schools),
+ there are usually several standalone APs placed around the building to give good wireless coverage everywhere.In short,
+ a Wi-Fi AP is what lets wireless devices join the local network and get access to the internet or other resources.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+\color brown
+Wireless LAN controller (WLC)
+\series default
+\color inherit
+ is a device or software that centrally manages multiple WiFi access points in large networks,
+ like offices or campuses.
+ Instead of configuring each access point separately,
+ admins use the controller to set WiFi settings (such as passwords,
+ network names,
+ and firewall rules) once,
+ and the changes apply to all APs automatically.
+ The WLC also manages security,
+ firmware updates,
+ and load balancing across access points.
+ Another key function is seamless roaming:
+ as users move through the building,
+ their devices can automatically switch between access points without losing connection,
+ because the controller coordinates the 
+\color violet
+handover
+\color inherit
+ process.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+\color brown
+Network TAP (Test Access Point)
+\series default
+\color inherit
+ is a hardware device that’s used to monitor and capture network traffic for analysis.
+ It sits between two points in the network and makes an exact copy of all the data passing through,
+ sending it to a monitoring or security tool.
+ Unlike a switch port in mirror mode,
+ a TAP is a dedicated device,
+ so it captures traffic without interfering or slowing down the network.Network TAPs are commonly used for network troubleshooting,
+ security monitoring,
+ or recording traffic for later analysis.
+ They work at Layer 1 (physical layer) and are often used in data centers or anywhere reliable,
+ passive network monitoring is needed.
+\end_layout
+
+\begin_layout Subsection
+
+\color blue
+RFC assignments
+\end_layout
+
+\begin_layout Enumerate
+What are RFCs?
+\end_layout
+
+\begin_layout Enumerate
+How many PPP related RFC documents can you find from rfc-editor website?
+\end_layout
+
+\begin_layout Enumerate
+What is the current status of RFC1597?
+ What is the number for updated,
+ more recent RFC of same topic?
+\end_layout
+
+\begin_layout Enumerate
+When was RFC5218 released?
+\end_layout
+
+\begin_layout Enumerate
+What is the meaning if RFC status is BCP?
+\end_layout
+
+\begin_layout Enumerate
+List authors of the CoAP RFC (June 2014).
+ What is the RFC number?
+\end_layout
+
+\begin_layout Enumerate
+Twitch.tv provides IRC access to the stream chats.
+ Which RFC defines the original Internet Relay Chat (IRC) Protocol?
+\end_layout
+
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+\color brown
+An RFC (Request for Comments)
+\series default
+\color inherit
+ is kind of like open-source documentation for how the internet works.
+ Anyone engineers,
+ researchers,
+ or even just enthusiasts can write and submit an RFC if they have an idea or proposal about how something on the internet should work.
+ The process is similar to making a pull request for code,
+ but instead of merging changes,
+ your RFC is published as its own document with a unique number if it gets accepted.
+ Other experts can review,
+ discuss,
+ and suggest edits just like code review in open-source projects.
+ If something needs to be changed later,
+ a new RFC is created instead of editing the old one.
+ All the discussions and documents are open and public.
+ RFCs cover everything from technical standards (like TCP/IP,
+ HTTP,
+ DNS,
+ email),
+ to experiments,
+ to even jokes.
+ Some RFCs become official internet standards after enough review and consensus,
+ but many are just for sharing information or starting a conversation in the community
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+\color brown
+How many PPP related RFC documents can you find from rfc-editor website?
+
+\series default
+ 
+\color inherit
+According to the rfc-editor.org which i checked.
+ I fount 111 RFC documents related to PPP (Point-to-Point Protocol).
+ I used Title/Keyword search and got this:
+ 
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pasted3.png
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+What is the current status of RFC1597?
+ What is the number for updated,
+ more recent RFC of same topic?
+ The current status of RFC1597 is Informational (it’s not an official standard,
+ just a technical note).RFC1597 has been obsoleted by RFC1918,
+ which is the updated and more widely used document on the same topic (private IP address ranges for IPv4).So,
+ RFC1918 is the newer and active RFC covering this topic.
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset Graphics
+	filename rfs1597.png
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\color brown
+\begin_inset Graphics
+	filename obsolated.png
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+
+\series bold
+\color brown
+When was RFC5218 released?
+
+\series default
+\color inherit
+ Even though the timeline on the page shows November 2007,
+ that’s just when the draft work started and the document was first discussed.
+ The actual RFC was published later—
+look at the “Type” line,
+ which says “RFC - Informational (July 2008)”.For any report or official answer,
+ you always use the publication date of the RFC itself,
+ not the draft or discussion dates.
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename RELEASERFC.png
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+
+\series bold
+\color brown
+BCP stands for Best Current Practice.
+
+\series default
+\color inherit
+ If an RFC has the status BCP,
+ it means it describes the best way to do something on the internet right now sort of like an official recommendation or guideline,
+ but not a strict standard.
+ BCPs are used for things that everyone should probably follow,
+ but that might change over time as technology and best practices evolve.
+ So,
+ BCP = Best Current Practice = recommended way to do things at the moment,
+ not a permanent standard.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+\color brown
+List authors of the CoAP RFC (June 2014).
+ What is the RFC number?
+ 
+\color violet
+Authors:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+
+\series bold
+\color violet
+Z.
+ Shelby
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+\color violet
+K.
+ Hartke
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+\color violet
+C.
+ Bormann
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+And the RFC number is RFC 7252.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename rfcauthors.png
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+
+\series bold
+\color brown
+Twitch.tv provides IRC access to the stream chats.
+ Which RFC defines the original Internet Relay Chat (IRC) Protocol?
+ 
+\series default
+\color inherit
+The answer is RFC 1459.
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename IRC.png
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Subsection
+
+\color blue
+What is OSI model?
+ Compare OSI model to TCP/IP model
+\end_layout
+
+\begin_layout Standard
+
+\color brown
+The OSI (Open Systems Interconnection model)
+\color inherit
+ is a way to describe how network communication works by splitting everything into seven clear layers,
+ each with its own job.
+ It was created by ISO (International Organization for Standardization) in the 1980s,
+ mostly to help different vendors’ equipment and software work together,
+ and to give people a common language for talking about networks.
+ Example:
+ Sending an email (OSI pipeline) 
+\end_layout
+
+\begin_layout Itemize
+Application layer :
+ You write your message and hit “send” in your email app.
+ The app uses a protocol like SMTP (Simple Mail Transfer Protocol) to format and send your message.
+\end_layout
+
+\begin_layout Itemize
+Presentation layer:
+ If your message uses special characters,
+ emojis,
+ or attachments,
+ this layer makes sure the data is properly encoded (for example,
+ turning your message into ASCII or UTF-8).
+ If you’re using encryption (like TLS/SSL),
+ this layer encrypts your email so only the right recipient can read it.
+\end_layout
+
+\begin_layout Itemize
+Session layer:
+ Your app opens a “session” or connection to your email server—
+basically,
+ it handles logging in,
+ keeping the connection alive while your email is sent,
+ and closing it when finished.
+\end_layout
+
+\begin_layout Itemize
+Transport layer:
+ This layer breaks your email into smaller pieces (“segments” or “packets”) and ensures they all get to the server reliably and in the right order.
+ It uses protocols like TCP (Transmission Control Protocol) to handle lost packets or errors.
+\end_layout
+
+\begin_layout Itemize
+Network layer:
+ The system adds your and the server’s IP addresses to each packet.
+ This layer figures out the best path for each packet to travel across the internet from your device to the destination.
+\end_layout
+
+\begin_layout Itemize
+Data Link layer:
+ Each packet gets wrapped in a “frame” with information like MAC addresses,
+ so devices on your local network (like your router or Wi-Fi access point) know where to send it next.
+\end_layout
+
+\begin_layout Itemize
+Physical layer:
+ Finally,
+ the data gets turned into electrical signals (if you’re on Ethernet),
+ radio waves (if you’re on Wi-Fi),
+ or pulses of light (if you’re on fiber).
+ The signals travel through cables or wirelessly to the next device,
+ starting their journey through the network.
+\end_layout
+
+\begin_layout Standard
+The OSI model breaks everything into seven layers,
+ but real-world networks including the whole Internet actually use the TCP/IP model,
+ which has just four layers.
+ In TCP/IP,
+ some of the OSI layers are combined to keep things simple
+\end_layout
+
+\begin_layout Itemize
+Link (covers OSI’s Physical and Data Link)
+\end_layout
+
+\begin_layout Itemize
+Internet (same as OSI’s Network)
+\end_layout
+
+\begin_layout Itemize
+Transport (same as OSI’s Transport)
+\end_layout
+
+\begin_layout Itemize
+Application (combines OSI’s Session,
+ Presentation,
+ and Application)
+\end_layout
+
+\begin_layout Standard
+The reason the TCP/IP model combines some of the OSI layers is because,
+ in real life,
+ there’s usually no need for separate “Session” or “Presentation” layers.
+ Things like data formatting,
+ encryption,
+ and session management are almost always handled by the application itself or by libraries and protocols that sit at the Application layer.
+ There aren’t special,
+ separate protocols just for these jobs everything is built into how the application works.
+ So,
+ there was no point in keeping those layers separate.
+ Fewer layers means less complexity,
+ less overhead,
+ and it’s easier for engineers to actually design and troubleshoot real networks.
+ That’s why the TCP/IP model is simpler and lines up better with how the internet actually runs.
+\end_layout
+
+\begin_layout Part*
+Week #2
+\end_layout
+
+\begin_layout Subsection
+
+\color blue
+What are VLANs and IEEE 802.1q?
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\color brown
+VLAN (Virtual LAN)
+\series default
+\color inherit
+ is a technology that splits one physical network into multiple logical networks.
+ Normally,
+ a switch without VLANs is one big broadcast domain:
+ every device can hear every broadcast and send data to everyone else.
+ VLANs break this domain into smaller,
+ isolated ones.
+ Devices in different VLANs cannot directly see each other’s traffic,
+ even if they are connected to the same physical switch.
+ This improves security,
+ reduces unnecessary traffic,
+ and keeps networks easier to manage.
+ On a switch,
+ VLANs are configured per port:
+\end_layout
+
+\begin_layout Itemize
+
+\color violet
+Access
+\color inherit
+ ports connect end devices (like PCs,
+ printers,
+ or phones).
+ Each access port belongs to exactly one VLAN,
+ and the device doesn’t need to know about VLANs —
+ the switch automatically assigns all traffic from that port to the correct VLAN.
+\end_layout
+
+\begin_layout Itemize
+
+\color violet
+Trunk
+\color inherit
+ ports connect switches to each other,
+ or a switch to a router or firewall.
+ A trunk must carry traffic from multiple VLANs over a single cable.
+\end_layout
+
+\begin_layout Standard
+To keep packets separated on a trunk,
+ the
+\series bold
+\color brown
+ IEEE 802.1Q standard
+\series default
+\color inherit
+ is used.
+ It adds a small VLAN tag into the Ethernet frame,
+ containing the VLAN ID.
+ When another switch receives the frame,
+ it reads the tag and knows exactly which VLAN that packet belongs to.
+ This allows VLAN 10,
+ VLAN 20,
+ and VLAN 30 to all share the same trunk link without getting mixed up.
+ The advantage of this setup is centralized control:
+ all VLANs can be delivered to one core switch,
+ router,
+ or firewall,
+ where the administrator decides the rules which VLANs can talk to each other,
+ which can only access the internet,
+ and which are completely isolated.
+ Without VLANs and trunking,
+ you would need separate physical switches and cables for every network segment,
+ which is costly and harder to manage.
+\end_layout
+
+\begin_layout Subsection
+
+\color blue
+Define following terms and concepts shortly:
+\end_layout
+
+\begin_layout Enumerate
+ARP
+\end_layout
+
+\begin_layout Enumerate
+ARP spoofing
+\end_layout
+
+\begin_layout Enumerate
+HOP (networking)
+\end_layout
+
+\begin_layout Enumerate
+IP TTL
+\end_layout
+
+\begin_layout Enumerate
+IP TOS (DSCP)
+\end_layout
+
+\begin_layout Enumerate
+DHCP,
+ DHCP relay
+\end_layout
+
+\begin_layout Enumerate
+WoL (Wake-on-LAN)
+\end_layout
+
+\begin_layout Enumerate
+UPnP
+\end_layout
+
+\begin_layout Enumerate
+Traceroute / Tracepath
+\end_layout
+
+\begin_layout Enumerate
+Network Address Translation (NAT)
+\end_layout
+
+\begin_layout Enumerate
+Tier 1 and 2 networks
+\end_layout
+
+\begin_layout Enumerate
+Tier 3 ISP
+\end_layout
+
+\begin_layout Enumerate
+Routing Autonomous System (AS or ASN for BGP)
+\end_layout
+
+\begin_layout Enumerate
+127.0.0.1 address
+\end_layout
+
+\begin_layout Enumerate
+::1 address
+\end_layout
+
+\begin_layout Enumerate
+0.0.0.0/0 and ::/0 networks in the routing table
+\end_layout
+
+\begin_layout Enumerate
+Ranges of IPv4 multicast and experimental addresses
+\end_layout
+
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+\color brown
+ARP
+\series default
+\color inherit
+ stands for Address Resolution Protocol.
+ It was created in 1982 by David Plummer at MIT and described in RFC 826.
+ The idea behind ARP is simple computers need to talk to each other over a network,
+ and for that they use IP addresses.
+ But on a physical level,
+ like Ethernet or Wi-Fi,
+ they actually send data to MAC addresses.
+ So when a computer wants to send a packet to some IP like 192.168.1.1,
+ it first needs to figure out what MAC address is linked to that IP.
+ ARP does exactly that.
+ It sends a broadcast message to the local network asking “who has this IP?”,
+ and the device that owns that IP replies with its MAC.
+ The computer then saves that info in its ARP table and uses it to send data directly.
+ This is how communication works in IPv4 networks.
+ In IPv6,
+ ARP is replaced with a different protocol called Neighbor Discovery.
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+\color brown
+ARP spoofing 
+\series default
+\color inherit
+is when someone on the same local network pretends to be another device by sending fake ARP replies.
+ Imagine you're connected to Wi-Fi and your computer asks "who has IP 192.168.1.1?" because it wants to talk to the router.
+ The router replies with its real MAC address,
+ but at the same time there's some guy nearby – let's call him Vasyan in dark sunglasses – and he also replies,
+ saying that he is 192.168.1.1 and gives his own MAC address.
+ Your computer just takes the last answer it gets and saves it in its ARP table.
+ It doesn’t check who is telling the truth.
+ Now all your traffic goes to Vasyan instead of the real router.
+ He can read it,
+ change it,
+ or block it.This works because ARP is an old and dumb protocol.
+ It accepts whatever answer comes,
+ and always updates the ARP table with the latest reply.
+ That’s why ARP spoofing is so easy to do – you just keep sending fake ARP replies every few seconds and you stay in control.To defend against this,
+ people use static ARP entries,
+ special tools that detect spoofing,
+ or move to IPv6 where the system works differently and has more protection.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+\color brown
+HOP (networking)
+\color inherit
+.
+ 
+\family sans
+\series default
+\shape italic
+In networking,
+ a hop is one step that a packet makes as it travels from one device to another.
+ Every time it moves from one router or node to the next,
+ that’s a hop.
+ It’s like checkpoints on the way from sender to receiver.
+ You can actually trace them using tools like traceroute,
+ which shows how many hops your packet needs to reach a target.
+ The more hops,
+ the more delay and risk of packet loss.In IP networks,
+ hops are limited by a field called TTL time to live.
+ Each hop decreases the TTL by 1.
+ If it reaches zero,
+ the packet is dropped.
+ This prevents endless loops in the network.To understand hops better,
+ I wrote a small C++ simulation that models message propagation across a network of 10 000 nodes.
+ Each node randomly picks 3 other nodes to send a message to (fanout = 3).
+ I start with a single "mother node" and simulate how the message spreads across the network,
+ counting how many hops it takes to reach each node.
+ Every node keeps track of how many times it got the message and at what hop it arrived.
+ This way,
+ I can measure not just average hop count,
+ but also how many duplicate messages appear,
+ how many nodes were reached,
+ and how much total traffic was generated.The simulation uses a custom stack-based message queue instead of dynamic containers like std::vector,
+ to avoid heap allocation overhead.
+ It runs multiple iterations and averages out the results.
+ The final stats include average number of hops per reached node,
+ total number of messages sent,
+ and how much redundancy was created in the process.This model helped me get an intuitive feel for how information propagates in large random graphs,
+ how fanout affects reachability,
+ and what the typical hop distance is.
+ It also ties back nicely to the concept of hops in real-world networking —
+ the more intermediate points,
+ the longer the path,
+ and the more chances for noise or duplication.
+ GitHub link to the code:
+ 
+\series bold
+\color violet
+(https://github.com/igorbologovv/10KNodes/blob/main/node_jump.cpp)
 \end_layout
 
 \end_body

@@ -2059,13 +2059,12 @@ In networking,
  which shows how many hops your packet needs to reach a target.
  The more hops,
  the more delay and risk of packet loss.In IP networks,
- hops are limited by a field called TTL —
- time to live.
+ hops are limited by a field called TTL time to live.
  Each hop decreases the TTL by 1.
  If it reaches zero,
  the packet is dropped.
  This prevents endless loops in the network.To understand hops better,
- I wrote a small C++ simulation that models message propagation across a network of 100,000 nodes.
+ I wrote a small C++ simulation that models message propagation across a network of 10 000 nodes.
  Each node randomly picks 3 other nodes to send a message to (fanout = 3).
  I start with a single "mother node" and simulate how the message spreads across the network,
  counting how many hops it takes to reach each node.
@@ -2091,6 +2090,77 @@ In networking,
 \series bold
 \color violet
 (https://github.com/igorbologovv/10KNodes/blob/main/node_jump.cpp)
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+\color brown
+TTL
+\series default
+\color inherit
+ stands for Time To Live.
+ Despite the name,
+ it’s just a number inside an IP packet that limits how many hops the packet can make.
+ Each time it passes through a router,
+ TTL goes down by 1.
+ When it hits zero,
+ the packet is dropped.This prevents endless loops if routers misbehave.
+ Without TTL,
+ broken routing could flood the network.
+ Tools like traceroute use TTL to map paths by sending packets with increasing TTL values and seeing where they get stopped.Different systems use different starting TTLs Linux might start at 64,
+ Windows at 128,
+ some devices use 255.
+ So TTL can also help identify operating systems.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+\color brown
+TOS
+\series default
+\color inherit
+ stands for Type of Service it’s a field in the IP header that was meant to tell the network how a packet should be treated.
+ Over time,
+ the old TOS system was replaced with DSCP,
+ which stands for Differentiated Services Code Point.
+ DSCP gives us 6 bits in the IP header to mark the priority of traffic basically,
+ a way for the packet to say:
+ “hey,
+ I’m important” or “I can wait”.
+ This is mostly used for Quality of Service (QoS).
+ Routers and switches can read these DSCP values and decide how to queue or forward the packets.
+ For example,
+ voice packets (like from a Zoom call or VoIP app) are usually marked with DSCP 46 that means “low delay,
+ treat me fast”.
+ These packets are small,
+ sensitive to delay,
+ and can’t be buffered.
+ Video calls might get DSCP 34 also high-priority,
+ but not as strict as voice.
+ On the other hand,
+ file downloads or software updates are marked as best effort,
+ which just means:
+ “deliver me whenever”.And even chat messages over UDP might get their own DSCP level not as urgent as voice,
+ but still more important than background traffic.
+ This is especially useful when the network is under load.
+ The whole idea is to make sure real-time stuff gets through first.Now,
+ DSCP is not just for UDP.
+ It works with all IP traffic UDP,
+ TCP,
+ ICMP,
+ even encrypted VPN tunnels.
+ The reason people often talk about UDP in this context is because it’s usually used for real-time traffic,
+ where delays and packet loss really hurt.
+ TCP traffic (like web browsing or file transfer) can also use DSCP,
+ especially in finance or other systems that care about latency or reliability.
+ But since TCP already has its own built-in mechanisms like retransmissions and congestion control DSCP has less impact there.So yeah,
+ any packet can carry a DSCP value,
+ but whether the network honors it depends on router configuration.
+ In home networks,
+ DSCP might be ignored.
+ In corporate or ISP environments with QoS policies it matters a lot.
 \end_layout
 
 \end_body
