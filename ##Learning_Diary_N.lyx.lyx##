@@ -3062,42 +3062,5 @@ According to the Ficix statistics page,
 List all private IPv4 networks (RFC1918)
 \end_layout
 
-\begin_layout Standard
-The private IPv4 networks defined by RFC1918 are:
-\end_layout
-
-\begin_layout Itemize
-10.0.0.0 – 10.255.255.255 (10/8 prefix)
-\end_layout
-
-\begin_layout Itemize
-172.16.0.0 – 172.31.255.255 (172.16/12 prefix)
-\end_layout
-
-\begin_layout Itemize
-192.168.0.0 – 192.168.255.255 (192.168/16 prefix)
-\end_layout
-
-\begin_layout Standard
-These address ranges are reserved for use in private networks and are not routed on the public internet.
-\end_layout
-
-\begin_layout Standard
-\align center
-\begin_inset Graphics
-	filename pasted14.png
-	scale 30
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection
-
-\color blue
-What is the purpose of IPv4 private networks?
-\end_layout
-
 \end_body
 \end_document

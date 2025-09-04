@@ -2289,6 +2289,734 @@ Network Address Translation (NAT)
  devices inside your network are not directly visible from the internet.
  If you want to make something accessible from outside,
  you set up port forwarding on the router.
+ 
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+\color brown
+Tier 1 and Tier 2 networks
+\series default
+\color inherit
+ The internet is made up of many networks,
+ but not all are equal.
+ Tier 1 networks are the top-level backbone providers huge companies (like AT&T,
+ Tata,
+ NTT,
+ Level 3/CenturyLink) that can reach every other network on the internet without paying anyone else for transit.
+ They do this by peering directly with all other Tier 1 networks and exchanging traffic for free (settlement-free peering).
+ Tier 1s basically form the "core" of the global internet.
+ Tier 2 networks are a level below.
+ They usually have to pay Tier 1 networks for access to some parts of the internet (this is called IP transit),
+ but they may also peer directly with other Tier 2s and smaller networks.
+ ISPs (Internet Service Provider),
+ regional carriers,
+ and large hosting providers are often Tier 2.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+\color brown
+Tier 3 ISPs
+\series default
+\color inherit
+ are local or regional internet providers that connect homes and small businesses to the internet.
+ They don’t have their own global backbone;
+ instead,
+ they buy all their internet access from bigger ISPs (Tier 2 or Tier 1 networks).
+ Tier 3 providers focus on last-mile delivery and customer support,
+ making sure users in their area get connected.
+ Most people get their internet from a Tier 3 ISP,
+ which acts as the final step between you and the wider internet.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+\color brown
+Routing Autonomous System (AS or ASN for BGP)
+\series default
+\color inherit
+.
+ The global internet is made up of thousands of Autonomous Systems (AS).
+ Each AS is a large group of IP addresses managed by one organization (like an ISP,
+ big company,
+ or university),
+ and is identified by a unique ASN (Autonomous System Number).
+ To create your own AS,
+ you first need to officially receive a big block of public IP addresses (from a regional registrar like RIPE,
+ ARIN,
+ or APNIC) and then register an ASN.
+ Only after that can you connect to other networks as a separate AS and use BGP to exchange routes.
+ Once you have your own IP range and ASN,
+ you can peer with other ASes,
+ sell IP space to other providers,
+ and even provide internet to others just like the big players.
+ ASes use BGP (Border Gateway Protocol) to advertise which IP ranges they can route.
+ This is how the global routing table is built,
+ and why traffic knows which path to take across the world.
+ Tier 1 AS:
+ giant backbones,
+ connect directly to all other Tier 1s,
+ never pay for transit.
+ Tier 2 AS:
+ buy internet from Tier 1,
+ may peer with others.
+ Tier 3 AS:
+ connect end-users,
+ buy all connectivity from higher tiers.
+ Every ISP,
+ hosting company,
+ or cloud provider is an AS.
+ The AS system allows the internet to scale,
+ set routing and security rules,
+ and ensures redundancy (multiple paths).
+ When you go online,
+ your data travels from your home LAN (private IPs/NAT),
+ through your Tier 3 ISP’s AS,
+ up through bigger ASes,
+ all connected and managed using BGP.
+ So,
+ if you own a large enough block of public IPs and get your own ASN,
+ you can become an AS yourself connect to other networks,
+ sell IP space,
+ and become part of the global backbone.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+\color brown
+127.0.0.1
+\series default
+\color inherit
+ is the “loopback” address,
+ also known as localhost.
+ When your computer sends data to 127.0.0.1,
+ it never leaves the machine the data just loops back and stays inside.
+ This address is used for testing,
+ running local servers,
+ and letting programs talk to each other on the same computer without any network hardware.
+ Every device reserves 127.0.0.1 for itself;
+ it’s never used to reach other devices.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+\color brown
+::1
+\series default
+\color inherit
+ is the IPv6 loopback address,
+ the same as 127.0.0.1 in IPv4.
+ It lets your computer send data to itself without touching the network useful for local testing and running servers on your own machine.
+ IPv6 is the new version of the internet protocol,
+ made because IPv4 addresses ran out.
+ IPv6 uses much longer addresses (like 2001:0db8:85a3::8a2e:0370:7334) and has enough space for every device in the world to get a unique IP.
+ With IPv6,
+ ::1 is always reserved as the loopback address for local use.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+\color brown
+0.0.0.0/0 and ::/0 networks in the routing table.
+
+\series default
+\color inherit
+ Every router or device on the network keeps a routing table,
+ which tells it where to send packets for different IP ranges.
+ When a packet arrives,
+ the router checks if it has a specific route for the destination IP.
+ If yes,
+ it forwards the packet along that path.
+ If it doesn’t have a matching route,
+ it uses the default route (0.0.0.0/0 for IPv4 or ::/0 for IPv6) to send the packet to its default gateway or the next higher-level router.
+ Each router along the way repeats this process until the packet reaches a network that knows how to deliver it to the final destination.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+\color brown
+Ranges of IPv4 multicast and experimental addresses.
+ 
+\series default
+\color inherit
+Multicast is a way to send one packet to multiple receivers at the same time but not to everyone (like broadcast),
+ just to devices that joined a specific group.
+ It’s used for things like streaming video to a group,
+ online games,
+ or letting devices find each other on the local network.
+ The multicast range is 224.0.0.0 to 239.255.255.255,
+ but not all addresses are used the same way:
+ 
+\end_layout
+
+\begin_layout Itemize
+224.0.0.0 to 224.0.0.255 For network control and discovery inside the local network only.
+ These addresses are used by routers and protocols like OSPF,
+ RIP,
+ or mDNS,
+ and never leave the local subnet.
+ Example:
+ 224.0.0.1 means “all devices on this subnet”.
+\end_layout
+
+\begin_layout Itemize
+224.0.1.0 to 238.255.255.255 For general multicast applications.
+ These addresses can be routed across networks if allowed.
+ Used for things like IPTV,
+ large group calls,
+ or multi-site streaming.
+\end_layout
+
+\begin_layout Itemize
+239.0.0.0 to 239.255.255.255 For private multicast inside a company or organization.
+ These addresses are not supposed to be routed on the public internet,
+ only inside your organization’s network.
+ Like “private IPs” but for multicast.
+ Experimental addresses (240.0.0.0 to 255.255.255.254) are reserved and not used in the public internet.
+\end_layout
+
+\begin_layout Subsection
+
+\color blue
+Search some information about AS1741
+\end_layout
+
+\begin_layout Enumerate
+Which organisation or company advertises AS1741 with BGP?
+\end_layout
+
+\begin_layout Enumerate
+List some public peering exchange points the AS1741 connects to?
+\end_layout
+
+\begin_layout Enumerate
+To which regional internet registry (RIR) the AS1741 belongs to?
+\end_layout
+
+\begin_layout Enumerate
+What is the contact email address/phone/web form if you would need to inform some security or abuse issues to the owner of the AS1741?
+\end_layout
+
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+\color brown
+Which organisation or company advertises AS1741 with BGP?
+
+\color inherit
+ 
+\series default
+I searched for AS1741 on bgp.he.net and found that it is advertised by CSC - Tieteen tietotekniikan keskus Oy,
+ which is known as Funet.
+ This is Finland’s national research and education network.
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename tieteentech.png
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+
+\series bold
+\color brown
+List some public peering exchange points the AS1741 connects to.
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+I visited peeringdb.com and found a list of public peering exchange points for AS1741.
+ According to the information on the site (see screenshot below),
+ AS1741 is connected to several IXPs in Finland,
+ including:
+\end_layout
+
+\begin_layout Itemize
+FICIX 1 (Espoo) 100G
+\end_layout
+
+\begin_layout Itemize
+FICIX 2 (Helsinki) 100G
+\end_layout
+
+\begin_layout Itemize
+FICIX 3 (Oulu) 10G
+\end_layout
+
+\begin_layout Itemize
+TREX Tampere 10G
+\end_layout
+
+\begin_layout Standard
+For each IXP,
+ both IPv4 and IPv6 connections are listed.
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename peering.png
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+
+\series bold
+\color brown
+To which regional internet registry (RIR) the AS1741 belongs to?
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+I checked ipinfo.io where it says that the “Registry” for AS1741 is RIPE (Réseaux IP Européens) which is the Regional Internet Registry for Europe.
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename ripe.png
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+
+\series bold
+\color brown
+What is the contact email address/phone/web form if you would need to inform some security or abuse issues to the owner of the AS1741?
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+All related information about the security is on below screenshot.
+ AS1741 is owned and operated by CSC - Tieteen tietotekniikan keskus Oy,
+ the Finnish national research and education network provider (Funet).:
+ 
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename security.png
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Subsection
+
+\color blue
+What it the difference between static and dynamic routing?
+ Use example(s)
+\end_layout
+
+\begin_layout Standard
+The difference between static and dynamic routing is that static routing relies on routes that are manually configured by a network administrator,
+ while dynamic routing allows routers to automatically learn and update routes using special protocols.
+ With static routing,
+ the network administrator sets up specific paths for traffic,
+ and these routes do not change unless someone manually edits them.
+ This method is simple and works well for small or stable networks,
+ but if something in the network changes,
+ like a link fails,
+ the route will not update on its own.
+ For example,
+ in a small office,
+ an administrator might add a static route telling Router A to send all traffic for a certain network through Router B.
+ If Router B goes offline,
+ the connection breaks until someone changes the route manually.
+ In contrast,
+ dynamic routing uses protocols like OSPF,
+ RIP,
+ or BGP,
+ which enable routers to share information about the network and automatically adjust routes if the network changes.
+ This is useful in larger or more complex networks,
+ because if a link fails or a new router is added,
+ the system will quickly update itself and find the best available path without human intervention.
+ In summary,
+ static routing is manual and straightforward,
+ but does not adapt to changes,
+ while dynamic routing is automated and flexible,
+ able to respond to changes in real time.
+\end_layout
+
+\begin_layout Subsection
+
+\color blue
+Describe briefly these dynamic routing protocols
+\end_layout
+
+\begin_layout Enumerate
+RIP
+\end_layout
+
+\begin_layout Enumerate
+OSPF and IS-IS
+\end_layout
+
+\begin_layout Enumerate
+BGP
+\end_layout
+
+\begin_layout Enumerate
+RPL (ripple)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+\color brown
+RIP (Routing Information Protocol)
+\series default
+\color inherit
+ is a classic distance-vector routing protocol that was one of the first dynamic protocols used in TCP/IP networks.
+ RIP works by having routers periodically (every 30 seconds) exchange information with their neighbors about how many hops it takes to reach various networks.
+ Each router keeps a simple routing table with the shortest hop count to each destination.
+ The protocol is very easy to configure and understand,
+ making it popular for small or simple networks.
+ However,
+ RIP has several limitations:
+ it only allows up to 15 hops,
+ which means it cannot be used in large networks,
+ and it is slow to react to changes,
+ so convergence (the process of all routers learning the best paths) can take a long time.
+ Also,
+ because it only cares about hop count and not bandwidth or delay,
+ it may choose suboptimal paths.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+\color brown
+OSPF and IS-IS
+\series default
+\color inherit
+ are both modern routing protocols used mostly inside large organizations and by internet providers.
+ They don’t just look at the number of hops,
+ like older protocols,
+ but actually build a complete map of the network by exchanging information between all routers.
+ Each router then figures out the best route to any destination using an algorithm called Dijkstra’s,
+ which basically finds the shortest path.
+ OSPF is made specifically for IP networks and divides them into smaller “areas” to keep things organized and efficient.
+ IS-IS works in a very similar way,
+ but it was first created for a different kind of network (the OSI model),
+ and over time it turned out to be super flexible and reliable so now it’s also used by a lot of big ISPs.
+ Both protocols can react quickly if something changes or breaks in the network,
+ and they have features like security and load balancing that make them suitable for complex setups.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+\color brown
+BGP,
+ or Border Gateway Protocol
+\series default
+\color inherit
+,
+ is basically the protocol that keeps the global Internet running.
+ It decides how data gets from one big network (like an ISP or a company) to another,
+ all around the world.
+ Unlike older routing protocols that just look for the shortest or fastest path,
+ BGP lets networks set their own rules for which routes to use for example,
+ preferring cheaper or faster connections,
+ or avoiding certain networks altogether.
+ Routers using BGP talk to each other and exchange lists of which networks they can reach,
+ plus extra info about how to get there,
+ like the list of networks (AS numbers) the data would pass through.
+ The cool thing about BGP is that it’s super flexible and powerful,
+ so it can handle the massive scale of the whole Internet.
+ But because it’s so important and complex,
+ configuring BGP wrong can accidentally mess up the Internet for millions of people and that’s happened before.
+ So BGP gives you a lot of control,
+ but it also means you have to be careful.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+\color brown
+RPL (Routing Protocol for Low-power and Lossy Networks)
+\series default
+\color inherit
+,
+ sometimes called “ripple,” is a special routing protocol made for Internet of Things (IoT) setups think sensors,
+ smart meters,
+ or tiny devices running on batteries that connect over spotty wireless networks.
+ The main idea behind RPL is to help these devices find reliable paths to send their data to a central hub or gateway,
+ even if some connections are weak or keep changing.
+ Instead of regular routing tables,
+ RPL builds a sort of flexible tree (called a DODAG),
+ which lets data flow around problems like dead links or devices that drop offline.
+ It takes into account things like link quality or how much energy devices have left,
+ so it can pick the most efficient routes.
+ That’s why RPL works really well in places like smart homes,
+ factories with lots of sensors,
+ or city-wide smart infrastructure anywhere there are lots of simple,
+ wireless devices that need to get their data back to a main server,
+ even if the network is kind of unreliable.
+\end_layout
+
+\begin_layout Subsection
+
+\color blue
+Create a DNS request (any tool such as ping,
+ nslookup,
+ whatever) to resolve the IP address of www.oamk.fi
+\end_layout
+
+\begin_layout Enumerate
+Use some IP whois lookup web service to resolve which company is hosting and has that IP address and server?
+ (www.oamk.fi)
+\end_layout
+
+\begin_layout Enumerate
+What is the inetnum or route/network (IP address range) the www.oamk.fi's IP address belongs to?
+\end_layout
+
+\begin_layout Enumerate
+What is abuse contact email address of that network range?
+\end_layout
+
+\begin_layout Standard
+I used the ping command to find out the IP address of www.oamk.fi.
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pasted8.png
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+I ran the whois command on this IP to see who owns it and which network it belongs to.
+ The output said that the IP address is part of the range 95.216.0.0 - 95.217.255.255,
+ and that this whole network is managed by Hetzner Online GmbH,
+ which is a German hosting company.
+ In the same whois result,
+ I also found the abuse contact email for this network,
+ which is abuse@hetzner.com
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pasted9.png
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+
+\color blue
+Use traceroute (tracert in MS Windows command shell) to www.whitehouse.gov
+\end_layout
+
+\begin_layout Standard
+What is the internet service provider's first router IP address near you?
+ (it's most likely the 2nd router/hop,
+ immediately after your home network)
+\end_layout
+
+\begin_layout Enumerate
+How many hops (routers) are there to the www.whitehouse.gov from your device?
+\end_layout
+
+\begin_layout Enumerate
+Use traceroute again,
+ but this time to Google's public DNS server in 8.8.8.8,
+ and Quad9 DNS in 9.9.9.9.
+ How far are those?
+\end_layout
+
+\begin_layout Enumerate
+Why traceroute does not always work,
+ and does not show the route up to the final destination IP,
+ or there are timeouts for some routers (* is timeout)?
+ For example,
+ IP address of education.gov.au
+\end_layout
+
+\begin_layout Enumerate
+Use traceroute and DNS to estimate/guess from response DNS names,
+ round trip times,
+ and with IP whois lookups,
+ where the web server reliefweb.int is located (continent,
+ country or so)?
+\end_layout
+
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+The first hop is my home router (192.168.1.1),
+ and the second hop (91.159.136.2) is most likely the first router of my Internet service provider.
+ The traceroute shows a total of 7 hops before timeouts start appearing.
+ The route does not reach all the way to the destination,
+ which is common due to network security settings and firewalls that block traceroute probes.
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pasted10.png
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+After that,
+ I ran traceroute to Google’s public DNS server (8.8.8.8) and to Quad9 DNS (9.9.9.9).
+ For 8.8.8.8,
+ the traceroute reached the destination in 7 hops (the 7th hop was 108.170.238.171,
+ which is part of Google’s network).
+ For 9.9.9.9,
+ the traceroute only showed 4 hops before getting only timeouts (stars) for the rest,
+ which means the packets reached the Quad9 DNS network (the last visible hop was 195.140.192.28,
+ which is in Tampere,
+ Finland),
+ but further hops were not shown,
+ possibly due to firewalls or network restrictions.
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pasted11.png
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Traceroute does not always show the route all the way to the final destination because some routers or firewalls on the path are configured to ignore or block the traceroute packets (ICMP or UDP).
+ This is often done for security reasons,
+ to prevent outside users from mapping internal network structure or to reduce unnecessary network load.
+ When a router does not respond,
+ traceroute will show a star (*) and a timeout for that hop.
+ For some websites,
+ like education.gov.au,
+ the final server or several routers near the end may not respond at all,
+ so the route appears incomplete,
+ even if the website itself is working.
+ This is normal and expected on many networks.
+\end_layout
+
+\begin_layout Enumerate
+To estimate where the web server for reliefweb.int is located,
+ I used traceroute and saw that the last responding hop was nyk-b17-link.ip.twelve99.net (62.115.137.15).
+ I am not sure about the exact location of this router,
+ but then I checked the IP address of reliefweb.int (52.87.133.138) using whois.
+ The whois result showed that this address belongs to Amazon Technologies Inc.
+ (AWS) in Seattle,
+ United States.
+ So,
+ even though the traceroute did not reach the actual server,
+ based on the whois lookup I can say that reliefweb.int is hosted on AWS in the US.
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename traceroute-nyk.png
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Subsection
+Use Ficix statistics web page and answer:
+\end_layout
+
+\begin_layout Enumerate
+What is the most quiet IP traffic hour in the Ficix 1 exchange point?
+\end_layout
+
+\begin_layout Enumerate
+Which organisations or companies are connected to Ficix 3?
+\end_layout
+
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+According to the Ficix 1 statistics page,
+ the most quiet IP traffic hour was approximately between 03:00–06:00 (EEST),
+ when the traffic dropped to its lowest value.
+ This is clearly visible on the traffic graph,
+ where both inbound and outbound traffic reached their minimum during this time.
 \end_layout
 
 \end_body
