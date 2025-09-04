@@ -2145,7 +2145,8 @@ TOS
  “deliver me whenever”.And even chat messages over UDP might get their own DSCP level not as urgent as voice,
  but still more important than background traffic.
  This is especially useful when the network is under load.
- The whole idea is to make sure real-time stuff gets through first.Now,
+ The whole idea is to make sure real-time stuff gets through first.
+ Now,
  DSCP is not just for UDP.
  It works with all IP traffic UDP,
  TCP,
@@ -2161,6 +2162,133 @@ TOS
  In home networks,
  DSCP might be ignored.
  In corporate or ISP environments with QoS policies it matters a lot.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+\color brown
+DHCP (Dynamic Host Configuration Protocol)
+\series default
+\color inherit
+ is a protocol that automatically assigns IP addresses,
+ gateway,
+ DNS,
+ and other settings to devices when they join a network.
+ In home networks,
+ the router usually acts as the DHCP server,
+ handing out private IPs from a preset range and keeping track of who got what.
+ The router itself gets a public IP from the ISP via DHCP and uses NAT to let all local devices share that one public IP,
+ tracking connections with a NAT table.
+ 
+\series bold
+\color brown
+DHCP relay
+\series default
+\color inherit
+ is used when the DHCP server is in a different subnet.
+ The relay agent (usually a router or switch) forwards the client’s broadcast request to the real server and relays the response back,
+ allowing centralized IP management in larger networks.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+\color brown
+Wake-on-LAN (WoL)
+\series default
+\color inherit
+ is a feature that lets you remotely turn on a computer over the local network by sending it a special packet called a magic packet.
+ This packet contains the target device’s MAC address repeated several times,
+ and it’s usually sent as a broadcast to the whole LAN.
+ For WoL to work,
+ the computer must support it at the hardware level (typically in the NIC and BIOS/UEFI),
+ and it has to be in a low-power state,
+ not completely shut off.
+ The NIC listens passively on the network,
+ and when it sees its MAC repeated in a magic packet,
+ it triggers the system to power on.
+ WoL doesn’t work over the internet directly,
+ unless you set up port forwarding or VPN.
+ It’s mainly used in local networks to wake up machines for remote access,
+ updates,
+ or maintenance.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+\color brown
+UPnP (Universal Plug and Play)
+\series default
+\color inherit
+ lets devices on your local network automatically open ports on the router to make themselves accessible from the internet.This is useful because routers with NAT block all incoming connections by default,
+ unless the user manually sets up port forwarding.With UPnP enabled,
+ an app can request the router to open a specific port and forward any traffic from the internet to that device.This is used by games,
+ torrent clients,
+ or remote access tools so they can accept incoming connections without manual setup.The downside is security:
+ any device in your local network can expose itself to the internet,
+ which can be dangerous if malware is present.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+\color brown
+Traceroute / Tracepath.
+
+\series default
+\color inherit
+ When you're checking network problems,
+ you usually start with ping it just tells you if the connection works.
+ But if you want to know how the packets travel to the destination,
+ you use traceroute or tracepath.
+ Tracerout is the classic tool,
+ it can send packets using UDP,
+ TCP or ICMP,
+ and works with both IPv4 and IPv6,
+ it shows you every hop (router) between your device and the destination,
+ and for each one,
+ it prints 3 round-trip times (RTTs).
+ You can even tweak the way packets are sent.
+ But to do that,
+ traceroute often needs root access because crafting custom or raw packets can be a security risk.
+ Tracepath is the simpler and safer tool.
+ It uses normal UDP packets and doesn’t need root.
+ It can’t do advanced tricks,
+ but it’s great for basic diagnostics,
+ it shows similar output:
+ each hop,
+ its IP or hostname,
+ and the round-trip time (but only once per hop).It also shows the MTU (maximum packet size allowed) along the path,
+ which can help in certain cases.
+ When to use which?For most cases,
+ tracepath is enough and safer great for workstations and normal users.If you need more control or are troubleshooting complex network issues,
+ use traceroute,
+ possibly with sudo.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+\color brown
+Network Address Translation (NAT)
+\series default
+\color inherit
+ was invented because there aren’t enough public IPv4 addresses for every device.
+ Instead of giving each device a unique global IP,
+ your provider gives your home one public IP.
+ Your router assigns private addresses (like 192.168.x.x) to all your devices,
+ and keeps a table matching each device’s private IP and port to a unique public port.
+ When a device goes online,
+ the router replaces its private IP with the public IP,
+ saves the mapping,
+ and sends replies to the right device based on this table.
+ Besides saving IP addresses,
+ NAT adds privacy and basic security:
+ devices inside your network are not directly visible from the internet.
+ If you want to make something accessible from outside,
+ you set up port forwarding on the router.
 \end_layout
 
 \end_body
