@@ -3019,5 +3019,515 @@ According to the Ficix 1 statistics page,
  where both inbound and outbound traffic reached their minimum during this time.
 \end_layout
 
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pasted12.png
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+According to the Ficix statistics page,
+ the following organisations and companies are connected to Ficix 3:
+ CSC,
+ Cinia,
+ DNA,
+ Elisa AS719,
+ FNE,
+ GleSYS,
+ Kaisanet,
+ Lounea,
+ Telia,
+ and Valoo:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pasted13.png
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+
+\color blue
+List all private IPv4 networks (RFC1918)
+\end_layout
+
+\begin_layout Standard
+The private IPv4 networks defined by RFC1918 are:
+\end_layout
+
+\begin_layout Itemize
+10.0.0.0 – 10.255.255.255 (10/8 prefix)
+\end_layout
+
+\begin_layout Itemize
+172.16.0.0 – 172.31.255.255 (172.16/12 prefix)
+\end_layout
+
+\begin_layout Itemize
+192.168.0.0 – 192.168.255.255 (192.168/16 prefix)
+\end_layout
+
+\begin_layout Standard
+These address ranges are reserved for use in private networks and are not routed on the public internet.
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pasted14.png
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+
+\color blue
+What is the purpose of IPv4 private networks?
+\end_layout
+
+\begin_layout Standard
+The main purpose of IPv4 private networks is to help deal with the shortage of public IPv4 addresses,
+ by letting different networks use the same private address ranges internally.
+ This way,
+ organizations and home users can connect as many devices as they want without taking up public address space.
+ Besides saving addresses,
+ private networks also make it easier to organize and manage local networks,
+ because internal traffic can stay within the local network and does not have to travel over the public internet.
+ Private addresses also improve security,
+ since devices with private IPs are not reachable directly from outside you need special rules or port forwarding to allow access from the internet.
+ In summary,
+ private networks help save public IP addresses,
+ make local networking simpler,
+ and add a basic layer of security.
+\end_layout
+
+\begin_layout Subsection
+
+\color blue
+List and explain three or more purposes and features of the ICMP and or ICMPv6 protocol
+\end_layout
+
+\begin_layout Standard
+ICMP (Internet Control Message Protocol) and its IPv6 version,
+ ICMPv6,
+ are protocols that work together with IP at the network layer (layer 3) of the OSI model.
+ Their main purpose is not to transfer user data,
+ but to send control and error messages that help manage and troubleshoot networks.
+ One important feature of ICMP is error reporting.
+ If a router cannot deliver a packet for example,
+ because the destination is unreachable,
+ the network is down,
+ or a port is blocked it sends back an ICMP “Destination Unreachable” message to the sender.
+ Another key feature is handling situations where packets loop around the network:
+ if the “time to live” (TTL) of a packet reaches zero,
+ the router sends an ICMP “Time Exceeded” message,
+ which helps prevent endless loops.
+ ICMP is also the foundation for network diagnostic tools.
+ The most common example is the ping command,
+ which uses ICMP Echo Request and Echo Reply messages to test if another device is reachable and to measure round-trip time.
+ The traceroute tool uses ICMP messages to discover the path packets take through the network,
+ by intentionally causing TTL to expire at each hop and recording the routers that respond.
+ In IPv6,
+ ICMPv6 has even more responsibilities.
+ It not only does error reporting and diagnostics,
+ but also supports Neighbor Discovery,
+ which lets devices on the same local network automatically find each other,
+ learn each other's addresses,
+ and even configure their own IPv6 addresses without manual setup.
+\end_layout
+
+\begin_layout Subsection
+
+\color blue
+Try to solve these basic IP subnet calculations without checking the solutions:
+\end_layout
+
+\begin_layout Enumerate
+If network address is 192.168.100.0,
+ and subnet mask is 255.255.255.224,
+ what is the broadcast address of the network?
+\end_layout
+
+\begin_layout Enumerate
+If network address is 1.2.3.4,
+ and broadcast address is 1.2.3.7,
+ what is the subnet mask of the network?
+\end_layout
+
+\begin_layout Enumerate
+If broadcast address is 192.168.129.255 and network mask is 255.255.254.0,
+ what is the network address of the network?
+\end_layout
+
+\begin_layout Standard
+A subnet mask is a number used in IP networking to separate the network part of an IP address from the host part.
+ Technically,
+ a subnet mask is just a sequence of 32 bits,
+ written as four numbers separated by dots (for example,
+ 255.255.255.0).
+ Each of these numbers is actually a group of eight bits.
+ The reason we usually see subnet masks written in decimal (like 255.255.255.224) is simply because it’s easier for humans to read,
+ but computers always work with them in binary (ones and zeros).
+ For example,
+ the mask 255.255.255.224 looks like this in binary:
+ 11111111.11111111.11111111.11100000.
+ The “1” bits mean “network part,” and the “0” bits mean “host part.” So here,
+ the first 27 bits are for the network,
+ and the last 5 bits are for devices in that network.
+ Some common subnet masks and what they look like in both decimal and binary:
+\end_layout
+
+\begin_layout Itemize
+255.255.255.0 (/24):
+ 11111111.11111111.11111111.00000000 —
+ 256 addresses per network
+\end_layout
+
+\begin_layout Itemize
+255.255.255.128 (/25):
+ 11111111.11111111.11111111.10000000 —
+ 128 addresses per network
+\end_layout
+
+\begin_layout Itemize
+255.255.255.224 (/27):
+ 11111111.11111111.11111111.11100000 —
+ 32 addresses per network
+\end_layout
+
+\begin_layout Standard
+Subnet masks are important because they help devices figure out which other devices are “local” and which ones are on another network,
+ and they make it possible to split large networks into smaller,
+ easier-to-manage parts.
+\end_layout
+
+\begin_layout Enumerate
+If the network address is 192.168.100.0 and the subnet mask is 255.255.255.224:
+ 
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+The mask 255.255.255.224 is 27 ones and 5 zeros in binary,
+ so the block size is 32 addresses (2⁵ = 32).
+\end_layout
+
+\begin_layout Enumerate
+The network address is 192.168.100.0.
+ 
+\end_layout
+
+\begin_layout Enumerate
+The broadcast address is the last address in the block:
+ 192.168.100.31.
+ So the broadcast address for this network is 192.168.100.31.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+The answer is pretty easy to make we calculate 7-[4](4 included) = 4 addresses,
+ 4 = 2^2 so only 2 bits are free and the adjusting mask from the table for 30 ones is 255.255.255.252
+\end_layout
+
+\begin_layout Enumerate
+254 in binary form is 11111110.
+ The fourth number has 8 zeros.
+ Altogether,
+ there are 9 zeros in the mask,
+ which means 2^9 = 512 addresses in the subnet.
+ Since the broadcast address is 192.168.129.255,
+ we need to count 512 addresses backwards to find the network address.
+ The last bit in the 129 part represents only one address,
+ so when we subtract this range,
+ we go back to 128.
+ With all the last 8 bits as zeros,
+ the final result is 192.168.128.0.
+\end_layout
+
+\begin_layout Subsection
+
+\color blue
+Try to solve these IP subnetting assignments without checking the solutions and document at least some examples/answers to the learning diary.
+ Answers should contain (for each subnet):
+ Network address,
+ broadcast address and subnet mask:
+\end_layout
+
+\begin_layout Itemize
+Subnetting task 1:
+ The address space available is 172.16.64.0/23.
+ Subnet it and create 5 (A,
+ B,
+ C,
+ D and E) IPv4 subnets with following amount of hosts in each network:
+ A = 85,
+ B = 45,
+ C = 95,
+ D = 57,
+ E = 34.
+ Leave some small amount of free addresses to each subnet.
+ Avoid unnecessary waste of IPs.
+\end_layout
+
+\begin_layout Itemize
+Subnetting task 2:
+ Same as task 1,
+ but available address space is now 192.168.0.0/25 and networks/hosts are:
+ A = 28,
+ B = 10,
+ C = 60,
+ D = 4.
+ Leave some small amount of free addresses to each subnet.
+ Avoid unnecessary waste of IPs.
+\end_layout
+
+\begin_layout Itemize
+Subnetting task 3:
+ IPv6 address space available:
+ 2001:708:510::/48.
+ Create four /64 IPv6 networks.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+\color brown
+Subnetting task 1
+\series default
+\color inherit
+ .
+ So 172.16.64.0/23.
+ This means we have the same situation as in the previous task:
+ the subnet mask has 9 zeros,
+ which gives us 512 available addresses.
+ When creating subnets,
+ the number of hosts probably does not include the broadcast address,
+ but each subnet must have the last address reserved for broadcast.
+ As we already know,
+ there are 512 addresses in total.
+ We could just divide the 512 addresses evenly into 5,
+ but we want to avoid wasting extra IPs.
+ So,
+ for each subnet,
+ I add 2 to the required number of hosts (to account for the network and broadcast addresses),
+ then choose the next power of two as the subnet size.
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+85 + 2 = 87 capacity 128
+\end_layout
+
+\begin_layout Enumerate
+45 + 2 = 47 capacity 64
+\end_layout
+
+\begin_layout Enumerate
+95 + 2 = 97 capacity 128
+\end_layout
+
+\begin_layout Enumerate
+57 + 2 = 59 capacity 64
+\end_layout
+
+\begin_layout Enumerate
+34 + 2 = 36 capacity 64
+\end_layout
+
+\begin_layout Standard
+So the total is 128 + 64 + 128 + 64 + 64 = 448bits for all subnets together.
+\end_layout
+
+\begin_layout Standard
+It is important to mention that we use powers of two not by chance,
+ but because subnetting is based on bits,
+ and we need to keep all subnet blocks aligned,
+ with no gaps or overlaps.
+ In the next step,
+ I will arrange (“stretch out”) these blocks in a line,
+ starting from 172.16.64.0,
+ so that each subnet directly follows the previous one.
+ Also the subnet is not that difficult to count we just see the amount of addresses and 255 - this amount + 1.
+ and that would be the subnet mask /25 and /26 in the answer means exacley about that bit which we subtracted in a previous task.
+\end_layout
+
+\begin_layout Enumerate
+for A :
+ 172.16.64.0 - 172.16.64.127 (capacity 128);
+ Broadcast is the last in this range (172.16.64.127) ;
+ Subnet mask:
+ 255.255.255.128/25.
+\end_layout
+
+\begin_layout Enumerate
+C I will use straight after A because it is easier to count :
+ C :
+ 172.16.64.128 - 172.16.64.255 (capacity 128);
+ Broadcast is the last in this range (172.16.64.255);
+ Subnet mask:
+ 255.255.255.128/25.
+\end_layout
+
+\begin_layout Enumerate
+for B :
+ 172.16.65.0 - 172.16.65.63 (capacity 64) ;
+ Broadcast is the last in this range 172.16.65.63;
+ Subnet mask:
+ 255.255.255.192/26.
+\end_layout
+
+\begin_layout Enumerate
+for D :
+ 172.16.65.64 - 172.16.65.127 (capacity 64) ;
+ Broadcast is the last in this range 172.16.65.127;
+ Subnet mask:
+ 255.255.255.192/26.
+\end_layout
+
+\begin_layout Enumerate
+for E :
+ 172.16.65.128 - 172.16.65.191 (capacity 64);
+ Broadcast is the last in this range 172.16.65.191;
+ Subnet mask:
+ 255.255.255.192/26.
+\end_layout
+
+\begin_layout Enumerate
+The remaining addresses (172.16.65.192 —
+ 172.16.65.255) are left free and can be used for future networks.
+ 
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+
+\series bold
+\color brown
+Subnetting task 2
+\series default
+\color inherit
+ :
+ 192.168.0.0/25 Is a total space of IPs means we have 7 zeros.
+ So the mask would be 255.255.255.128/25.
+ Then we use absolutely the same algorythm as in the previous task.
+ I will skip some steps since I showed them in the task 1 and I will list pnly the answers in decreasing mode:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+capacity = 64
+\end_layout
+
+\begin_layout Enumerate
+capacity = 32
+\end_layout
+
+\begin_layout Enumerate
+capacity = 16
+\end_layout
+
+\begin_layout Enumerate
+capacity = 8
+\end_layout
+
+\begin_layout Standard
+sum = 120
+\end_layout
+
+\begin_layout Standard
+free IPs left = 128 - 120 = 8.
+\end_layout
+
+\begin_layout Enumerate
+(c) (Subnet range,
+ Broadcast,
+ Mask) = 192.168.0.0 – 192.168.0.63;
+ 192.168.0.63;
+ 255.255.255.192 (/26)
+\end_layout
+
+\begin_layout Enumerate
+(a) (Subnet range,
+ Broadcast,
+ Mask) = 192.168.0.64 – 192.168.0.95;
+ 192.168.0.95;
+ 255.255.255.224 (/27)
+\end_layout
+
+\begin_layout Enumerate
+(b) (Subnet range,
+ Broadcast,
+ Mask) = 192.168.0.96 – 192.168.0.111;
+ 192.168.0.111;
+ 255.255.255.240 (/28)
+\end_layout
+
+\begin_layout Enumerate
+(d) (Subnet range,
+ Broadcast,
+ Mask) = 192.168.0.112 – 192.168.0.119;
+ 192.168.0.119;
+ 255.255.255.248 (/29)
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+
+\series bold
+\color brown
+Subnetting task 3
+\series default
+\color inherit
+:
+ The /48 prefix means that the first three blocks (2001:708:510) are fixed for all addresses in this range.
+ To create four /64 subnets,
+ we use the next (fourth) block as the subnet number and set it to 0,
+ 1,
+ 2,
+ and 3.
+ Each subnet will look like this:
+\end_layout
+
+\begin_layout Itemize
+2001:708:510:0::/64
+\end_layout
+
+\begin_layout Itemize
+2001:708:510:1::/64
+\end_layout
+
+\begin_layout Itemize
+2001:708:510:2::/64
+\end_layout
+
+\begin_layout Itemize
+2001:708:510:3::/64
+\end_layout
+
+\begin_layout Standard
+In IPv6,
+ there are no broadcast addresses,
+ so you don’t need to reserve anything for broadcast.
+\end_layout
+
+\begin_layout Standard
+Each /64 subnet has a huge number of available addresses,
+ and this method of subnetting is standard in IPv6.
+\end_layout
+
 \end_body
 \end_document
