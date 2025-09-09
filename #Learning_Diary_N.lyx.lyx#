@@ -3526,5 +3526,858 @@ In IPv6,
  and this method of subnetting is standard in IPv6.
 \end_layout
 
+\begin_layout Part*
+Week #3
+\end_layout
+
+\begin_layout Subsection
+
+\color blue
+Answer these questions:
+ 
+\end_layout
+
+\begin_layout Enumerate
+Explain shortly the purpose of TCP acknowledgment and sequence numbers
+\end_layout
+
+\begin_layout Enumerate
+What is the purpose of TCP SYN bit?
+\end_layout
+
+\begin_layout Enumerate
+What is the purpose of TCP reset bit?
+\end_layout
+
+\begin_layout Enumerate
+When TCP retransmissions occur?
+\end_layout
+
+\begin_layout Enumerate
+What is flow-control?
+ (for IP family protocols such as TCP)
+\end_layout
+
+\begin_layout Enumerate
+Explain TCP connection state LISTENING
+\end_layout
+
+\begin_layout Enumerate
+Explain TCP connection state ESTABLISHED
+\end_layout
+
+\begin_layout Enumerate
+What is the purpose of TCP or UDP source port?
+\end_layout
+
+\begin_layout Enumerate
+What is the purpose of TCP or UDP destination port?
+\end_layout
+
+\begin_layout Enumerate
+What are the common well-known network service names for these TCP ports:
+ 22,
+ 23,
+ 25,
+ 80,
+ 443,
+ 3306?
+\end_layout
+
+\begin_layout Enumerate
+What are common connection-oriented protocol features/advantages,
+ and why TCP is such protocol?
+\end_layout
+
+\begin_layout Enumerate
+What are connectionless protocols features (or lack of),
+ and why UDP is connectionless protocol?
+\end_layout
+
+\begin_layout Enumerate
+Why most services using UDP prefer max 512 byte UDP datagrams?
+\end_layout
+
+\begin_layout Enumerate
+When it is more reasonable to use UDP instead of TCP?
+\end_layout
+
+\begin_layout Enumerate
+What is the length of TCP header without extra options?
+ What about UDP header?
+\end_layout
+
+\begin_layout Enumerate
+What is TCP Nagle’s algorithm?
+ When it should be disabled for networking applications?
+\end_layout
+
+\begin_layout Enumerate
+What is Maximum Transmission Unit (MTU) and IPv4 fragmentation?
+\end_layout
+
+\begin_layout Enumerate
+What is a raw socket?
+\end_layout
+
+\begin_layout Enumerate
+What is port forwading?
+\end_layout
+
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+When you send data over TCP,
+ it gets split into small pieces called packets.
+ In real networks,
+ these packets can arrive out of order,
+ get lost along the way,
+ or even show up more than once.
+ To guarantee that everything is delivered correctly and nothing is missing,
+ TCP uses two special kinds of numbers:
+ sequence numbers and acknowledgment numbers.
+ Sequence numbers work like this:
+ every byte of data that gets sent is assigned its own unique number.
+ When a packet is transmitted,
+ its header contains the sequence number of the first byte of data inside that packet.
+ Thanks to these numbers,
+ the receiving side can put all the pieces of data back together in the right order,
+ even if they arrive all jumbled up.
+ If some piece is missing,
+ the gap in the sequence numbers immediately reveals which part got lost,
+ and the receiver can ask for it to be resent.
+ Acknowledgment numbers serve another purpose:
+ whenever the receiver gets new data,
+ it sends back a message saying which byte it expects to receive next.
+ This tells the sender that all bytes up to that number have already arrived safely,
+ and that it’s time to send the next piece.
+ If an acknowledgment isn’t received for a while,
+ the sender knows that something went wrong and can retransmit the missing data.
+ Here’s how it works in practice.
+ When a connection is first established,
+ both sides agree on which sequence numbers to start from.
+ This happens using special flags in the TCP protocol called SYN and ACK (these are just flags to indicate the type of message,
+ not actual sequence numbers themselves).
+ After that,
+ as data is transmitted,
+ suppose the sender sends a packet with a sequence number of 1000 and includes 500 bytes of data.
+ The receiver,
+ upon getting these bytes,
+ sends back an acknowledgment number of 1500.
+ This means everything up to byte 1499 has been successfully received and the next byte expected should have the number 1500.
+ If any of the data gets lost in transit and isn’t acknowledged,
+ the sender will notice the missing acknowledgment and resend the necessary data.
+ 
+\color magenta
+[https://ru.stackoverflow.com/questions/566637/]
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+\color brown
+The TCP SYN 
+\series default
+\color inherit
+bit is used during the very beginning of a TCP connection,
+ in what’s called the “three-way handshake.” Its main purpose is to synchronize the sequence numbers between the two computers that want to communicate.
+ Here’s how it works in practice:
+ When one computer wants to establish a TCP connection with another,
+ it sends a packet with the SYN flag set.
+ This first SYN packet tells the receiver,
+ “I want to start a conversation,
+ and here is the initial sequence number I’d like to use.” This initial sequence number is important because it marks where the counting of bytes will begin for the data being sent.
+ When the receiving computer gets this SYN packet,
+ it replies with its own packet that has both the SYN and ACK flags set.
+ This reply serves two purposes at once:
+ First,
+ it acknowledges that it received the first SYN by setting the ACK flag and including the expected next sequence number.
+ Second,
+ by also setting the SYN flag,
+ it tells the initiator,
+ “Okay,
+ I’m ready too,
+ and here’s the starting sequence number I want to use for my side of the communication.” Finally,
+ the initiating computer sends one more ACK packet to confirm that it received the server’s response,
+ and now both sides know which sequence numbers they’ll be using to track the conversation.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+\color brown
+The TCP reset bit,
+ called the RST flag
+\series default
+\color inherit
+,
+ is used to immediately end a TCP connection or to reject an attempt to start one.
+ When a packet arrives with the reset bit set,
+ it tells the other side to instantly stop using that connection.
+ This usually happens if one side receives unexpected data for a connection that doesn’t exist,
+ or if a server receives a request on a closed port.
+ For example,
+ in security situations,
+ if an attacker tries to connect to a protected or closed port,
+ the server can respond with a TCP packet that has the RST flag set.
+ This instantly tells the attacker that the connection is not allowed and to stop trying.
+ Firewalls can also use the reset bit to automatically cut off suspicious or unauthorized connection attempts,
+ making sure that attackers cannot find out which services are running.
+ In this way,
+ the reset bit helps quickly reject unwanted or suspicious connections and protects the server’s resources.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+\color brown
+TCP retransmissions
+\series default
+\color inherit
+ happen when the data sent from one computer does not reach the other computer or is not confirmed as received.
+ If the sender does not get a confirmation (an acknowledgment) after some time,
+ it will send the same data again.
+ This can happen if a packet is lost somewhere on the way or damaged.
+ By resending the data,
+ TCP makes sure that everything eventually arrives safely and in the right order,
+ even if something goes wrong during transmission.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+\color brown
+Flow control in TCP
+\series default
+\color inherit
+ is a mechanism that prevents the sender from overwhelming the receiver with too much data at once.
+ The main idea is that the sender might be able to send data much faster than the receiver can process or store it in its buffer.
+ If this isn’t controlled,
+ the receiver’s buffer could fill up,
+ and some data might be lost.
+ To avoid this problem,
+ TCP uses a special field called the window size.
+ This is a number that the receiver sends to the sender,
+ telling it how many more bytes of data it is ready to accept at the moment.
+ The sender is not allowed to send more data than what the current window size allows.
+ Once the receiver has processed some of the data and has free space again,
+ it sends an updated window size,
+ and the sender can continue sending more data.
+ For example,
+ if the receiver is busy and its buffer is almost full,
+ it can set the window size to zero.
+ This tells the sender to stop sending new data until there is space again.
+ When the receiver is ready,
+ it increases the window size and informs the sender,
+ which can then resume sending.
+ In this way,
+ flow control helps balance the speed between the sender and the receiver,
+ prevents buffer overflow,
+ and ensures that no data is lost just because one side is slower at handling the data.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+\color brown
+The TCP connection state LISTENING
+\series default
+\color inherit
+ means that a server is waiting and ready to accept new incoming connections on a specific port.
+ When a program (like a web server) wants to accept connections from clients,
+ it creates a socket and puts it into the LISTENING state.
+ In this state,
+ the server is not yet connected to any client,
+ but it is actively waiting for connection requests.
+ As soon as a client tries to connect (by sending a SYN packet),
+ the server can respond and begin establishing a new TCP connection.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+\color brown
+The TCP connection state ESTABLISHED
+\series default
+\color inherit
+ means that a full two-way connection has been successfully set up between the client and the server,
+ and both sides can now send and receive data.
+ In this state,
+ the three-way handshake is complete,
+ and the connection is ready for actual data transfer.
+ Any information sent by either side will be reliably delivered to the other side.
+ Most of the time when two computers are actively communicating over TCP,
+ their connection is in the ESTABLISHED state.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+\color brown
+The source port
+\series default
+\color inherit
+ is a number included in every TCP or UDP packet that identifies which application or process on the sender’s device sent the data.
+ This allows the receiving device to know where replies should be sent,
+ and it lets the sender’s own operating system deliver any response to the correct program when it comes back.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+\color brown
+The destination port
+\series default
+\color inherit
+ is a number in each TCP or UDP packet that specifies which application or service on the receiving device should get the incoming data.
+ When a device receives a packet,
+ it looks at the destination port to decide which program or service should handle that data.Source and destination ports together make sure that data flows between the correct applications on both sides,
+ so replies return to the right sender,
+ and new incoming data gets delivered to the right receiver.
+\end_layout
+
+\begin_layout Enumerate
+Here are the common,
+ well-known network services for those TCP ports:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+22:
+ SSH (Secure Shell)
+\end_layout
+
+\begin_layout Itemize
+23:
+ Telnet
+\end_layout
+
+\begin_layout Itemize
+25:
+ SMTP (Simple Mail Transfer Protocol)
+\end_layout
+
+\begin_layout Itemize
+80:
+ HTTP (HyperText Transfer Protocol)
+\end_layout
+
+\begin_layout Itemize
+443:
+ HTTPS (HyperText Transfer Protocol Secure)
+\end_layout
+
+\begin_layout Itemize
+3306:
+ MySQL Database Service
+\end_layout
+
+\begin_layout Standard
+These are standard assignments used across the internet,
+ so when you see these port numbers,
+ they usually mean the listed service is running on that port.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+
+\series bold
+\color brown
+A connection-oriented protocol 
+\series default
+\color inherit
+like TCP is designed to make sure data gets from one computer to another safely and in the right order.
+ With TCP,
+ before sending any actual information,
+ both sides set up a connection and agree on how communication will happen.
+ This setup allows TCP to guarantee that all data will arrive,
+ that the order of the data will be preserved,
+ and that any missing or damaged information will be detected and resent automatically.
+ TCP can also slow down or speed up data transfer depending on the state of the receiver and the network.
+ That’s why TCP is used for things like web browsing and file transfers,
+ where reliability is more important than speed.
+ The combination of these features is what makes TCP a connection-oriented protocol:
+ it’s all about managing and controlling the connection from start to finish to make sure nothing is lost or mixed up.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+\color brown
+A connectionless protocol
+\series default
+\color inherit
+,
+ like UDP,
+ sends data without setting up any formal connection between the sender and receiver.
+ With UDP,
+ each packet is sent independently and there’s no guarantee that packets will arrive,
+ arrive in order,
+ or even arrive at all.
+ There is no mechanism for checking errors,
+ confirming delivery,
+ or resending lost data.
+ This lack of extra steps makes UDP fast and efficient,
+ but also less reliable than TCP.
+ UDP is called connectionless because it simply sends packets out,
+ without any handshake or ongoing management of the connection,
+ making it a good fit for applications where speed matters more than reliability like online games,
+ voice calls,
+ or live streaming.
+\end_layout
+
+\begin_layout Enumerate
+Most services using UDP prefer to keep their datagrams at 512 bytes or less because this size can usually be sent across different networks without getting split into smaller fragments.
+ If a UDP datagram is larger than 512 bytes,
+ it might have to be fragmented into multiple pieces as it travels over the Internet.
+ Fragmentation increases the chance that some pieces will get lost,
+ and if even one fragment is missing,
+ the entire datagram is lost.
+ Keeping datagrams at 512 bytes or less makes transmission more reliable and avoids problems with fragmentation and loss,
+ which is especially important since UDP itself doesn’t guarantee delivery or provide automatic retransmission.
+ This size also matches traditional limits in protocols like DNS,
+ which was originally designed to fit entirely within a single 512-byte UDP packet.
+\end_layout
+
+\begin_layout Enumerate
+It is more reasonable to use UDP instead of TCP when speed is more important than reliability,
+ or when your application can tolerate some data loss,
+ out-of-order packets,
+ or duplication.
+ UDP is the better choice for real-time applications like online gaming,
+ voice or video calls,
+ and live streaming,
+ where it’s more important to get data quickly than to guarantee every single packet arrives perfectly.
+ UDP is also useful when sending small,
+ simple queries like DNS requests,
+ where adding the overhead of connection setup and error-checking would only slow things down.
+\end_layout
+
+\begin_layout Enumerate
+What is the length of TCP header without extra options?
+ What about UDP header?
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+TCP Header (20 bytes,
+ default fields,
+ no options):
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Source Port (2 bytes)
+\end_layout
+
+\begin_layout Itemize
+Destination Port (2 bytes)
+\end_layout
+
+\begin_layout Itemize
+Sequence Number (4 bytes)
+\end_layout
+
+\begin_layout Itemize
+Acknowledgment Number (4 bytes)
+\end_layout
+
+\begin_layout Itemize
+Data Offset + Reserved + Flags (2 bytes)
+\end_layout
+
+\begin_layout Itemize
+Window Size (2 bytes)
+\end_layout
+
+\begin_layout Itemize
+Checksum (2 bytes)
+\end_layout
+
+\begin_layout Itemize
+Urgent Pointer (2 bytes)
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+UDP Header (8 bytes):
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Source Port (2 bytes):
+ The sender’s port number
+\end_layout
+
+\begin_layout Itemize
+Destination Port (2 bytes):
+ The receiver’s port number
+\end_layout
+
+\begin_layout Itemize
+Length (2 bytes):
+ The total length of the UDP packet (header + data)
+\end_layout
+
+\begin_layout Itemize
+Checksum (2 bytes):
+ Error-checking for header and data
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pasted15.png
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout Enumerate
+
+\series bold
+\color brown
+TCP Nagle’s algorithm 
+\series default
+\color inherit
+is a feature designed to reduce the number of small packets sent over the network.
+ When enabled,
+ it collects small outgoing messages and sends them all together as one larger packet,
+ instead of sending each tiny message separately.
+ This helps reduce network congestion and overhead.
+ However,
+ Nagle’s algorithm can introduce delays in applications that need to send many small messages quickly,
+ especially those that rely on real-time or interactive communication,
+ like online games,
+ VoIP,
+ instant messaging,
+ or trading platforms.
+ In these cases,
+ the small delays caused by waiting for more data to “bundle” can negatively impact responsiveness.
+ Nagle’s algorithm should be disabled (using the TCP_NODELAY option) for networking applications that require minimal latency and instant delivery of small messages,
+ such as real-time games,
+ chat apps,
+ or low-latency financial trading systems.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+\color brown
+Maximum Transmission Unit (MTU)
+\series default
+\color inherit
+ is the largest size,
+ in bytes,
+ of a single packet that can be sent over a particular network link without needing to be broken up.
+ Every network interface (like Ethernet,
+ WiFi,
+ etc.) has its own MTU value,
+ for example,
+ standard Ethernet is usually 1500 bytes.
+ If an IPv4 packet is larger than the MTU of the network,
+ it must be split into smaller pieces—
+this process is called fragmentation.
+ Each fragment is sent as a separate packet,
+ and at the destination,
+ all fragments are reassembled into the original,
+ full packet.
+ Fragmentation is handled at the IP layer,
+ not by TCP or UDP.
+ Fragmentation is generally avoided if possible,
+ because it increases the chance of packet loss (if one fragment is lost,
+ the whole original packet is lost),
+ and reassembly takes extra processing time.
+ That’s why most applications try to keep packets within the MTU size of the network path.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+\color brown
+A raw socket 
+\series default
+\color inherit
+is a special type of network socket that gives a program direct access to lower-level network protocols.
+ Unlike regular sockets (like TCP or UDP),
+ raw sockets allow the application to send and receive packets with custom headers,
+ and even craft entire packets from scratch.
+ Raw sockets are often used for network diagnostics,
+ custom protocol implementation,
+ packet sniffing,
+ or security tools—
+anything where you need full control over the packet structure (for example,
+ writing your own ping,
+ traceroute,
+ or firewall).
+ Because they bypass normal protocol handling,
+ raw sockets usually require special privileges (like root/admin access) for security reasons,
+ since they can be used for things like packet spoofing or attacks.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+\color brown
+Port forwarding
+\series default
+\color inherit
+ is a technique used in networking where incoming connections to a specific port on one device (usually a router or firewall) are automatically redirected to another port and/or another device inside the local network.
+ This allows external users or services on the internet to access a computer or service (like a web server,
+ game server,
+ or CCTV camera) inside a private network,
+ even though that device doesn’t have a direct public IP address.
+ For example,
+ if you set up port forwarding on your router for port 80,
+ any connection coming to your home’s public IP address on port 80 will be sent directly to a specified computer inside your local network,
+ also on port 80 (or any other port you choose).
+ Port forwarding is commonly used for hosting servers at home,
+ remote desktop access,
+ gaming,
+ and other scenarios where devices on a private network need to be reachable from the outside world.
+\end_layout
+
+\begin_layout Subsection
+
+\color blue
+Describe these protocols or services shortly:
+ 
+\end_layout
+
+\begin_layout Enumerate
+IPSec
+\end_layout
+
+\begin_layout Enumerate
+RTP and RTCP
+\end_layout
+
+\begin_layout Enumerate
+QUIC (IETF)
+\end_layout
+
+\begin_layout Enumerate
+Wireguard
+\end_layout
+
+\begin_layout Enumerate
+DoH
+\end_layout
+
+\begin_layout Enumerate
+Round-robin DNS
+\end_layout
+
+\begin_layout Enumerate
+LDAP
+\end_layout
+
+\begin_layout Enumerate
+Radius
+\end_layout
+
+\begin_layout Enumerate
+Syslog
+\end_layout
+
+\begin_layout Enumerate
+NTP
+\end_layout
+
+\begin_layout Enumerate
+SNMP
+\end_layout
+
+\begin_layout Enumerate
+SMTP
+\end_layout
+
+\begin_layout Enumerate
+SMB/CIFS
+\end_layout
+
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+\color brown
+IPSec
+\series default
+\color inherit
+ is a set of protocols that keeps data safe when sending it over the internet between two devices or networks.
+ The process starts with both sides deciding they want a secure connection,
+ because regular IP packets can easily be intercepted or changed along the way.
+ To set up this protection,
+ both devices first need to agree on which encryption methods and keys they’ll use.
+ They do this using the Internet Key Exchange (IKE) protocol,
+ which lets them securely create a shared secret key,
+ even though they’re talking over the open internet.
+ Each side makes a public and a private value,
+ exchanges the public part,
+ and thanks to the math behind it (Diffie-Hellman),
+ both can come up with the same secret key without anyone else figuring it out,
+ even if someone is listening in.
+ Now they both have matching keys and rules for how to protect the data,
+ known as a security association.
+ Once this is set up,
+ IPSec steps in to protect the chosen traffic.
+ Every time one side needs to send a packet,
+ IPSec either encrypts it,
+ signs it,
+ or both depending on the agreed settings.
+ It adds a special header for authentication (AH) or for encryption and authentication (ESP).
+ In transport mode,
+ only the data part of the packet is protected.
+ In tunnel mode,
+ the whole original packet gets wrapped up and hidden inside a new one,
+ which is how VPNs usually work.
+ The protected packet is then sent across the internet.
+ When the other side receives it,
+ it checks the signature,
+ decrypts it if needed,
+ and pulls out the original data before passing it along to the right app or network.
+ This way,
+ IPSec makes sure your data stays private and unchanged,
+ even over public networks.
+ That’s why it’s so widely used for VPNs and for safely connecting distant offices.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+\color brown
+RTP (Real-time Transport Protocol)
+\series default
+\color inherit
+ is a protocol used to deliver audio and video over networks,
+ like in video calls,
+ online meetings,
+ or IP telephony.
+ When you’re in a voice or video chat,
+ RTP is what actually moves the sound and video data between participants,
+ making sure everything arrives quickly and in the right order for smooth playback.
+ RTP doesn’t try to guarantee perfect delivery it’s designed for real-time use,
+ so if a packet is late or missing,
+ it just gets skipped (which is usually better than waiting and causing a lag).
+ Each RTP packet has a sequence number and timestamp,
+ so the receiver knows how to put everything back in order and sync up sound and video.
+ Alongside RTP,
+ there’s RTCP (RTP Control Protocol),
+ which is like a helper protocol that travels alongside the main media stream.
+ RTCP doesn’t carry actual media,
+ but instead sends small control messages between the participants.
+ These messages report things like packet loss,
+ delay,
+ or how well the connection is working.
+ That way,
+ applications (like Zoom,
+ Skype,
+ or any VoIP system) can monitor call quality in real time,
+ adjust the stream if needed,
+ and even show users stats like “poor connection.” Together,
+ RTP and RTCP are the backbone for most live voice and video over the internet,
+ balancing speed and quality to keep things smooth and responsive.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+\color brown
+QUIC
+\series default
+\color inherit
+ is a transport protocol built on top of UDP and designed to improve the speed and security of internet connections compared to traditional protocols like TCP.
+ When a client (like your browser) connects to a server using QUIC,
+ it starts with a single handshake that establishes both the connection and the encryption keys,
+ thanks to TLS 1.3 being integrated directly into QUIC itself.
+ This handshake usually needs just one round trip,
+ which means less waiting time before any real data starts to flow.QUIC uses unique connection IDs that stay the same even if your IP address changes,
+ so you can move between networks (for example,
+ switching from Wi-Fi to 4G) without losing your session.
+ Inside one QUIC connection,
+ you can have multiple independent streams of data,
+ so if a packet is lost on one stream,
+ it doesn’t hold up the others—
+unlike TCP,
+ where all streams can get blocked if anything goes missing (so-called head-of-line blocking).
+ Each QUIC packet carries its own sequence number,
+ and the protocol itself handles retransmissions and flow control for each stream separately.Another important detail is that QUIC encrypts not only the application data but also most of its own headers,
+ making it harder to track or interfere with connections.
+ All QUIC packets are sent over UDP,
+ so they’re less likely to get stuck behind firewalls that throttle or filter TCP traffic.
+ Because everything (from connection setup to encryption and retransmissions) happens within QUIC,
+ it avoids delays from middleboxes,
+ optimizes for speed,
+ and adapts quickly to changing network conditions.
+ Today,
+ QUIC is the backbone of HTTP/3,
+ which means modern browsers and major web services use it to make loading pages,
+ streaming,
+ and online communication much faster and smoother compared to the old web stack.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+\color brown
+WireGuard
+\series default
+\color inherit
+ is a modern VPN protocol designed to be fast,
+ simple,
+ and highly secure.
+ Unlike older VPNs like IPsec or OpenVPN,
+ WireGuard is built around a minimal codebase and uses cutting-edge cryptography by default,
+ such as Curve25519 for key exchange,
+ ChaCha20 for encryption,
+ and Poly1305 for authentication.
+ When you set up a WireGuard tunnel,
+ each device generates its own public and private key pair.
+ To allow connections,
+ you simply exchange public keys with the other side there’s no need for complex certificates or a certificate authority.
+ Once configured,
+ WireGuard sits at the network layer (Layer 3),
+ creating a virtual network interface (like wg0) on your device.
+ When you send data,
+ it’s automatically encrypted using the peer’s public key,
+ wrapped in a UDP packet,
+ and sent to the remote endpoint.
+ The other side decrypts it using its private key,
+ checks the packet’s authenticity,
+ and passes the data into its own virtual network.
+ Because WireGuard is stateless in the traditional sense no sessions or handshakes after the initial key exchange packets can start flowing almost instantly,
+ and connections recover quickly from drops or IP address changes.
+ WireGuard uses a “silent by default” design:
+ if there’s no traffic,
+ it sends nothing,
+ making it harder to detect or block.
+ It also re-establishes handshakes automatically if network conditions change.
+ The protocol is extremely lightweight just a few thousand lines of code which makes it easier to audit and secure compared to legacy VPN solutions.
+ In practice,
+ this means faster setup,
+ lower CPU usage,
+ and better performance for most use cases,
+ whether you’re building a corporate VPN,
+ connecting remote workers,
+ or just protecting your data on public Wi-Fi.
+ Because of its efficiency and simplicity,
+ WireGuard is now built into the Linux kernel and widely available on most platforms.
+\end_layout
+
 \end_body
 \end_document
