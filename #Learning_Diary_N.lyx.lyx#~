@@ -4294,5 +4294,458 @@ RTP (Real-time Transport Protocol)
  balancing speed and quality to keep things smooth and responsive.
 \end_layout
 
+\begin_layout Enumerate
+
+\series bold
+\color brown
+QUIC
+\series default
+\color inherit
+ is a transport protocol built on top of UDP and designed to improve the speed and security of internet connections compared to traditional protocols like TCP.
+ When a client (like your browser) connects to a server using QUIC,
+ it starts with a single handshake that establishes both the connection and the encryption keys,
+ thanks to TLS 1.3 being integrated directly into QUIC itself.
+ This handshake usually needs just one round trip,
+ which means less waiting time before any real data starts to flow.QUIC uses unique connection IDs that stay the same even if your IP address changes,
+ so you can move between networks (for example,
+ switching from Wi-Fi to 4G) without losing your session.
+ Inside one QUIC connection,
+ you can have multiple independent streams of data,
+ so if a packet is lost on one stream,
+ it doesn’t hold up the others—
+unlike TCP,
+ where all streams can get blocked if anything goes missing (so-called head-of-line blocking).
+ Each QUIC packet carries its own sequence number,
+ and the protocol itself handles retransmissions and flow control for each stream separately.Another important detail is that QUIC encrypts not only the application data but also most of its own headers,
+ making it harder to track or interfere with connections.
+ All QUIC packets are sent over UDP,
+ so they’re less likely to get stuck behind firewalls that throttle or filter TCP traffic.
+ Because everything (from connection setup to encryption and retransmissions) happens within QUIC,
+ it avoids delays from middleboxes,
+ optimizes for speed,
+ and adapts quickly to changing network conditions.
+ Today,
+ QUIC is the backbone of HTTP/3,
+ which means modern browsers and major web services use it to make loading pages,
+ streaming,
+ and online communication much faster and smoother compared to the old web stack.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+\color brown
+WireGuard
+\series default
+\color inherit
+ is a modern VPN protocol designed to be fast,
+ simple,
+ and highly secure.
+ Unlike older VPNs like IPsec or OpenVPN,
+ WireGuard is built around a minimal codebase and uses cutting-edge cryptography by default,
+ such as Curve25519 for key exchange,
+ ChaCha20 for encryption,
+ and Poly1305 for authentication.
+ When you set up a WireGuard tunnel,
+ each device generates its own public and private key pair.
+ To allow connections,
+ you simply exchange public keys with the other side there’s no need for complex certificates or a certificate authority.
+ Once configured,
+ WireGuard sits at the network layer (Layer 3),
+ creating a virtual network interface (like wg0) on your device.
+ When you send data,
+ it’s automatically encrypted using the peer’s public key,
+ wrapped in a UDP packet,
+ and sent to the remote endpoint.
+ The other side decrypts it using its private key,
+ checks the packet’s authenticity,
+ and passes the data into its own virtual network.
+ Because WireGuard is stateless in the traditional sense no sessions or handshakes after the initial key exchange packets can start flowing almost instantly,
+ and connections recover quickly from drops or IP address changes.
+ WireGuard uses a “silent by default” design:
+ if there’s no traffic,
+ it sends nothing,
+ making it harder to detect or block.
+ It also re-establishes handshakes automatically if network conditions change.
+ The protocol is extremely lightweight just a few thousand lines of code which makes it easier to audit and secure compared to legacy VPN solutions.
+ In practice,
+ this means faster setup,
+ lower CPU usage,
+ and better performance for most use cases,
+ whether you’re building a corporate VPN,
+ connecting remote workers,
+ or just protecting your data on public Wi-Fi.
+ Because of its efficiency and simplicity,
+ WireGuard is now built into the Linux kernel and widely available on most platforms.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+\color brown
+A DoH query
+\series default
+\color inherit
+ (DNS over HTTPS query) is just a DNS request sent inside a secure,
+ encrypted HTTPS connection instead of being sent as plain text.
+ Normally,
+ when your device wants to find the IP address for a website like youtube.com,
+ it sends a DNS query in clear text to a DNS server.
+ Anyone on the network (like your internet provider) can see or even change these plain DNS requests.
+ With DoH,
+ your device (usually your browser) wraps the DNS query inside an HTTPS request and sends it to a special DoH server,
+ just like visiting a secure website.
+ Because HTTPS is encrypted,
+ nobody in the middle can see which websites you are looking up or interfere with your requests.
+ The DoH server replies with the DNS answer,
+ also over HTTPS,
+ and your device then connects to the real website.
+ In short,
+ a DoH query is a DNS request hidden inside secure web traffic,
+ protecting your privacy and preventing others from snooping on or tampering with the websites you visit.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+\color brown
+Round-robin DNS
+\series default
+\color inherit
+ is a simple technique used to distribute traffic across multiple servers by listing several IP addresses for the same domain name in the DNS records.
+ When someone tries to visit a website,
+ their device asks the DNS server for the IP address of the site.
+ With round-robin DNS,
+ the server replies with a list of several IP addresses each pointing to a different server that can handle the request.
+ Every time a new DNS query comes in,
+ the DNS server rotates the order of the IP addresses it returns.
+ For example,
+ if a domain has three servers,
+ the first user might get IP1 first,
+ the next user gets IP2 first,
+ and so on.
+ This way,
+ users are spread out more evenly across all available servers,
+ balancing the load and making the site more reliable.
+ However,
+ round-robin DNS is quite basic:
+ it doesn’t check if a server is actually working before giving out its IP address,
+ so sometimes users might get directed to a server that’s down.
+ Still,
+ it’s a popular and easy method to share traffic for big websites,
+ gaming servers,
+ or any service that needs simple load distribution.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+\color brown
+LDAP,
+ or Lightweight Directory Access Protocol,
+
+\series default
+\color inherit
+ is an application-level protocol that lets you access and manage a directory a special database storing information about users,
+ computers,
+ groups,
+ and other resources in a company.
+ It runs over TCP/IP,
+ most often on port 389 or 636 for secure connections.
+ Instead of each computer or service keeping its own list of users and passwords,
+ LDAP provides a central place where everything is stored in a tree-like structure.
+ When someone logs in to a computer,
+ email,
+ VPN,
+ or other service,
+ that system can check the user’s credentials directly with the LDAP server.
+ This means you can set up one account for a person and use it everywhere across the organization,
+ making things much simpler to manage.
+ On the technical side,
+ LDAP servers like Microsoft Active Directory or OpenLDAP let admins organize people and resources into branches and groups that reflect how the real company works.
+ You can create rules about who can access what and update user details in one place.
+ Computers whether Linux or Windows can be joined to the LDAP directory so users can log in with their company accounts,
+ and their permissions or group memberships are automatically pulled from the directory.
+ Because LDAP is an open standard,
+ it works with a huge range of software and operating systems.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+\color brown
+RADIUS
+\series default
+\color inherit
+ is a network protocol that’s mainly used to handle authentication,
+ authorization,
+ and accounting for users who connect to network services,
+ such as Wi-Fi,
+ VPNs,
+ or remote access gateways.
+ Instead of every router or access point keeping its own list of users and passwords,
+ you set up a central RADIUS server where all user credentials and access rules are stored.
+ When someone tries to connect,
+ say,
+ to a company’s Wi-Fi,
+ the access point sends the user’s login details to the RADIUS server.
+ The server checks the credentials often by comparing the username and password against a central directory like LDAP or Active Directory and then replies with a yes or no,
+ and sometimes instructions on what the user is allowed to do.
+ Besides authentication,
+ RADIUS can enforce policies,
+ such as which VLAN a user is assigned to,
+ or limit connection times.
+ It also tracks accounting data,
+ like session duration or the amount of data transferred,
+ which is helpful for auditing or billing.
+ RADIUS typically uses UDP ports 1812 for authentication and 1813 for accounting.
+ The protocol is very common in enterprise networks for controlling access to Wi-Fi,
+ VPN,
+ dial-up,
+ and many other services.
+ Its strength is that you get centralized control over who can log in and how,
+ so you don’t have to manage passwords or permissions on every device separately.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+\color brown
+Syslog
+\series default
+\color inherit
+ is a standard protocol used for sending system logs and event messages across a network.
+ It allows devices like servers,
+ routers,
+ switches,
+ firewalls,
+ and printers to report important events to a central log server,
+ which makes monitoring and troubleshooting much easier.
+ Each message typically includes information like the time,
+ the source device,
+ the type or severity of the event,
+ and the actual log text.
+ Syslog servers listen on UDP port 514 by default,
+ though it can also use TCP.
+ The protocol is simple and widely supported,
+ so you can collect logs from all kinds of hardware and software in one place.
+ This is essential for system administrators who want to keep track of what’s happening on their network,
+ catch problems early,
+ and analyze patterns or security incidents.
+ Syslog messages can cover anything from user logins and errors to firewall alerts and application logs.
+ With a central syslog server,
+ you can store,
+ search,
+ and manage logs from hundreds of devices,
+ which helps with auditing and daily operations.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+\color brown
+NTP,
+ or Network Time Protocol
+\series default
+\color inherit
+,
+ is used to keep the clocks of computers and devices in sync across a network.
+ Accurate time is much more important than it seems:
+ it’s essential for keeping logs meaningful,
+ making sure authentication works,
+ coordinating distributed systems,
+ and running scheduled tasks at the right moment.
+ Without synchronized time,
+ it becomes almost impossible to investigate incidents,
+ compare events between servers,
+ or run security protocols that rely on time stamps.
+ Here’s how NTP works in practice.
+ Each computer or server has its own internal clock,
+ but these clocks naturally drift over time and can fall out of sync with each other.
+ To fix this,
+ an NTP client runs in the background and regularly contacts one or more NTP servers,
+ which provide the precise current time,
+ often sourced from atomic clocks or GPS.
+ When your device reaches out,
+ it sends a request including its own timestamp.
+ The server responds with its own timestamps,
+ and the client uses this information to calculate network delays and figure out the actual time difference between itself and the server.
+ Instead of making sudden jumps,
+ the client slowly and smoothly adjusts its own clock to line up with the accurate time.
+ NTP works over UDP port 123,
+ and usually there’s a hierarchy:
+ company devices sync to a local NTP server,
+ which in turn syncs with highly accurate external sources.
+ This approach keeps all the clocks on your network closely matched.
+ Thanks to NTP,
+ logs stay meaningful,
+ authentication protocols function properly,
+ and automated tasks run when they’re supposed to.
+ Reliable,
+ synchronized time is a basic requirement for any modern IT infrastructure.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+\color brown
+SNMP,
+ or Simple Network Management Protocol
+\series default
+\color inherit
+,
+ is a standard protocol used to monitor and manage network devices like switches,
+ routers,
+ firewalls,
+ printers,
+ and servers.
+ It lets network administrators collect information about the status and performance of devices,
+ check for problems,
+ and even make some remote changes if needed.
+ Each device that supports SNMP runs a small piece of software called an SNMP agent,
+ which keeps track of all sorts of statistics and settings like network traffic,
+ CPU usage,
+ memory,
+ and interface status.
+ From the administrator’s side,
+ there’s usually an SNMP manager or monitoring system that regularly queries these agents,
+ asking for data or getting automatic alerts if something goes wrong.
+ The information is organized in a standardized way using something called a MIB (Management Information Base),
+ so all the data is structured and easy to work with,
+ even if it comes from different vendors.
+ SNMP usually uses UDP ports 161 for queries and 162 for alerts,
+ known as “traps.” Thanks to SNMP,
+ admins can watch the health of their entire network in real time,
+ automate responses to problems,
+ and keep everything running smoothly from a single dashboard.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+\color brown
+SMTP,
+ or Simple Mail Transfer Protocol
+\series default
+\color inherit
+,
+ is the main protocol used to send email across the internet.
+ When you send an email from your client like Outlook,
+ Thunderbird,
+ or a webmail service your message goes to an SMTP server,
+ which then figures out how to deliver it to the recipient’s mail server.
+ SMTP handles all the steps involved in relaying and forwarding mail from sender to receiver,
+ making sure the message gets where it’s supposed to go.
+ SMTP works over TCP,
+ usually on port 25,
+ 465,
+ or 587,
+ and uses a straightforward text-based conversation between servers to deliver each message.
+ It doesn’t deal with fetching or reading email from mailboxes that’s handled by other protocols like IMAP or POP3.
+ SMTP is also responsible for handling issues like relaying,
+ authentication,
+ and spam prevention.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+\color brown
+SMB,
+ or Server Message Block
+\series default
+\color inherit
+,
+ is a protocol that lets computers share files,
+ folders,
+ and even printers with each other over a network.
+ Imagine you have one computer with a folder full of documents,
+ and you want other people in your office to be able to open,
+ edit,
+ or save files there without copying them back and forth on USB sticks.
+ With SMB,
+ you can “share” that folder,
+ and everyone on the same network can access it right from their own computers,
+ as if it was a local folder.
+ The same works for printers:
+ one printer can be connected to one computer but shared with the whole office so anyone can print.
+ SMB is built into Windows and also works on Linux and macOS (for example,
+ through Samba).
+ It’s the reason you can see “Network Drives” or “Shared Folders” when you browse your company’s network.
+ CIFS is just an older version of SMB,
+ mostly used on older Windows systems,
+ but nowadays people usually mean SMB when they talk about file sharing.
+ This is different from remote desktop tools like AnyDesk or TeamViewer.
+ With SMB,
+ you don’t take control of someone else’s computer or see their screen.
+ You’re just working directly with files and folders that live somewhere else on your network,
+ without even noticing they’re not physically on your own machine.
+ SMB is how companies make it easy for teams to collaborate,
+ share documents,
+ and use network printers,
+ all without needing to physically connect to each device.
+\end_layout
+
+\begin_layout Subsection
+
+\color blue
+When listing services with netstat command,
+ what is the meaning if some network service is LISTENING and binded to the IP address 127.0.0.1?
+ What if the service is LISTENING IP address 0.0.0.0?
+\end_layout
+
+\begin_layout Standard
+If a service is listening on 127.0.0.1,
+ it means that service only accepts connections from the same computer (localhost).
+ This is commonly used during development,
+ when an application is not ready for public use and may have many vulnerabilities,
+ so no other device on the network can connect to it only programs running on that machine can use it.
+ This approach is typical for services that should not be exposed to the outside world,
+ like a local database or a test web server.
+ If a service is listening on 0.0.0.0,
+ it means the service accepts connections on all network interfaces and IP addresses of the computer.
+ This includes both local and remote connections,
+ so other devices on the network (and potentially from the internet,
+ if there’s no firewall) can reach the service.
+ Using 0.0.0.0 is necessary when you want your application or service to be accessible by users or devices across your local network or even from outside,
+ such as hosting a website,
+ providing a shared resource,
+ or running a server that should be reachable by multiple clients.
+\end_layout
+
+\begin_layout Subsection
+
+\color blue
+Why some applications are using or offer “keepalive” mechanism to maintain established connection (for example SSH connections)?
+\end_layout
+
+\begin_layout Standard
+Some applications use a “keepalive” mechanism to make sure a network connection stays active and is not dropped by firewalls,
+ routers,
+ or NAT devices when there is no data being sent for a while.
+ For example,
+ with SSH connections,
+ if you leave a terminal idle,
+ many networks or devices will eventually close the connection,
+ assuming it’s no longer needed.
+ The keepalive mechanism solves this by sending small,
+ regular packets over the connection,
+ even when there’s no real data being transferred.
+ These packets let both sides (and any devices in between) know that the connection is still alive,
+ preventing unexpected disconnects due to inactivity.
+\end_layout
+
+\begin_layout Standard
+To enable keepalive,
+ you usually add specific settings in the program’s configuration.
+ For SSH,
+ you can set ServerAliveInterval and ServerAliveCountMax in your SSH client config file (~/.ssh/config) or ClientAliveInterval and ClientAliveCountMax in the SSH server config (/etc/ssh/sshd_config).
+ These options control how often keepalive packets are sent and how many missed responses are allowed before closing the connection.
+ If you don’t need keepalive,
+ you can simply leave these options unset the connection will work,
+ but may disconnect if left idle for too long,
+ depending on your network.
+\end_layout
+
 \end_body
 \end_document
