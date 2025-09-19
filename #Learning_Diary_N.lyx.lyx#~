@@ -4747,5 +4747,97 @@ To enable keepalive,
  depending on your network.
 \end_layout
 
+\begin_layout Subsection
+
+\color blue
+Study available options with command line command “netstat /?” (Windows) or netstat –help (Linux,
+ maybe MacOS).
+ What different things you can check with netstat command?
+\end_layout
+
+\begin_layout Standard
+With the netstat command,
+ you can inspect many aspects of your system’s network activity.
+ Based on the netstat --help output (see screenshot),
+ you can:
+\end_layout
+
+\begin_layout Itemize
+Display all active network connections and their states (connected,
+ listening,
+ etc.)
+\end_layout
+
+\begin_layout Itemize
+Show which programs (processes) are using each network socket
+\end_layout
+
+\begin_layout Itemize
+List all listening server sockets (services waiting for incoming connections)
+\end_layout
+
+\begin_layout Itemize
+Display the routing table,
+ showing how network traffic is directed
+\end_layout
+
+\begin_layout Itemize
+View detailed statistics for each protocol (like TCP,
+ UDP,
+ ICMP,
+ etc.)
+\end_layout
+
+\begin_layout Itemize
+Show statistics and status for all network interfaces
+\end_layout
+
+\begin_layout Itemize
+Check which multicast groups your interfaces have joined
+\end_layout
+
+\begin_layout Itemize
+Show masqueraded (NAT) connections
+\end_layout
+
+\begin_layout Itemize
+Display the forwarding information base or routing cache
+\end_layout
+
+\begin_layout Itemize
+Customize the output to show numeric IPs,
+ ports,
+ or user names
+\end_layout
+
+\begin_layout Itemize
+Continuously monitor changes with the -c option
+\end_layout
+
+\begin_layout Itemize
+The help output also lists available options for working with different socket types (TCP,
+ UDP,
+ UNIX,
+ etc.) and address families (IPv4,
+ IPv6,
+ etc.),
+ so you can filter exactly what you need.
+\end_layout
+
+\begin_layout Standard
+Below is a screenshot of the netstat --help output on my system:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pasted16.png
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
 \end_body
 \end_document

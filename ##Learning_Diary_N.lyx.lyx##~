@@ -4863,5 +4863,412 @@ The slowness is caused by the recvfrom system call taking a long time to return 
 
 \end_layout
 
+\begin_layout Part*
+Week #4
+\end_layout
+
+\begin_layout Subsection
+
+\color blue
+Use Croc to move file or files between two or more hosts/devices.
+ Answer shortly:
+\end_layout
+
+\begin_layout Itemize
+
+\color blue
+How the Croc works?
+\end_layout
+
+\begin_layout Itemize
+
+\color blue
+How the Croc moves files if both hosts are not directly visible to each other?
+ (for example,
+ both are behind NATs or basic firewalls)
+\end_layout
+
+\begin_layout Standard
+Croc is an open source command-line tool for sending files,
+ folders,
+ or text between two computers securely and conveniently even if both are behind NAT,
+ firewalls,
+ or on totally different networks.
+ What sets Croc apart is its focus on end-to-end encryption,
+ simple peer coordination,
+ and its ability to work even in restrictive network conditions without user configuration.
+ When you want to send a file with Croc,
+ you start by running a command like croc send somefile.zip.
+ The Croc client immediately generates a random,
+ human-readable code (e.g.,
+ bold-wolf-7).
+ This code acts as both a rendezvous token (so both parties join the same session) and as the basis for cryptographic key exchange.
+ You send this code to your recipient however you want by chat,
+ phone,
+ or in person.
+ Both the sender and receiver clients connect to a public relay server (by default,
+ croc.schollz.com:9009).
+ This server's job is just to help the two parties find each other and exchange the minimal information needed to establish a direct connection.
+ It’s not a storage server,
+ and it never sees your files in plain text.
+ Once both parties connect to the relay with the same code,
+ they try to set up a peer-to-peer connection using a process called UDP hole punching.
+ This lets two computers behind NAT routers try to establish direct contact by simultaneously sending UDP packets to each other's public IP and port as seen by the relay.
+ If their routers support it (as most home routers do),
+ a direct encrypted connection is made.
+ If not,
+ Croc transparently relays the traffic through the server,
+ always keeping your data encrypted.
+ Before any file is sent,
+ Croc uses a cryptographic protocol called PAKE (specifically,
+ SPAKE2) to derive a strong,
+ session-specific encryption key from the shared code.
+ The actual code is never sent over the network only cryptographic “blobs” that can’t be used to brute-force the key.
+ All file data is then encrypted using AES-256-GCM (for confidentiality and authentication) before being sent over the wire,
+ whether direct or through the relay.
+ Files are chunked into pieces and transferred over QUIC (a modern UDP-based protocol) if possible,
+ or TCP as a fallback.
+ At the end,
+ both parties compare file hashes to ensure integrity.
+ In practice,
+ this means that as long as you keep your session code secret,
+ nobody can read your files not the relay server,
+ not an attacker on the network,
+ and not anyone who sees your encrypted packets.
+ However,
+ if someone learns your session code before the transfer,
+ they could connect as a receiver and get the file,
+ so you should treat the code as a sensitive secret and share it carefully.
+ Croc doesn’t require opening ports,
+ setting up accounts,
+ or configuring firewalls.
+ It works cross-platform and provides a real “just works” experience for sending sensitive files securely to anyone,
+ anywhere even if they’re both behind restrictive networks.
+\end_layout
+
+\begin_layout Standard
+Step 1.
+ Install Croc on Both Machines:
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\color magenta
+On Arch Linux (local):
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pasted18.png
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\color magenta
+On Gentoo (remote):
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pasted19.png
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Step 2.
+ Prepare a test file to be sent on my local machine:
+ 
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pasted20.png
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+3.
+ Sending And generating a secret code:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pasted21.png
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+4.
+ I'v got some file bro:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pasted22.png
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+5.
+ It works and I am happy.
+ 
+\end_layout
+
+\begin_layout Subsection
+
+\color blue
+Study how NTP protocol operates and analyse this Python NTP client code.
+ Also available here as plain text.
+\end_layout
+
+\begin_layout Standard
+
+\color blue
+This Python script uses direct socket programming to access the NTP server.
+ Comment individual socket programming related code lines.
+ Also,
+ answer these:
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+What is the NTP server (DNS) hostname?
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+What is the destination port number being used?
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+Is this Python script using TCP or UDP?
+ How do you know?
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+Try to execute the app with Python
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pasted23.png
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The NTP server sends back a 48-byte reply where the exact moment when the server sent its response is encoded in two fields:
+ the 10th and 11th words of the packet (each word is 4 bytes).
+ The 10th word contains the number of seconds since January 1,
+ 1900,
+ and the 11th word gives the fractional part of that second as a 32-bit integer.
+ To get the precise timestamp,
+ the script combines these two values,
+ adding the seconds and the fraction (divided by 2 to the power of 32),
+ and then adjusts for the epoch difference between NTP and Unix time.
+ This is how the script retrieves the accurate current time from the NTP server.
+\end_layout
+
+\begin_layout Subsection
+
+\color blue
+Do these Python programming assignments with Windows or Linux (or with MacOS if you want and know how)
+\end_layout
+
+\begin_layout Standard
+
+\color blue
+For example,
+ use https://realpython.com/python-sockets/ or similar site(s) for socket programming example codes and create TCP client and TCP server Python scripts
+\end_layout
+
+\begin_layout Itemize
+
+\color blue
+Establish a TCP connection between your client and server Python scripts (either as localhost traffic or between two separate hosts if you have access to two or more Python running hosts without firewall preventing the traffic)
+\end_layout
+
+\begin_layout Itemize
+
+\color blue
+Transfer some ASCII text strings between the hosts
+\end_layout
+
+\begin_layout Itemize
+
+\color blue
+TCP client connects to the server,
+ sends some plain text string and then disconnects
+\end_layout
+
+\begin_layout Itemize
+
+\color blue
+Server prints the text to the console or elsewhere
+\end_layout
+
+\begin_layout Itemize
+
+\color blue
+Save your source codes and work.
+ You need scripts again during the course week #5 (Wireshark protocol analyzer assignments)
+\end_layout
+
+\begin_layout Itemize
+
+\color blue
+Use netstat or similar command line tools to check the TCP connection status (for example the Python server script LISTENING the selected TCP port)
+\end_layout
+
+\begin_layout Standard
+1.
+ I will use sshfs to be able to work with the file from GUI rather than using vim because I was brn in 1995 and not in 1975 though I like vim but not this time.
+ This time I want to finish this exercise faster so I can go and drink some beer.
+ 
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pasted24.png
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+2.
+ I create remotely on the remote server using GUI the file 
+\begin_inset Quotes eld
+\end_inset
+
+nothing_server.py
+\begin_inset Quotes erd
+\end_inset
+
+ In the attached screenshot Yuo will fing the comments which explain what happens there.
+ 
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pasted25.png
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+3.
+ I create a client named 
+\begin_inset Quotes eld
+\end_inset
+
+nothing_client.py
+\begin_inset Quotes erd
+\end_inset
+
+ on my local machine in the same style:
+ 
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pasted26.png
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+4.
+ I run the server on the remote host:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pasted27.png
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+5.
+ I run the client and recieve a message from it on my Gentoo server:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pasted28.png
+	scale 30
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename pasted29.png
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+6.
+ I go to the bar and get some beer because I have a good mood now after all and wish you a good day or night too.
+\end_layout
+
 \end_body
 \end_document
