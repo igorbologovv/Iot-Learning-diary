@@ -5631,5 +5631,165 @@ CSV (Comma-Separated Values) A very simple text format for tabular data.
  and John 30 SQL.
 \end_layout
 
+\begin_layout Subsection
+
+\color blue
+Install Wireshark protocol analyser and inspect your IP traffic (DNS requests,
+ web browsing and such) with the Wireshark:
+\end_layout
+
+\begin_layout Itemize
+
+\color blue
+Analyse the plain text traffic between the TCP socket Python scripts you did during the course week #4.
+ Note:
+ use localhost network interface when capturing host internal traffic (localhost/127.0.0.1)
+\end_layout
+
+\begin_layout Itemize
+
+\color blue
+Try to ping 8.8.8.8 from command prompt and capture the traffic.
+ What protocols ping was using?
+ What is the total header length of your ping request (all used protocol headers combined when ping sends echo request)?
+\end_layout
+
+\begin_layout Itemize
+
+\color blue
+Capture some web browsing traffic and related DNS requests.
+ What are those A (and maybe AAAA requests)?
+ Which protocol is used for DNS requests?
+ (Note:
+ This cannot be done with web browser if your browser uses DNS over HTTPS.
+ Most do now.
+ Either skip this task or disable DoH temporary in the web browser settings)
+\end_layout
+
+\begin_layout Standard
+I set up a simple Python TCP server and client on my local machine and captured the traffic on the loopback interface (lo).
+ In Wireshark I applied the display filter tcp.port == 6666 to isolate this connection.
+ The capture shows the three-way handshake (SYN,
+ SYN/ACK,
+ ACK),
+ the data transfer packet,
+ and the connection teardown (FIN/ACK).
+ By following the TCP stream,
+ I could see the payload as human-readable text,
+ which demonstrates that plain TCP sockets send application data without any encryption.
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pasted31.png
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pasted32.png
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+I captured ICMP Echo Request packets while running a ping to 8.8.8.8 on my wireless interface.
+ In Wireshark,
+ the packet clearly shows the three protocol layers:
+ Ethernet II,
+ IPv4 and ICMP.
+\end_layout
+
+\begin_layout Standard
+Wireshark explicitly displays the IPv4 header length as 20 bytes in the “Header Length” field.
+ For Ethernet II and ICMP the exact byte counts are not printed in the GUI,
+ because they are fixed and well known:
+ Ethernet II always has a 14-byte header (destination MAC,
+ source MAC,
+ EtherType),
+ and ICMP Echo Request always has an 8-byte header (type,
+ code,
+ checksum,
+ identifier,
+ sequence number).
+\end_layout
+
+\begin_layout Standard
+When adding them together we get:
+\end_layout
+
+\begin_layout Itemize
+Ethernet II:
+ 14 bytes (not shown,
+ but fixed)
+\end_layout
+
+\begin_layout Itemize
+IPv4:
+ 20 bytes (explicitly shown in Wireshark)
+\end_layout
+
+\begin_layout Itemize
+ICMP:
+ 8 bytes (fixed format)
+\end_layout
+
+\begin_layout Standard
+This results in a total header length of 42 bytes (336 bits).
+ The payload section is also visible in Wireshark as “Data (40 bytes)”,
+ which is the repeating byte sequence that the ping program inserts into each request.
+ Wireshark also reports “98 bytes on wire”,
+ which is larger than 42+40 = 82 bytes,
+ because Ethernet frames are padded to the minimum size and include the CRC checksum on the wire.
+\end_layout
+
+\begin_layout Standard
+This analysis shows both how the protocols encapsulate each other (Ethernet → IPv4 → ICMP) and why Wireshark sometimes shows the exact header length field (IPv4) and sometimes not (Ethernet,
+ ICMP,
+ since their headers are fixed).
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pasted33.png
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+I captured DNS queries on my wireless interface while browsing normal websites.
+ With the display filter dns in Wireshark I could see “Standard query” packets.
+ For example,
+ the client resolved domains such as google.com and cookie-law.org.
+ The DNS queries were of type A (for IPv4 addresses) and AAAA (for IPv6 addresses).
+ Wireshark also showed that these DNS requests were sent via UDP to port 53,
+ which is the standard transport protocol for DNS.
+ This confirmed how web browsers first resolve human-readable hostnames into IP addresses before making HTTP/HTTPS connections.
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pasted34.png
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
 \end_body
 \end_document
