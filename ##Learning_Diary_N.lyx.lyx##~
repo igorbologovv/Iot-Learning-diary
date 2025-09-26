@@ -5248,6 +5248,21 @@ nothing_client.py
 \end_layout
 
 \begin_layout Standard
+Server:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pasted30.png
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 \align center
 \begin_inset Graphics
 	filename pasted28.png
@@ -5270,5 +5285,239 @@ nothing_client.py
  I go to the bar and get some beer because I have a good mood now after all and wish you a good day or night too.
 \end_layout
 
+\begin_layout Part*
+Week #5
+\end_layout
+
+\begin_layout Subsection
+
+\color blue
+Define following terms and concepts shortly:
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+What is the difference between encoding and encryption?
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+List few common encryption algorithms or systems
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+List few common encoding systems
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+What are plain text protocols?
+ List some
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+Encapsulation (protocol)
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+JSON,
+ XML,
+ YAML,
+ CSV
+\end_layout
+
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+
+\color brown
+Difference between encoding and encryption
+\color inherit
+ Encoding means taking some data and converting it into another format that computers or communication systems can handle more easily.
+ The goal is not to hide the content,
+ but to make sure the data can be transmitted or stored without getting corrupted.
+ For example,
+ Base64 turns binary data into readable ASCII characters so that it can be sent through text-based channels like email.
+ Common text encodings,
+ such as UTF-8,
+ are also just rules that say how characters are represented as numbers and bytes.
+ Anyone who knows the encoding method can turn the data back to its original form,
+ no secrets needed.
+ Encryption,
+ on the other hand,
+ is about protecting information.
+ It changes readable data (plaintext) into something that looks random (ciphertext).
+ To get back the original message,
+ you need a secret key.
+ Without the key,
+ the encrypted data should be useless to an outsider.
+ This is how we protect sensitive information like passwords,
+ credit card numbers,
+ or private messages when sending them across the internet.
+ Examples of modern encryption include AES,
+ RSA,
+ or ChaCha20.
+ So the main difference:
+ encoding is like translating data into another “alphabet” for compatibility,
+ while encryption is locking the data with a key so that only authorized people can unlock and read it.
+\end_layout
+
+\begin_layout Enumerate
+
+\color brown
+Common encryption algorithms and systems Encryption
+\color inherit
+ can be split into two main categories:
+ symmetric (same key for encryption and decryption) and asymmetric (public key to encrypt,
+ private key to decrypt).
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+AES (Advanced Encryption Standard) – the most widely used symmetric algorithm today.
+ It works in blocks of data (128 bits) and supports different key lengths (128,
+ 192,
+ 256).
+ Used in Wi-Fi (WPA2/WPA3),
+ VPNs,
+ TLS,
+ disk encryption.
+\end_layout
+
+\begin_layout Itemize
+ChaCha20-Poly1305 – a modern stream cipher with authentication,
+ designed as an alternative to AES.
+ It’s fast on mobile devices and often used in TLS (for example in Google Chrome,
+ WhatsApp,
+ and WireGuard VPN).
+\end_layout
+
+\begin_layout Itemize
+RSA (Rivest–Shamir–Adleman) – an asymmetric encryption system.
+ Based on the difficulty of factoring large numbers.
+ Often used for exchanging keys securely (e.g.,
+ in TLS handshakes).
+\end_layout
+
+\begin_layout Itemize
+Elliptic Curve Cryptography (ECC) – family of asymmetric algorithms using properties of elliptic curves.
+ Provides same level of security with shorter keys compared to RSA.
+ Examples include ECDSA (signatures) and ECDH (key exchange).
+\end_layout
+
+\begin_layout Itemize
+DES / 3DES (Data Encryption Standard) – older symmetric algorithms.
+ DES is insecure today,
+ and 3DES is being phased out,
+ but they were historically very important.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+
+\color brown
+Encoding systems
+\color inherit
+ are methods of representing data in another format so that it can be stored,
+ transmitted,
+ or interpreted correctly.
+ Unlike encryption,
+ they do not hide meaning anyone can decode the data if they know the rules.
+ The most common encoding systems are listed below:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Base64 – converts binary data (like images or files) into ASCII text.
+ Common in email attachments (MIME) and web applications (embedding images or JSON data).
+\end_layout
+
+\begin_layout Itemize
+URL encoding (percent-encoding) – replaces special characters in URLs with % followed by their ASCII hex code (e.g.,
+ space → %20).
+ Ensures safe transmission of URLs across the web.
+\end_layout
+
+\begin_layout Itemize
+UTF-8 (Unicode Transformation Format) – the most common character encoding for text.
+ It maps characters (letters,
+ symbols,
+ emojis) into sequences of bytes so computers can process human languages.
+\end_layout
+
+\begin_layout Itemize
+ASCII (American Standard Code for Information Interchange) – one of the earliest text encodings.
+ Maps English letters,
+ numbers,
+ and symbols into numbers (e.g.,
+ A = 65).
+\end_layout
+
+\begin_layout Itemize
+Hexadecimal encoding – represents binary data as hexadecimal characters (e.g.,
+ 01001000 → 48 → H).
+ Common in debugging and cryptography.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+
+\color brown
+Plain text protocols 
+\color inherit
+are network protocols where the communication is sent in human-readable form,
+ without encryption.
+ This means that if someone captures the traffic with a tool like Wireshark,
+ they can directly read the commands,
+ messages,
+ usernames,
+ or even passwords.
+ These protocols are easy to implement and debug,
+ but they are insecure over the open internet because anyone who intercepts the packets can see the contents.
+ Common examples of plain text protocols:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+HTTP (without TLS,
+ i.e.
+ not HTTPS) – web pages transferred in clear text.
+\end_layout
+
+\begin_layout Itemize
+FTP (File Transfer Protocol) – transfers files,
+ but credentials and data are visible.
+\end_layout
+
+\begin_layout Itemize
+Telnet – remote terminal access,
+ replaced by SSH for security.
+\end_layout
+
+\begin_layout Itemize
+SMTP,
+ POP3,
+ IMAP (when used without TLS/SSL) – email protocols that expose message contents and logins.
+\end_layout
+
+\begin_layout Itemize
+DNS (traditional DNS queries are plain text over UDP/TCP port 53).
+\end_layout
+
+\end_deeper
 \end_body
 \end_document
