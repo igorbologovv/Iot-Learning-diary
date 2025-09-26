@@ -5770,18 +5770,359 @@ This analysis shows both how the protocols encapsulate each other (Ethernet → 
 \end_layout
 
 \begin_layout Standard
-I captured DNS queries on my wireless interface while browsing normal websites.
- With the display filter dns in Wireshark I could see “Standard query” packets.
- For example,
- the client resolved domains such as google.com and cookie-law.org.
- The DNS queries were of type A (for IPv4 addresses) and AAAA (for IPv6 addresses).
- Wireshark also showed that these DNS requests were sent via UDP to port 53,
- which is the standard transport protocol for DNS.
- This confirmed how web browsers first resolve human-readable hostnames into IP addresses before making HTTP/HTTPS connections.
+I captured web browsing traffic on interface wlan0 using Wireshark.
+ By applying the filter dns,
+ I observed Standard query A (IPv4 address lookups) and Standard query AAAA (IPv6 address lookups).
+ The packets were transported using UDP protocol on port 53.
+ This confirms that the system resolver used classic DNS requests to translate domain names (e.g.,
+ push.services.mozilla.com) into IP addresses.
 \end_layout
 
 \begin_layout Standard
 \align center
+\begin_inset Graphics
+	filename pasted35.png
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+
+\color blue
+Download this zipper pcap traffic file and inspect it with Wireshark.
+ The IP traffic sample is about IoT device sending base64 encoded and JSON formatted data to a server.
+ Answer these questions:
+\end_layout
+
+\begin_layout Itemize
+
+\color blue
+What is the total size of captured frame in bits?
+\end_layout
+
+\begin_layout Itemize
+
+\color blue
+What is the payload length (data) in bytes?
+\end_layout
+
+\begin_layout Itemize
+
+\color blue
+What is the source IP address of device sending the traffic?
+\end_layout
+
+\begin_layout Itemize
+
+\color blue
+What is the destination IP address receiving the traffic?
+\end_layout
+
+\begin_layout Itemize
+
+\color blue
+What is the IP family procotol delivering the data?
+\end_layout
+
+\begin_layout Itemize
+
+\color blue
+What is the source port?
+\end_layout
+
+\begin_layout Itemize
+
+\color blue
+What is the destination port?
+\end_layout
+
+\begin_layout Itemize
+
+\color blue
+Extract the payload as printable text (use right mouse button and copy as printable text for the data part only).
+ Use any base64 decoder to convert the data to a plain text JSON message.
+ What is the content of JSON formatted data?
+\end_layout
+
+\begin_layout Itemize
+
+\color blue
+Hint:
+ If you struggle with this task,
+ you can get the UDP payload if you select the UDP datagram with right mouse button in the Wireshark packet view,
+ and use “Follow”.
+ It gives you the UDP packet data payload as ASCII text you can copy-paste from the Wireshark popup window to any common base64 decoder
+\end_layout
+
+\begin_layout Standard
+I opened the provided IoT traffic capture file in Wireshark and inspected the single UDP packet.
+\end_layout
+
+\begin_layout Itemize
+The total size of the captured frame was 1536 bits (192 bytes on wire).
+\end_layout
+
+\begin_layout Itemize
+The payload length (data) was 150 bytes.
+\end_layout
+
+\begin_layout Itemize
+The source IP address of the IoT device was 194.163.171.214.
+\end_layout
+
+\begin_layout Itemize
+The destination IP address receiving the traffic was 193.167.100.28.
+\end_layout
+
+\begin_layout Itemize
+The IP family protocol delivering the data was IPv4.
+\end_layout
+
+\begin_layout Itemize
+The source port was 49240.
+\end_layout
+
+\begin_layout Itemize
+The destination port was 8080.
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pasted36.png
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+I then extracted the UDP payload as printable text in Wireshark.
+ The data was base64 encoded.
+ When I decoded it the first time,
+ the output was still another base64 string.
+ Running a second decode revealed the final JSON message.
+\end_layout
+
+\begin_layout Standard
+I used the following Linux commands:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pasted37.png
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This confirmed that the IoT device was sending sensor/button data in JSON format over UDP,
+ but encoded twice with base64.
+\end_layout
+
+\begin_layout Subsection
+
+\color blue
+Download this zipper pcap traffic file and inspect it with Wireshark.
+ Traffic is simple MySQL session example from Wireshark Wiki.
+ Answer these questions:
+\end_layout
+
+\begin_layout Itemize
+
+\color blue
+What is the destination IP address receiving the traffic?
+\end_layout
+
+\begin_layout Itemize
+
+\color blue
+What is the destination TCP port?
+\end_layout
+
+\begin_layout Itemize
+
+\color blue
+Use Wireshark's follow TCP stream feature (right mouse button) and inspect what are the two database rows (animals) and related values which were inserted to the foo table's animal and name columns?
+\end_layout
+
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+I opened the MySQL capture file in Wireshark.
+ Inspecting the IP header showed that the destination IP was 192.168.0.254.
+ The destination TCP port was 3306,
+ which is the default MySQL port.
+\end_layout
+
+\begin_layout Standard
+By using Wireshark’s Follow → TCP Stream feature,
+ I could see the SQL commands in plain text.
+ The captured session contained two INSERT statements into the foo table:
+\end_layout
+
+\begin_layout Itemize
+animal = "dog",
+ name = "Goofy"
+\end_layout
+
+\begin_layout Itemize
+animal = "cat",
+ name = "Garfield"
+\end_layout
+
+\begin_layout Standard
+This demonstrates that unencrypted database traffic exposes sensitive SQL queries and data directly on the network.
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pasted38.png
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pasted39.png
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+
+\color blue
+Download this zipped pcap traffic file and inspect it with Wireshark.
+ Traffic has been captured from host 192.168.80.32.
+ Answer these questions:
+\end_layout
+
+\begin_layout Itemize
+
+\color blue
+What is the MAC address of host 192.168.80.32?
+\end_layout
+
+\begin_layout Itemize
+
+\color blue
+What is the MAC address of host 192.168.80.1?
+ Which vendor has build the ethernet chipset of host 192.168.80.1?
+ (use Wireshark or IEEE OUI data)
+\end_layout
+
+\begin_layout Itemize
+
+\color blue
+Which IP address sent ICMP echo requests to this (192.168.80.32) host?
+ Also,
+ there is a repeating short message inside ICMP datagrams the host sent as ICMP echo request payload.
+ What is the repeated message?
+\end_layout
+
+\begin_layout Itemize
+
+\color blue
+What was the web page the host 192.168.80.32 visited first (full web page address,
+ not just the host)?
+ What was the web browser or HTTP user agent string used to access that web server?
+\end_layout
+
+\begin_layout Itemize
+
+\color blue
+What is the hostname in “Host:” field of the HTTP GET request sent by 192.168.80.32?
+\end_layout
+
+\begin_layout Itemize
+
+\color blue
+What is most likely the default DNS server (the IP address) used by the host 192.168.80.32?
+\end_layout
+
+\begin_layout Itemize
+
+\color blue
+Use Wireshark’s file/export objects/HTTP feature to extract the ZIP file which was downloaded from the web server 193.167.100.88.
+ What is inside the ZIP file?
+\end_layout
+
+\begin_layout Itemize
+
+\color blue
+Host 192.168.80.32 sent DNS requests to host 9.9.9.9.
+ What are the requests?
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pasted40.png
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pasted41.png
+	scale 30
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename pasted43.png
+	scale 30
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename pasted42.png
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pasted44.png
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 
 \end_layout
 
