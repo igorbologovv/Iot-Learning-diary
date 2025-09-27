@@ -6166,5 +6166,376 @@ In this task I analyzed the provided pcap file network_capture.pcap with Wiresha
  and finally the contents of the ZIP archive captured in the traffic.
 \end_layout
 
+\begin_layout Subsection
+
+\color blue
+Create a new JSON file with any text editor.
+ JSON file should contain data for at least two houses and related IoT sensor data.
+ Each house must have few sensors with following information and some random data for each sensor.
+\end_layout
+
+\begin_layout Itemize
+
+\color blue
+Validate your JSON file with validator:
+ jsonlint.com or jsonformatter.curiousconcept.com
+\end_layout
+
+\begin_layout Itemize
+
+\color blue
+What is GraphQL?
+ Also,
+ check this traffic and parking API documentation from Oulu (extra task uses this API)
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pasted45.png
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+For this assignment I created a JSON file describing IoT sensor data from two houses.
+ Each house had several sensors,
+ and for every sensor I included an ID number,
+ a location description,
+ notes,
+ a Unix epoch timestamp,
+ and three random sensor values.
+ After writing the file in a text editor I validated the JSON with an online validator (jsonlint.com).
+ The validator confirmed that the syntax was correct and the file was valid JSON.
+\end_layout
+
+\begin_layout Standard
+
+\color blue
+What is GraphQL?
+\end_layout
+
+\begin_layout Standard
+
+\color brown
+GraphQL
+\color inherit
+is an API query language and runtime for requesting exactly the data you need.
+ Instead of having many fixed endpoints like in REST,
+ GraphQL provides a single endpoint where the client defines the structure of the response.
+ This prevents overfetching and underfetching,
+ and makes it possible to retrieve related entities with one request.
+ The schema defines the available types and fields,
+ and the server resolves the query accordingly.
+\end_layout
+
+\begin_layout Standard
+
+\color blue
+Testing the Oulu traffic API
+\end_layout
+
+\begin_layout Standard
+I sent the following GraphQL query to the API:
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\color violet
+{
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\color violet
+carParks {
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\color violet
+name
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\color violet
+maxCapacity
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\color violet
+spacesAvailable
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\color violet
+}
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\color violet
+}
+\end_layout
+
+\begin_layout Standard
+I executed the query with curl:
+ 
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\color violet
+curl -L -X POST 
+\backslash
+
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\color violet
+-H "Content-Type:
+ application/json" 
+\backslash
+
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\color violet
+--data '{ "query":
+ "{ carParks { name maxCapacity spacesAvailable } }" }' 
+\backslash
+
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\color violet
+https://api.oulunliikenne.fi/proxy/graphql
+\end_layout
+
+\begin_layout Standard
+The API responded with live data about car parks in Oulu.
+ For example:
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\color violet
+{
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\color violet
+"data":
+ {
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\color violet
+"carParks":
+ [
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\color violet
+{ "name":
+ "Rehaparkki",
+ "maxCapacity":
+ 357,
+ "spacesAvailable":
+ 307 },
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\color violet
+{ "name":
+ "Kivisydän",
+ "maxCapacity":
+ 750,
+ "spacesAvailable":
+ 460 },
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\color violet
+{ "name":
+ "Technopolis",
+ "maxCapacity":
+ 400,
+ "spacesAvailable":
+ 364 },
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\color violet
+{ "name":
+ "Valkea",
+ "maxCapacity":
+ 60,
+ "spacesAvailable":
+ 17 }
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\color violet
+]
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\color violet
+}
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+\color violet
+}
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pasted46.png
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+
+\color blue
+Install Cmder (or some other toolset where you have Curl or similar tool to make HTTP requests from command line or application.) Use Curl to fetch XML formatted weather data from FMI:
+ curl -s -L "https://opendata.fmi.fi/wfs?request=getFeature&storedquery_id=fmi::observations::weather::timevaluepair&place=oulu&timestep=100&parameters=temperature" Inspect and validate the received XML data with www.w3schools.com/xml/xml_validator.asp
+\end_layout
+
+\begin_layout Standard
+I used the provided FMI (Finnish Meteorological Institute) API.
+ With the following curl command,
+ I retrieved weather observations for Oulu:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pasted47.png
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+I copied the XML output and pasted it into the W3Schools XML validator The validation confirmed that the XML data is well-formed and correct.
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pasted48.png
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+
+\color blue
+Decode this base64 encoded message with any tool(s) you prefer:
+ SGVsbG8gdGhlcmUgT2FtayBzdHVkZW50ISBBcmUgeW91IGhhdmluZyBmdW4gbm93Pz8/
+\end_layout
+
+\begin_layout Standard
+I used the Linux command line tool base64 to decode it:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pasted49.png
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+and yes I am having alot of fun,
+ also because today is Saturday and this hw is going to end soon I will take some beer and watch my gf playing the Witcher 3.
+ 
+\end_layout
+
+\begin_layout Subsection
+
+\color blue
+Encode this string:“I love data processing challenges!” with base64 encoding
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pasted50.png
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The flag -n in the echo command is important because,
+ by default,
+ echo appends a newline character (
+\backslash
+n) at the end of the string.
+ If I did not use -n,
+ the newline would also be encoded,
+ and the Base64 result would be slightly different.
+ Using -n ensures that only the exact text I want is encoded,
+ without any extra characters.
+\end_layout
+
 \end_body
 \end_document
