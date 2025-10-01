@@ -6507,5 +6507,890 @@ and yes I am having alot of fun,
  
 \end_layout
 
+\begin_layout Subsection
+
+\color blue
+Encode this string:“I love data processing challenges!” with base64 encoding
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pasted50.png
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The flag -n in the echo command is important because,
+ by default,
+ echo appends a newline character (
+\backslash
+n) at the end of the string.
+ If I did not use -n,
+ the newline would also be encoded,
+ and the Base64 result would be slightly different.
+ Using -n ensures that only the exact text I want is encoded,
+ without any extra characters.
+\end_layout
+
+\begin_layout Part*
+Week #6
+\end_layout
+
+\begin_layout Subsection
+
+\color blue
+Describe the difference between request-response and publish-subscribe communication models
+\end_layout
+
+\begin_layout Standard
+Request–response is the traditional way computer communication works on the web.
+ In this model a client,
+ such as a browser or an application,
+ sends a request directly to a server.
+ The server then processes the request and returns a response,
+ after which the exchange is usually complete.
+ The important point is that nothing happens unless the client actively asks for it.
+ For example,
+ if you want the current weather,
+ your phone needs to query the weather service each time.
+ This makes request–response predictable and easy to understand because every request has exactly one answer,
+ but it also means the client must keep polling repeatedly to see if something has changed.
+ Publish–subscribe,
+ often used with protocols like MQTT,
+ works differently.
+ Here the communication is organized around a broker and topics.
+ Devices that produce information act as publishers.
+ They send their data to the broker under a specific topic name,
+ such as “home/kitchen/temperature.” Devices that are interested in this information act as subscribers.
+ They register with the broker and say “I want all messages from this topic.” Whenever the publisher sends a new message,
+ the broker automatically delivers it to every subscriber.
+ The publisher and subscriber do not know each other directly,
+ only the topic connects them.
+ The practical effect is that publish–subscribe allows instant delivery of updates without repeated polling.
+ A temperature sensor can push a new reading as soon as it is measured,
+ and a smartphone subscribed to the same topic immediately receives it.
+ With request–response the phone would need to ask the sensor again and again,
+ even if the value has not changed,
+ which wastes bandwidth and battery power.
+ Publish–subscribe is therefore especially useful in Internet of Things systems where many devices need to share data in real time with minimal overhead,
+ while request–response remains better suited for one-time queries such as fetching a web page or uploading a form.
+\end_layout
+
+\begin_layout Subsection
+
+\color blue
+Try MQTT websocket demo application
+\end_layout
+
+\begin_layout Itemize
+
+\color blue
+Subscribe to some existing topic(s) in HiveMQ demo service .
+\end_layout
+
+\begin_layout Itemize
+
+\color blue
+Publish some messages to the topic(s) you subscribed
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pasted51.png
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+I used the HiveMQ WebSocket client to test the publish–subscribe model in practice.
+ First I connected to the public broker at broker.hivemq.com with port 8884.
+ After the connection was established,
+ the client showed a green “connected” status.
+ I then subscribed to the topic oamkiotcourse/#,
+ which means I would receive all messages that are published under that namespace.
+ The subscription appeared in the Subscriptions window of the client.
+ Next I published my own message.
+ I set the topic to oamkiotcourse/test and entered the text “Hello from my client.” As soon as I pressed publish,
+ the message appeared in the Messages window,
+ because I was already subscribed to the same topic.
+ This demonstrated how MQTT delivers data instantly to subscribers without repeated polling.
+ By watching other users’ messages and publishing my own,
+ I saw the full cycle of connecting,
+ subscribing,
+ publishing,
+ and receiving.
+\end_layout
+
+\begin_layout Subsection
+
+\color blue
+Explain what are MQTT retained messages
+\end_layout
+
+\begin_layout Standard
+In MQTT a retained message is a special type of message that the broker keeps stored as the “last known good value” for a topic.
+ Normally when a client subscribes to a topic,
+ it will only receive new messages that are published after the subscription is active.
+ If nothing is published,
+ the subscriber receives nothing.
+ With retained messages this changes.
+ When a publisher sends a message with the retain flag set,
+ the broker saves that message as the retained one for that topic.
+ The next time any new client subscribes to that topic,
+ the broker immediately delivers the retained message,
+ even if it was originally published long before.
+ This feature is very useful for IoT systems,
+ because new devices or applications can instantly learn the current state of the system without waiting for the next update.
+ For example,
+ a temperature sensor can publish the latest reading as a retained message.
+ Even if the sensor only sends a new value once every hour,
+ any phone or dashboard that subscribes later will still get the last measurement right away.
+ Without retained messages,
+ the subscriber would have to wait until the next scheduled update.
+ Retained messages are not stored forever in history,
+ they only keep the most recent one per topic.
+ If a new retained message is published on the same topic,
+ it overwrites the old one.
+ If a publisher wants to clear the retained message,
+ it can send an empty payload with the retain flag set,
+ and the broker will remove the stored value.
+ This makes retained messages a simple and efficient mechanism to provide “current status” information in publish–subscribe systems.
+\end_layout
+
+\begin_layout Subsection
+
+\color blue
+List shortly some reasons why MQTT may be better than HTTP for IP-based IoT communication?
+ (For example:
+ HTTP vs.
+ MQTT:
+ A tale of two IoT protocols and MQTT Vs.
+ HTTP:
+ Understanding the Differences)
+\end_layout
+
+\begin_layout Standard
+MQTT is often considered more suitable than HTTP for IoT communication because it is designed to minimize overhead and deliver data efficiently over unreliable or low-bandwidth networks.
+ HTTP uses a request–response pattern where each exchange includes a full set of headers,
+ and the client must poll repeatedly to check for updates.
+ MQTT,
+ on the other hand,
+ maintains a lightweight persistent connection and uses the publish–subscribe model so that updates are pushed immediately to subscribers without extra traffic.
+ One important difference is the size of the protocol overhead.
+ HTTP headers can easily be hundreds of bytes long,
+ while MQTT messages can be only a few bytes.
+ This means MQTT is more battery-friendly for devices with limited power and more efficient on low-bandwidth links.
+ MQTT also has built-in features like Quality of Service levels that ensure messages are delivered even if the connection is unstable,
+ and retained messages that let new subscribers get the latest state instantly.
+ HTTP does not provide these mechanisms directly.
+ Another advantage is that MQTT connections are long-lived and bidirectional,
+ so the server can deliver messages to the client as soon as they are available.
+ With HTTP,
+ clients need to use workarounds like long polling or WebSockets to achieve the same effect.
+ For IoT scenarios with thousands of small devices sending sensor data or waiting for commands,
+ MQTT’s efficiency,
+ reliability features,
+ and push-based communication make it a much better choice than classic HTTP request–response.
+\end_layout
+
+\begin_layout Subsection
+
+\color blue
+What is CoAP?
+\end_layout
+
+\begin_layout Standard
+CoAP stands for Constrained Application Protocol.
+ It is a specialized web transfer protocol designed by the IETF for small,
+ resource-limited devices and networks such as those used in the Internet of Things.
+ CoAP is built on top of UDP instead of TCP,
+ which means it avoids the heavy overhead of connection setup and large headers.
+ The protocol is intentionally very lightweight so that tiny devices with little memory,
+ low CPU power,
+ and limited battery life can still communicate efficiently.
+ CoAP follows the same general idea as HTTP:
+ it uses a request–response interaction model and supports methods like GET,
+ PUT,
+ POST,
+ and DELETE.
+ This makes it easier to integrate with existing web technologies,
+ because gateways can translate CoAP requests directly into HTTP when needed.
+ However,
+ CoAP messages are encoded in a compact binary format rather than text-based headers,
+ which saves space.
+ A key feature of CoAP is its ability to work well in lossy and low-power networks.
+ It includes optional reliability mechanisms built on top of UDP,
+ such as confirmable messages that must be acknowledged,
+ and non-confirmable messages when speed is more important than reliability.
+ CoAP also supports multicast,
+ meaning one device can efficiently send a message to many other devices at once,
+ which HTTP does not support.
+ In addition,
+ CoAP includes an “observe” extension that lets clients automatically receive updates from a resource whenever it changes,
+ similar to publish–subscribe behavior.
+ Because of its efficiency,
+ CoAP is widely used in IoT environments where devices need to talk to each other or to gateways without consuming too much energy or network capacity.
+ It essentially brings the ideas of the web into the constrained world of sensors and actuators.
+\end_layout
+
+\begin_layout Subsection
+
+\color blue
+What is 6LoWPAN?
+\end_layout
+
+\begin_layout Standard
+6LoWPAN stands for IPv6 over Low-Power Wireless Personal Area Networks.
+ It is not a completely new protocol,
+ but rather an adaptation layer that makes it possible to run IPv6 on top of small wireless networks such as those defined by IEEE 802.15.4.
+ The problem it solves is that IPv6 packets are normally quite large and require a minimum transmission unit of 1280 bytes,
+ while IEEE 802.15.4 frames can only carry 127 bytes in total.
+ Without some kind of adaptation,
+ IPv6 would simply not fit.
+ 6LoWPAN introduces two key mechanisms:
+ header compression and fragmentation.
+ Header compression removes or shortens many fields of the IPv6 header when they are not necessary,
+ reducing the overhead from dozens of bytes to only a few.
+ Fragmentation then allows a large IPv6 packet to be split across multiple small 802.15.4 frames and reassembled at the destination.
+ With these techniques,
+ tiny battery-powered nodes can still participate in an IPv6 network and be addressed directly with global IP addresses.
+ The importance of 6LoWPAN is that it makes IoT devices first-class citizens of the Internet.
+ Instead of relying on custom protocols or closed networks,
+ sensors and actuators using 6LoWPAN can be integrated into standard IP-based systems,
+ communicate with the wider Internet through gateways,
+ and use the same tools as other networked devices.
+ It bridges the gap between the constrained world of wireless sensor networks and the global IPv6 Internet.
+\end_layout
+
+\begin_layout Subsection
+
+\color blue
+What is IETF ROLL?
+\end_layout
+
+\begin_layout Standard
+IETF ROLL is the working group in the Internet Engineering Task Force that focuses on routing solutions for low-power and lossy networks.
+ The name ROLL comes from “Routing Over Low power and Lossy networks.” These are networks made up of devices such as sensors,
+ actuators,
+ and small embedded systems that usually operate with very limited energy and have unreliable wireless links.
+ Traditional routing protocols like OSPF or BGP are far too heavy for such conditions,
+ so the IETF created ROLL to design something lighter and more efficient.
+ The main outcome of the ROLL group is the RPL protocol (Routing Protocol for Low-Power and Lossy Networks).
+ ROLL defined the requirements and architecture for how routing should work in environments where nodes may go to sleep,
+ links may drop packets frequently,
+ and memory and CPU resources are extremely constrained.
+ Instead of trying to adapt existing Internet routing protocols,
+ ROLL worked from the ground up to make something that fits the IoT world.
+ In practice,
+ ROLL provides the framework and the standardization process,
+ while RPL is the protocol that implements the ideas.
+ Thanks to ROLL’s work,
+ small devices can form multi-hop IPv6 networks where data can flow reliably from many sensors up to a gateway and sometimes back down again,
+ without draining the devices’ batteries or requiring constant retransmissions.
+\end_layout
+
+\begin_layout Subsection
+
+\color blue
+Describe IETF RPL protocol?
+\end_layout
+
+\begin_layout Standard
+RPL,
+ which stands for Routing Protocol for Low-Power and Lossy Networks,
+ is the protocol developed by the IETF ROLL group to provide routing in constrained IoT environments.
+ It is designed specifically for networks made of small devices with limited battery power and unreliable wireless links,
+ where traditional Internet routing protocols would be too heavy or inefficient.
+ RPL organizes the network into a structure called a Destination Oriented Directed Acyclic Graph,
+ or DODAG.
+ In simple terms this is a tree-like graph with one or more root nodes,
+ usually a gateway to the wider Internet,
+ and many leaf nodes,
+ such as sensors.
+ Each node has a “rank” that represents its relative position in the graph.
+ Data typically flows upward from the leaves toward the root,
+ but RPL also supports downward and point-to-point traffic when needed.
+ Routing decisions in RPL are based on an Objective Function,
+ which can take into account different metrics such as link reliability,
+ energy consumption,
+ latency,
+ or hop count.
+ This allows the network to adapt to the constraints of the environment.
+ For example,
+ in a network where saving energy is the top priority,
+ the Objective Function can prefer routes through nodes with higher battery capacity.
+ RPL operates with control messages that allow nodes to join the graph,
+ update their position,
+ and repair the topology when links fail.
+ Because the network is “lossy,” meaning packet loss is common,
+ RPL is built to be resilient and recover quickly from changes.
+ It also supports different modes for downward traffic,
+ either storing routing tables in the nodes or letting the root handle all downward routes.
+ In practice,
+ RPL makes it possible for thousands of small IoT devices to connect in a multi-hop IPv6 network and reach an Internet gateway,
+ while still respecting the severe limits of memory,
+ processing,
+ and energy that these devices face.
+ It is therefore one of the core building blocks that allows low-power wireless sensor networks to integrate smoothly with the wider Internet.
+\end_layout
+
+\begin_layout Subsection
+
+\color blue
+Why classic computer network protocols like TCP/IP,
+ data formats such as JSON and XML,
+ and security systems like (PKI/HTTPS) won’t usually work at all or are not very optimal to be used in resource limited wireless sensor networks (low power and lossy networks)?
+\end_layout
+
+\begin_layout Standard
+Classic Internet technologies such as TCP/IP,
+ JSON or XML,
+ and full PKI-based HTTPS security are not well suited for low-power and lossy networks,
+ because they were designed for devices and links that are much stronger than what small IoT nodes can provide.
+ Wireless sensor networks often consist of battery-powered nodes with only a few kilobytes of RAM,
+ tiny CPUs,
+ and radio links that lose packets frequently.
+ In this environment every byte and every retransmission matters,
+ so the heavy overhead of traditional protocols becomes a serious problem.
+ TCP,
+ for example,
+ provides reliable transport,
+ but it does so with mechanisms like three-way handshakes,
+ acknowledgment of every segment,
+ congestion control,
+ and strict ordering of data.
+ All of these create extra traffic and force nodes to keep state in memory.
+ On a lossy wireless link,
+ a single dropped packet can block the whole connection due to head-of-line blocking,
+ wasting both energy and bandwidth.
+ This is why protocols like CoAP over UDP or RPL-based routing are preferred,
+ because they are lighter and allow more flexibility.
+ Data formats like JSON and XML are also problematic in constrained networks.
+ They are text-based,
+ verbose,
+ and require significant parsing effort.
+ A single sensor value can be encoded in many tens of bytes of text,
+ while a binary encoding could send the same information in only a few bytes.
+ Parsing XML in particular consumes a lot of memory and CPU cycles,
+ which drains batteries and slows down small microcontrollers.
+ Security systems like HTTPS with full PKI certificates also create challenges.
+ The TLS handshake requires multiple round trips and processing of large cryptographic structures.
+ Storing and validating certificate chains consumes memory and CPU power far beyond what a tiny sensor can handle.
+ In addition,
+ the large headers of HTTPS messages mean more radio airtime,
+ which translates directly into higher energy use.
+ For this reason IoT environments usually adopt lightweight security approaches such as DTLS or compressed certificate formats designed for constrained devices.
+ Overall,
+ while TCP/IP,
+ JSON/XML,
+ and HTTPS are excellent for powerful computers on stable broadband connections,
+ they become inefficient and sometimes completely impractical in low-power,
+ lossy networks.
+ That is why IoT research and standards bodies have developed alternatives like 6LoWPAN for IPv6 compression,
+ CoAP for lightweight application messaging,
+ CBOR for compact data encoding,
+ and simplified security profiles that fit the strict limitations of wireless sensor networks.
+\end_layout
+
+\begin_layout Subsection
+
+\color blue
+What is the MTU challenge for IPv4 and IPv6 over common wireless low power and lossy wireless connections (Hint:
+ Research Zigbee/IEEE 802.15.4 and Bluetooth MTU vs IPv4 or IPv6)?
+\end_layout
+
+\begin_layout Standard
+The MTU challenge refers to the mismatch between the size of packets expected by Internet protocols like IPv4 and IPv6 and the much smaller frame sizes available in low-power wireless technologies such as Zigbee (IEEE 802.15.4) and Bluetooth.
+ MTU stands for Maximum Transmission Unit,
+ which is the largest payload that can be sent in a single packet without fragmentation.
+ IPv4 networks are expected to handle packets of at least 576 bytes,
+ and IPv6 requires every link to support an MTU of at least 1280 bytes.
+ This assumption works fine on Ethernet or Wi-Fi,
+ where frame sizes are usually 1500 bytes or more.
+ However,
+ IEEE 802.15.4,
+ which is the basis for Zigbee,
+ has a maximum physical frame size of only 127 bytes.
+ After subtracting the MAC header and other overhead,
+ the payload left for higher layers is often less than 100 bytes.
+ Bluetooth Low Energy has similar limitations,
+ with early versions supporting an ATT payload of only 23 bytes,
+ later increased but still far below the 1280 bytes required by IPv6.
+ The result is that standard IPv6 packets simply cannot fit into a single low-power wireless frame.
+ To make IPv6 usable in such networks,
+ an adaptation mechanism is required.
+ This is exactly the role of 6LoWPAN:
+ it compresses IPv6 headers to just a few bytes when possible,
+ and fragments larger packets into multiple small frames that can be reassembled at the receiver.
+ Without these techniques,
+ it would be impossible to run IPv6 directly over Zigbee or Bluetooth networks.
+ This MTU challenge is one of the fundamental reasons why the Internet of Things cannot simply reuse classic Internet protocols unchanged.
+ The gap between the large minimum packet sizes of IP and the tiny MTUs of low-power radios forces the use of header compression,
+ fragmentation,
+ and specialized routing protocols.
+ It shows clearly how the physical limits of wireless links shape the design of the whole IoT protocol stack.
+\end_layout
+
+\begin_layout Subsection
+
+\color blue
+Compare and list few HTTP/1.1,
+ HTTP/2 and HTTP/3 differencies and features
+\end_layout
+
+\begin_layout Standard
+HTTP/1.1,
+ HTTP/2,
+ and HTTP/3 are three generations of the same web protocol,
+ but each one introduces improvements to deal with the weaknesses of the earlier versions.
+ HTTP/1.1 is the traditional version that has been used on the web for decades.
+ It uses text-based messages and runs over TCP.
+ Each request and response is sent one after another.
+ Although keep-alive connections were added to avoid opening a new TCP session for every request,
+ the protocol still suffers from a limitation known as head-of-line blocking:
+ if one request is delayed,
+ the others behind it also wait.
+ Web browsers tried to solve this by opening multiple TCP connections in parallel,
+ but this added overhead and wasted resources.
+ HTTP/2 introduced a binary framing layer on top of TCP.
+ Instead of sending one request at a time,
+ HTTP/2 allows multiplexing:
+ many requests and responses can share the same TCP connection.
+ Each stream of data is identified and can be prioritized.
+ This reduces the need for multiple parallel connections and makes page loading faster.
+ HTTP/2 also added header compression (HPACK),
+ which cuts down the size of repeated header fields,
+ saving bandwidth.
+ The drawback is that it still runs over TCP,
+ so if a single packet is lost,
+ all streams on that connection are blocked until the loss is recovered,
+ which means the head-of-line problem is not fully solved.
+ HTTP/3 takes a more radical step by abandoning TCP completely and building on top of QUIC,
+ a transport protocol that runs over UDP.
+ QUIC integrates TLS 1.3 directly,
+ so connections are secure by default,
+ and the handshake usually takes only one round trip.
+ It also supports independent streams within a connection,
+ which eliminates head-of-line blocking:
+ a lost packet only affects the stream it belongs to,
+ not all of them.
+ Because QUIC is user-space and based on UDP,
+ it can adapt faster to changing network conditions and supports features like connection migration,
+ so a session can survive moving from Wi-Fi to mobile data without breaking.
+ In short,
+ HTTP/1.1 is simple but suffers from inefficiencies with multiple requests,
+ HTTP/2 improves throughput with multiplexing and compression but still depends on TCP,
+ and HTTP/3 uses QUIC over UDP to provide faster handshakes,
+ true parallelism without blocking,
+ and better performance on modern networks.
+ Together,
+ they show the evolution of the web from text-based sequential transfers to secure,
+ multiplexed,
+ and resilient connections optimized for today’s Internet.
+\end_layout
+
+\begin_layout Subsection
+
+\color blue
+Use Chrome or other Chromium based browser and it's developer tools (F12),
+ and access the course web page tl.oamk.fi/iot/.
+ From the developer tools network tab,
+ select the main page:
+ iot/ and check the response headers.
+ Answer:
+\end_layout
+
+\begin_layout Itemize
+
+\color blue
+What is the connection type?
+\end_layout
+
+\begin_layout Itemize
+
+\color blue
+What is the server software the web server announced?
+\end_layout
+
+\begin_layout Itemize
+
+\color blue
+Was any compression / encoding being used?
+ (content-encoding)
+\end_layout
+
+\begin_layout Itemize
+
+\color blue
+Is there X-Xss-Protection set in the response?
+\end_layout
+
+\begin_layout Itemize
+
+\color blue
+Is there Strict-Transport-Security set in the response?
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pasted52.png
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+I used Chrome developer tools to check the response headers of the course web page tl.oamk.fi/iot/.
+ From the Network tab I selected the main request and looked at the Response Headers.
+ The connection type was Keep-Alive.
+ The server software announced was Apache.
+ Compression was enabled with Content-Encoding:
+ gzip.
+ There was an X-XSS-Protection header set to 1;
+ mode=block.
+ There was also a Strict-Transport-Security header with a long max-age value,
+ which means the site enforces HTTPS for future connections.
+\end_layout
+
+\begin_layout Subsection
+
+\color blue
+What is Head-of-Line blocking challenge/problem?
+\end_layout
+
+\begin_layout Standard
+Head-of-Line (HOL) blocking is a performance problem that happens when multiple data streams are sharing the same transport connection and the loss or delay of one packet prevents the others from being delivered,
+ even though they are independent.
+ The name comes from the idea of a queue:
+ the first packet in line is stuck,
+ so all the packets behind it are blocked as well.
+ In classic HTTP/1.1 this effect was very visible.
+ Requests were sent one after another over a single TCP connection.
+ If one response was slow,
+ every request behind it had to wait,
+ even if the server had already generated the other responses.
+ Browsers tried to work around this by opening many parallel TCP connections,
+ but that caused other inefficiencies.
+ HTTP/2 improved things by allowing multiplexing,
+ so multiple streams could share one TCP connection.
+ However,
+ because TCP enforces strict in-order delivery,
+ a single lost packet blocks all streams until it is retransmitted.
+ This means HOL blocking still exists at the transport layer:
+ even if only one small packet was lost,
+ the receiver cannot deliver any subsequent data until the missing packet arrives.
+ The solution came with QUIC and HTTP/3.
+ QUIC uses UDP and builds its own mechanisms for reliability and congestion control.
+ Each stream in QUIC is independent,
+ so the loss of a packet on one stream does not stop progress on other streams.
+ This eliminates Head-of-Line blocking at the transport level and makes web traffic more responsive,
+ especially on mobile or wireless networks where packet loss is common.
+ In short,
+ Head-of-Line blocking is the problem where one delayed or lost packet blocks everything else behind it,
+ and modern protocols like QUIC are designed to remove this bottleneck.
+\end_layout
+
+\begin_layout Subsection
+
+\color blue
+What is reverse proxy.
+ List some advantages and features
+\end_layout
+
+\begin_layout Standard
+A reverse proxy is a server that sits between clients on the Internet and the actual backend servers that provide the content or services.
+ From the client’s perspective it looks like it is connecting directly to the target website,
+ but in reality the traffic goes through the reverse proxy first.
+ The proxy then forwards the request to one of the backend servers,
+ receives the response,
+ and sends it back to the client.
+ Because of this,
+ the backend servers are hidden and protected behind the reverse proxy,
+ and the proxy becomes the single visible point of entry.
+ One important feature of a reverse proxy is load balancing.
+ Instead of sending all client traffic to a single server,
+ the proxy can distribute the requests across multiple backend servers.
+ This improves scalability,
+ makes better use of resources,
+ and avoids overloading one machine while others sit idle.
+ Another advantage is security.
+ Since the reverse proxy is the only system exposed to the Internet,
+ it can filter malicious requests,
+ enforce TLS encryption,
+ or hide details about the backend infrastructure.
+ Attackers cannot directly see or access the real servers.
+ Caching is another common use.
+ A reverse proxy can store frequently requested resources,
+ such as images or scripts,
+ and serve them directly without contacting the backend.
+ This reduces latency for clients and lowers the load on backend servers.
+ Reverse proxies also enable central management of features like compression,
+ logging,
+ authentication,
+ and access control.
+ Instead of configuring each backend server separately,
+ the proxy can handle these functions in one place.
+ In practice,
+ reverse proxies like Nginx,
+ HAProxy,
+ or Apache mod_proxy are widely used in web systems.
+ They make services faster,
+ safer,
+ and more scalable by combining load balancing,
+ caching,
+ encryption,
+ and protection in a single gateway layer
+\end_layout
+
+\begin_layout Subsection
+
+\color blue
+What is Web application firewall (WAF).
+ List some advantages and features
+\end_layout
+
+\begin_layout Standard
+A Web Application Firewall,
+ or WAF,
+ is a special type of firewall that protects web applications by monitoring,
+ filtering,
+ and blocking harmful HTTP or HTTPS traffic.
+ Unlike a traditional firewall,
+ which focuses on network ports and IP addresses,
+ a WAF works at the application layer and understands the structure of web requests.
+ Its job is to recognize and stop attacks that target web applications,
+ such as SQL injection,
+ cross-site scripting (XSS),
+ or attempts to exploit vulnerabilities in forms and URLs.
+ One important feature of a WAF is its ability to inspect the content of requests and responses in real time.
+ For example,
+ if a request contains suspicious code that looks like an SQL injection attempt,
+ the WAF can block it before it reaches the server.
+ This adds an extra layer of defense,
+ even if the application itself still has a bug.
+ A WAF also helps enforce security policies.
+ Administrators can define rules such as limiting the size of requests,
+ blocking requests from certain countries or IP ranges,
+ or requiring stricter validation of cookies and headers.
+ Some WAFs use signature-based detection (similar to antivirus) while others apply behavior analysis and machine learning to detect new attack patterns.
+ Advantages of a WAF include increased protection against common web vulnerabilities,
+ reduced risk of data breaches,
+ and compliance with regulations that require web application security.
+ A WAF can also provide logging and monitoring,
+ giving visibility into suspicious activities and attempted attacks.
+ Many cloud providers and content delivery networks include WAF functionality as a managed service,
+ making it easier to deploy without additional hardware.
+\end_layout
+
+\begin_layout Subsection
+
+\color blue
+What are Websockets?
+\end_layout
+
+\begin_layout Standard
+WebSockets are a communication protocol that provides a persistent,
+ bidirectional connection between a client and a server over a single TCP (or QUIC) channel.
+ Unlike the traditional request–response model of HTTP,
+ where the client always has to ask and the server only answers,
+ WebSockets allow both sides to send data at any time once the connection is established.
+ The handshake to start a WebSocket connection begins with a normal HTTP request,
+ but then it is upgraded to a WebSocket session.
+ After that point,
+ the same connection stays open,
+ and there is no need to reestablish it for every message.
+ This reduces overhead and makes the communication much faster,
+ especially when there is a continuous flow of small updates.
+ The main advantage is real-time communication.
+ WebSockets are widely used in applications such as live chat systems,
+ online gaming,
+ collaborative editing tools,
+ dashboards that show stock prices or IoT sensor readings,
+ and anywhere updates need to appear immediately without polling.
+ Another benefit is efficiency.
+ Instead of sending full HTTP headers for every message,
+ WebSockets use a lightweight frame format,
+ which saves bandwidth and reduces latency.
+ Both text and binary data can be sent,
+ making it flexible for different use cases.
+\end_layout
+
+\begin_layout Subsection
+
+\color blue
+What is HTTP long polling?
+\end_layout
+
+\begin_layout Standard
+HTTP long polling is a technique used to simulate real-time communication over the traditional request–response model of HTTP.
+ In normal HTTP,
+ the client sends a request and the server immediately sends back a response,
+ then the connection closes.
+ If the client wants new data,
+ it has to send another request.
+ This creates delays and wastes bandwidth,
+ because the client keeps asking even when there is nothing new.
+ With long polling,
+ the client still sends an HTTP request,
+ but the server does not respond right away.
+ Instead,
+ it keeps the connection open until there is new data available or a timeout occurs.
+ As soon as something happens,
+ the server replies with the data.
+ The client then immediately sends another request,
+ and the process repeats.
+ From the user’s perspective it feels like updates are pushed from the server,
+ even though technically the client is always the one asking.
+ Long polling was widely used before WebSockets became standard.
+ For example,
+ early chat applications and live notification systems often relied on long polling to deliver near real-time updates.
+ The main drawback is inefficiency:
+ every new message still requires a full HTTP request and response,
+ which includes large headers,
+ and many open connections can overload the server.
+ It also introduces latency when the connection times out and has to be reestablished.
+\end_layout
+
+\begin_layout Subsection
+
+\color blue
+Use this tool to check few websites whether the server supports HTTP/2:
+ tools.keycdn.com/http2-test.
+ Two examples:
+ www.kaleva.fi and www.oulu.fi
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pasted53.png
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pasted54.png
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+I used the KeyCDN HTTP/2 Test tool to check whether Finnish websites support HTTP/2.
+ When I tested www.kaleva.fi he result showed that the site supports HTTP/2.
+ However,
+ when I tested www.oulu.fi the tool reported that HTTP/2 protocol is not supported.
+ These results show that even large and well-known websites may or may not adopt newer web protocols,
+ and tools like this make it easy to verify.
+\end_layout
+
+\begin_layout Subsection
+
+\color blue
+Study Google Firebase documentation and advertisements.
+ Think and list examples how to use Firebase ecosystem with Android application(s) or with some IoT other system?
+\end_layout
+
+\begin_layout Standard
+Firebase is a collection of managed building blocks that covers sign-in,
+ realtime databases,
+ storage,
+ push messaging,
+ A/B testing,
+ crash reporting,
+ and backend logic with Cloud Functions.
+ In a normal Android app I would start with Firebase Authentication so users can sign in with email,
+ phone,
+ Google,
+ or Apple without building my own auth server.
+ The same identity is then enforced by Firebase Security Rules,
+ so the app can read and write only the user’s own data.
+ For app data I would pick Cloud Firestore because it synchronizes in real time and has an offline cache on Android,
+ which means the UI stays responsive even when the phone loses the network and later resynchronizes automatically.
+ If I need millisecond-level live updates such as chat typing indicators,
+ I could also use the Realtime Database;
+ for larger media like profile photos or logs I would keep files in Cloud Storage and store only the metadata in Firestore.
+ When I need backend logic I would write Cloud Functions that run on events—
+saving a profile image can trigger a function that generates thumbnails,
+ writing an order can trigger a function that validates payment,
+ and a document change can send a push notification through Firebase Cloud Messaging.
+ For feature flags and instant tuning I would use Remote Config so I can flip UI behavior or thresholds without shipping a new APK.
+ As the app grows I would turn on Crashlytics and Google Analytics for Firebase to see crashes,
+ ANRs,
+ and retention funnels,
+ then use A/B Testing wired to Remote Config to validate UI changes safely.
+\end_layout
+
+\begin_layout Standard
+In an IoT scenario Firebase is still useful as the human-facing control plane while the devices speak their own efficient protocols.
+ A typical pattern is that the edge devices (for example ESP32 sensors) keep publishing telemetry to an MQTT broker,
+ while the Android app talks to Firebase.
+ Cloud Functions can act as a bridge:
+ a small HTTPS function receives MQTT-to-HTTP webhooks from the broker and writes normalized measurements into Firestore;
+ from the user’s point of view the Android dashboard just listens to the Firestore collection and shows new readings in real time.
+ Commands from the phone can travel in the other direction:
+ the app writes a “desired_state” document,
+ a Cloud Function triggers on that write and calls the broker’s REST API to publish a command message to the device’s topic.
+ If I need to alert the user,
+ the function can also send a push via FCM when a threshold is crossed,
+ for example “freezer temperature high.” For device configuration I can store per-device settings in Firestore and let Remote Config control global flags like sampling intervals;
+ the Android app reads Remote Config directly,
+ while devices fetch a compact JSON they understand that was generated by a Cloud Function from the same source of truth.
+ For logs and firmware I would keep binary files in Cloud Storage and expose signed URLs with expiration so devices can perform OTA updates safely;
+ the Android app can upload diagnostics or photos to the same bucket and the function can verify sizes,
+ MIME types,
+ or signatures before accepting them.
+ Because Firebase enforces identity,
+ I can tie each device to an owner account and write Security Rules so that only the owner (and perhaps a support role) can see that device’s data;
+ the mobile app benefits from the same rules automatically.
+ Finally,
+ I would use the Firebase Emulator Suite during development so I can test auth,
+ Firestore,
+ storage,
+ and functions locally without billing,
+ then deploy to production with the same configuration.
+\end_layout
+
+\begin_layout Subsection
+
+\color blue
+Use hivemq.com open MQTT broker service with Python to publish MQTT messages.
+ Use this very basic Python MQTT publish example.
+ Change the MQTT channel name to something different if the script complaing about the authentication.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
 \end_body
 \end_document
