@@ -8727,6 +8727,83 @@ in the hacker community,
  
 \end_layout
 
+\begin_layout Enumerate
+
+\color brown
+IDS stands for Intrusion Detection System
+\color inherit
+,
+ a security mechanism designed to monitor network or system activity for malicious behavior or policy violations.
+ It works like an alarm system it doesn’t block attacks directly but detects suspicious patterns and alerts administrators so they can respond.
+ IDS can analyze logs,
+ monitor network traffic,
+ and look for known attack signatures or abnormal activity that might indicate a compromise.
+ A Network Intrusion Detection System (NIDS) is a specific type of IDS that focuses on monitoring network traffic in real time.
+ It inspects packets as they pass through routers,
+ firewalls,
+ or switches,
+ searching for known exploits,
+ unusual port scans,
+ or suspicious data flows.
+ NIDS tools,
+ such as Snort,
+ Suricata,
+ or Zeek (Bro),
+ are commonly used to detect early stages of an attack,
+ like reconnaissance or lateral movement.
+ Unlike firewalls,
+ which block or allow traffic based on rules,
+ IDS and NIDS are passive detection systems they observe and report.
+ Some systems,
+ known as IPS (Intrusion Prevention Systems),
+ go further and automatically block malicious activity.
+ In practice,
+ combining NIDS with proper logging,
+ correlation tools,
+ and human analysis helps organizations detect attacks early and understand ongoing security incidents before serious damage occurs.
+\end_layout
+
+\begin_layout Enumerate
+
+\color brown
+SIEM,
+ or Security Information and Event Management,
+
+\color inherit
+ is a centralized system that collects,
+ stores,
+ and analyzes security-related logs and events from across an organization’s IT infrastructure.
+ It combines two core functions Security Information Management (SIM),
+ which deals with long-term storage and analysis of historical log data,
+ and Security Event Management (SEM),
+ which focuses on real-time monitoring,
+ correlation,
+ and alerting.
+ A SIEM platform gathers data from firewalls,
+ servers,
+ IDS/IPS systems,
+ antivirus tools,
+ applications,
+ and even cloud services,
+ then correlates these events to identify suspicious or abnormal activity.
+ For example,
+ if multiple failed logins are followed by a successful one from a new location,
+ the SIEM can generate an alert for possible credential compromise.
+ Modern SIEM solutions,
+ such as Splunk,
+ IBM QRadar,
+ Elastic SIEM,
+ or Azure Sentinel,
+ often use advanced analytics,
+ machine learning,
+ and threat intelligence feeds to detect complex attack patterns.
+ They also help organizations meet compliance requirements by maintaining centralized audit logs and generating security reports.
+ In essence,
+ SIEM serves as the “security brain” of an organization providing visibility,
+ detection,
+ and response coordination across diverse systems to help security teams react quickly and effectively to incidents.
+\end_layout
+
 \begin_layout Standard
 \begin_inset Separator plain
 \end_inset

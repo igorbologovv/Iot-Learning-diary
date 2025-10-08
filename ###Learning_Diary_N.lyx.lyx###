@@ -7746,7 +7746,7 @@ The published data (messages like msg-0-9547,
 Week #7
 \end_layout
 
-\begin_layout Standard
+\begin_layout Subsection
 
 \color blue
 Describe shortly following security tools/terms/concepts:
@@ -8691,11 +8691,376 @@ Lateral movement
  Early detection of lateral movement is key to stopping a breach before attackers reach critical assets.
 \end_layout
 
+\begin_layout Enumerate
+
+\color brown
+Social engineering
+\color inherit
+ is a manipulation technique that targets human behavior instead of technical systems.
+ Attackers use deception,
+ persuasion,
+ or psychological pressure to trick people into revealing confidential information,
+ clicking malicious links,
+ or performing actions that compromise security.
+ Typical examples include phishing emails,
+ fake technical support calls,
+ or impersonation of trusted authorities.
+ Unlike technical hacking,
+ social engineering does not rely on code exploits or vulnerabilities in software but rather on exploiting human trust,
+ fear,
+ or curiosity.
+ Because of this,
+ 
+\color violet
+in the hacker community,
+ social engineers are often viewed as the “lowest caste” of hackers many professionals despise and look down on them,
+ seeing their methods as lacking technical skill and relying only on manipulation.
+
+\color inherit
+ In that sense,
+ social engineering is sometimes described as “hacking people instead of systems.” Defending against social engineering requires continuous awareness training,
+ strict verification of requests,
+ multi-factor authentication,
+ and a strong security culture where users are encouraged to question unusual or urgent demands.
+ While technically simple,
+ social engineering remains one of the most effective attack methods precisely because it exploits the weakest link human nature.
+ 
+\end_layout
+
+\begin_layout Enumerate
+
+\color brown
+IDS stands for Intrusion Detection System
+\color inherit
+,
+ a security mechanism designed to monitor network or system activity for malicious behavior or policy violations.
+ It works like an alarm system it doesn’t block attacks directly but detects suspicious patterns and alerts administrators so they can respond.
+ IDS can analyze logs,
+ monitor network traffic,
+ and look for known attack signatures or abnormal activity that might indicate a compromise.
+ A Network Intrusion Detection System (NIDS) is a specific type of IDS that focuses on monitoring network traffic in real time.
+ It inspects packets as they pass through routers,
+ firewalls,
+ or switches,
+ searching for known exploits,
+ unusual port scans,
+ or suspicious data flows.
+ NIDS tools,
+ such as Snort,
+ Suricata,
+ or Zeek (Bro),
+ are commonly used to detect early stages of an attack,
+ like reconnaissance or lateral movement.
+ Unlike firewalls,
+ which block or allow traffic based on rules,
+ IDS and NIDS are passive detection systems they observe and report.
+ Some systems,
+ known as IPS (Intrusion Prevention Systems),
+ go further and automatically block malicious activity.
+ In practice,
+ combining NIDS with proper logging,
+ correlation tools,
+ and human analysis helps organizations detect attacks early and understand ongoing security incidents before serious damage occurs.
+\end_layout
+
+\begin_layout Enumerate
+
+\color brown
+SIEM,
+ or Security Information and Event Management,
+
+\color inherit
+ is a centralized system that collects,
+ stores,
+ and analyzes security-related logs and events from across an organization’s IT infrastructure.
+ It combines two core functions Security Information Management (SIM),
+ which deals with long-term storage and analysis of historical log data,
+ and Security Event Management (SEM),
+ which focuses on real-time monitoring,
+ correlation,
+ and alerting.
+ A SIEM platform gathers data from firewalls,
+ servers,
+ IDS/IPS systems,
+ antivirus tools,
+ applications,
+ and even cloud services,
+ then correlates these events to identify suspicious or abnormal activity.
+ For example,
+ if multiple failed logins are followed by a successful one from a new location,
+ the SIEM can generate an alert for possible credential compromise.
+ Modern SIEM solutions,
+ such as Splunk,
+ IBM QRadar,
+ Elastic SIEM,
+ or Azure Sentinel,
+ often use advanced analytics,
+ machine learning,
+ and threat intelligence feeds to detect complex attack patterns.
+ They also help organizations meet compliance requirements by maintaining centralized audit logs and generating security reports.
+ In essence,
+ SIEM serves as the “security brain” of an organization providing visibility,
+ detection,
+ and response coordination across diverse systems to help security teams react quickly and effectively to incidents.
+\end_layout
+
 \begin_layout Standard
 \begin_inset Separator plain
 \end_inset
 
 
+\end_layout
+
+\begin_layout Subsection
+
+\color blue
+Explain Microsoft’s STRIDE threat model shortly (see the old software vulnerability slides)
+\end_layout
+
+\begin_layout Standard
+The Microsoft STRIDE threat model is a framework used to identify and categorize potential security threats during software design.
+ STRIDE is an acronym that stands for Spoofing,
+ Tampering,
+ Repudiation,
+ Information Disclosure,
+ Denial of Service,
+ and Elevation of Privilege.
+ Each term represents a common type of attack that a system should be protected against.
+ Spoofing means impersonating another user or system to gain unauthorized access.
+ Tampering refers to modifying data or code without authorization.
+ Repudiation occurs when users deny performing an action,
+ and there is no way to prove otherwise due to missing logs or weak auditing.
+ Information disclosure means exposing private or internal data to unauthorized users.
+ Denial of Service is making an application or service unavailable by overloading or crashing it.
+ Elevation of Privilege happens when a user with limited permissions gains higher-level access.
+ The goal of STRIDE is to help developers think systematically about where security weaknesses may appear and plan countermeasures early in the software lifecycle.
+ It is often used together with Microsoft’s Threat Modeling Tool and the DREAD model,
+ which helps estimate the risk and impact of each identified threat.
+\end_layout
+
+\begin_layout Subsection
+
+\color blue
+Explain Microsoft’s DREAD risk model shortly (see the old software vulnerability slides)
+\end_layout
+
+\begin_layout Standard
+The DREAD model is a risk assessment framework developed by Microsoft to help evaluate how serious a particular security threat is once it has been identified.
+ Each letter in DREAD stands for a factor that contributes to the overall risk score:
+ Damage potential,
+ Reproducibility,
+ Exploitability,
+ Affected users,
+ and Discoverability.
+ In practice,
+ each factor is given a numerical value (for example from 1 to 10),
+ and the average or total score helps determine the priority of the threat.
+ Damage potential measures how severe the impact would be if the vulnerability were exploited.
+ Reproducibility describes how easily the attack can be repeated.
+ Exploitability estimates how easy it is to carry out the attack in practice.
+ Affected users indicates how many users or systems would be impacted.
+ Discoverability refers to how easy it is for an attacker to find the vulnerability.
+ By combining these five dimensions,
+ DREAD provides a structured way to rank threats and decide which ones require immediate attention.
+ It is often used together with the STRIDE model STRIDE helps identify the types of threats,
+ while DREAD helps quantify their risk and prioritize mitigation efforts.
+\end_layout
+
+\begin_layout Subsection
+
+\color blue
+Check some CVEs of widely used applications from https://www.cvedetails.com/ and answer:
+\end_layout
+
+\begin_layout Itemize
+
+\color blue
+Describe what is the CVE scoring system
+\end_layout
+
+\begin_layout Itemize
+
+\color blue
+When was the last time when Exim (MTA,
+ mail transfer agent,
+ more modern version of the application,
+ not the Cambridge version) had a critical vulnerability?
+ What is the CVE number?
+\end_layout
+
+\begin_layout Itemize
+
+\color blue
+Describe CVE-2016-6210 vulnerability shortly.
+ Optional:
+ How can you prevent such attack / vulnerability?
+\end_layout
+
+\begin_layout Itemize
+
+\color blue
+Describe CVE-2019-15846 vulnerability shortly
+\end_layout
+
+\begin_layout Itemize
+
+\color blue
+Describe CWE-208 from https://cwe.mitre.org/data/archive.html (download most recent PDF)
+\end_layout
+
+\begin_layout Enumerate
+
+\color brown
+CVE scoring system
+\color inherit
+ (CVSS) The Common Vulnerability Scoring System assigns each CVE a 0.0–10.0 severity score.
+ In CVSS v3.x the score is built from three metric groups:
+ Base (intrinsic exploitability and impact),
+ Temporal (changes over time,
+ e.g.,
+ exploit code or fixes),
+ and Environmental (your local context).
+ CVSS v4.0 refines this to Base,
+ Threat,
+ Environmental,
+ plus Supplemental metrics.
+ CVSS is a measure of severity,
+ not overall business risk.
+\end_layout
+
+\begin_layout Enumerate
+
+\color brown
+Exim:
+ last “critical” vulnerability and CVE ID
+\color inherit
+.
+ The most recent widely publicized critical Exim issue was disclosed in July 2024 and tracked as CVE-2024-39929 (advisories labeled it “critical” due to email-attachment filtering bypass;
+ note that its CVSS on some feeds is not “Critical”).
+ It affects Exim ≤4.97.1 and was addressed in 4.98.
+ For context,
+ Exim previously had a true critical RCE,
+ CVE-2023-42115 (CVSS 9.8),
+ disclosed in October 2023.
+ 
+\end_layout
+
+\begin_layout Enumerate
+
+\color brown
+CVE-2016-6210 (short description + prevention)
+\color inherit
+.
+ In OpenSSH before 7.3,
+ sshd took measurably different time paths for non-existent vs.
+ real usernames when large passwords were supplied,
+ enabling remote username enumeration via timing differences.
+ Upgrade to OpenSSH ≥7.3,
+ normalize/constant-time authentication code paths,
+ rate-limit authentication attempts,
+ and avoid revealing timing side-channels in auth flows.
+\end_layout
+
+\begin_layout Enumerate
+
+\color brown
+CVE-2019-15846 (short description) 
+\color inherit
+Exim before 4.92.2 allowed unauthenticated remote code execution as root via a TLS handshake quirk:
+ a specially crafted Server Name Indication (SNI) string with a trailing backslash could trigger a buffer issue and code execution.
+ Fixed in 4.92.2;
+ patch urgently if any older build is exposed.
+\end_layout
+
+\begin_layout Enumerate
+
+\color brown
+CWE-208:
+ Observable Timing Discrepancy
+\color inherit
+ when two operations take detectably different amounts of time and that timing difference reveals security-relevant state (e.g.,
+ whether a username exists or a MAC verified),
+ enabling side-channel information disclosure.
+ (See the current CWE page;
+ the most-recent PDF is linked from the CWE archive.)
+\end_layout
+
+\begin_layout Subsection
+
+\color blue
+Study D-Link DNS-320 ShareCenter write-up in the ExploitDB
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+What kind of software exploit is that?
+\end_layout
+
+\begin_layout Enumerate
+
+\color blue
+Try to explain shortly (summarise) from the write-up,
+ how the attacker can elevate access to become root (administrator) user?
+\end_layout
+
+\begin_layout Standard
+
+\color brown
+What kind of software exploit is that?
+
+\color inherit
+ The D-Link DNS-320 ShareCenter issue is a remote web-application exploit that results in remote code execution (RCE) with root privileges.
+ It’s effectively a chained exploit:
+ the vendor firmware contains a hard-coded/backdoor credential in a CGI binary that allows unauthorized admin access,
+ and the same CGI exposes a command-injection / log-injection vector that an attacker can abuse to drop and execute a web shell.
+\end_layout
+
+\begin_layout Standard
+
+\family sans
+\series bold
+How does the attacker escalate to root?
+ (plain,
+ non-operational summary)
+\end_layout
+
+\begin_layout Itemize
+The researcher found a CGI binary (e.g.
+ nas_sharing.cgi) that implements a built-in authentication check using fixed credentials.
+ If the attacker supplies that special username/password pair,
+ the CGI treats the request as authenticated so the attacker gets administrative access without needing a real account.
+\end_layout
+
+\begin_layout Itemize
+The CGI also contains functionality that uses user-supplied data in shell commands (or writes user input into system logs that are later processed) without proper sanitization.
+ In short:
+ there is a command-injection / unsafe-logging path.
+ An attacker with the backdoor login can therefore reach code that accepts attacker-controlled strings and ends up being interpreted by a shell.
+\end_layout
+
+\begin_layout Itemize
+The exploit strategy in the write-up combines these two weaknesses.
+ The attacker logs in using the hard-coded credential (bypassing normal authentication) and then injects payload data into a logging or command path so that a chunk of PHP (or other executable payload) ends up written into a filesystem location served by the device’s web server.
+\end_layout
+
+\begin_layout Itemize
+Finally,
+ because the vulnerable CGI / web runtime on the device runs with root (or with privileges that allow writing/executing files as root),
+ requesting the newly created web file triggers server-side execution of the attacker’s payload as root.
+ The result is full system compromise —
+ remote code execution with administrator privileges.
+\end_layout
+
+\begin_layout Standard
+Important practical notes (non-PoC):
+ the write-up explains that some payload characters (spaces,
+ quotes) don’t work reliably inside that firmware,
+ so exploit authors use indirect techniques (log injection,
+ pipes,
+ syslog tricks,
+ or staged writes) to assemble a working web shell in a writable web directory.
+ That is why the chain needs both the backdoor login and the unsafe logging/command behavior to succeed.
 \end_layout
 
 \end_body
